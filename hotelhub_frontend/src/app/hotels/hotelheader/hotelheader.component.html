@@ -1,271 +1,253 @@
-<html lang="en">
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
 
-<head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
-    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
-    <!-- <link
-      rel="icon"
-      href="/src/assets/img/kaiadmin/favicon.ico"
-      type="image/x-icon"
-    /> -->
+    <div class="d-flex align-items-center justify-content-between">
+        <a [routerLink]="['/']" class="logo d-flex align-items-center">
+            <img src="assets/img/logo.png" alt="">
+            <span class="d-none d-lg-block">NiceAdmin</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
 
-    <!-- Fonts and icons -->
-    <script>
-        WebFont.load({
-            google: { families: ["Public Sans:300,400,500,600,700"] },
-            custom: {
-                families: [
-                    "Font Awesome 5 Solid",
-                    "Font Awesome 5 Regular",
-                    "Font Awesome 5 Brands",
-                    "simple-line-icons",
-                ],
-                urls: ["/src/assets/css/fonts.min.css"],
-            },
-            active: function () {
-                sessionStorage.fonts = true;
-            },
-        });
-    </script>
+    <div class="search-bar">
+        <form class="search-form d-flex align-items-center" method="POST" action="#">
+            <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+            <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+        </form>
+    </div><!-- End Search Bar -->
 
-    <!-- CSS Files -->
-    <!-- <link rel="stylesheet" href="/src/assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/src/assets/css/plugins.min.css" />
-    <link rel="stylesheet" href="/src/assets/css/kaiadmin.min.css" /> -->
+    <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
 
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <!-- <link rel="stylesheet" href="/src/assets/css/demo.css" /> -->
-</head>
+            <li class="nav-item d-block d-lg-none">
+                <a class="nav-link nav-icon search-bar-toggle " href="#">
+                    <i class="bi bi-search"></i>
+                </a>
+            </li><!-- End Search Icon-->
 
-<body>
-    <div class="wrapper">
-        <!-- Sidebar -->
-        <div class="sidebar" data-background-color="dark">
-            <div class="sidebar-logo">
-                <!-- Logo Header -->
-                <div class="logo-header" data-background-color="dark">
-                    <a href="index.html" class="logo">
-                        <img src="assets/img/kaiadmin/logo_light.svg" alt="navbar brand" class="navbar-brand"
-                            height="20" />
+            <li class="nav-item dropdown pe-3">
+
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                    <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                    <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+                </a><!-- End Profile Iamge Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                    <li class="dropdown-header">
+                        <h6>Kevin Anderson</h6>
+                        <span>Web Designer</span>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                            <i class="bi bi-person"></i>
+                            <span>My Profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                            <i class="bi bi-gear"></i>
+                            <span>Account Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                            <i class="bi bi-question-circle"></i>
+                            <span>Need Help?</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Sign Out</span>
+                        </a>
+                    </li>
+
+                </ul><!-- End Profile Dropdown Items -->
+            </li><!-- End Profile Nav -->
+
+        </ul>
+    </nav><!-- End Icons Navigation -->
+
+</header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        <li class="nav-item">
+            <a class="nav-link " [routerLink]="['/']">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" [routerLink]="['/displaycategory']">
+                <i class="bi bi-house-door"></i><span>Room Category</span>
+            </a>
+        </li><!-- End Components Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="forms-elements.html">
+                        <i class="bi bi-circle"></i><span>Form Elements</span>
                     </a>
-                    <div class="nav-toggle">
-                        <button class="btn btn-toggle toggle-sidebar">
-                            <i class="gg-menu-right"></i>
-                        </button>
-                        <button class="btn btn-toggle sidenav-toggler">
-                            <i class="gg-menu-left"></i>
-                        </button>
-                    </div>
-                    <button class="topbar-toggler more">
-                        <i class="gg-more-vertical-alt"></i>
-                    </button>
-                </div>
-                <!-- End Logo Header -->
-            </div>
-            <div class="sidebar-wrapper scrollbar scrollbar-inner">
-                <div class="sidebar-content">
-                    <ul class="nav nav-secondary">
-                        <li class="nav-item active">
-                            <a data-bs-toggle="collapse" [routerLink]="['/']" class="collapsed" aria-expanded="false">
-                                <i class="fas fa-home"></i>
-                                <p>Dashboard</p>
-                            </a>
-                        </li>
-                        <li class="nav-section">
-                            <span class="sidebar-mini-icon">
-                                <i class="fa fa-ellipsis-h"></i>
-                            </span>
-                            <h4 class="text-section">Components</h4>
-                        </li>
-                        <li class="nav-item">
-                            <a data-bs-toggle="collapse" [routerLink]="['/displaycategory']">
-                                <i class="fas fa-layer-group"></i>
-                                <p>Categories</p>
-                            </a>
-                        </li>
+                </li>
+                <li>
+                    <a href="forms-layouts.html">
+                        <i class="bi bi-circle"></i><span>Form Layouts</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="forms-editors.html">
+                        <i class="bi bi-circle"></i><span>Form Editors</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="forms-validation.html">
+                        <i class="bi bi-circle"></i><span>Form Validation</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Forms Nav -->
 
-                        <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="#forms">
-                                <i class="fas fa-pen-square"></i>
-                                <p>Forms</p>
-                                <span class="caret"></span>
-                            </a>
-                            <div class="collapse" id="forms">
-                                <ul class="nav nav-collapse">
-                                    <li>
-                                        <a href="forms/forms.html">
-                                            <span class="sub-item">Basic Form</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="#tables">
-                                <i class="fas fa-table"></i>
-                                <p>Tables</p>
-                                <span class="caret"></span>
-                            </a>
-                            <div class="collapse" id="tables">
-                                <ul class="nav nav-collapse">
-                                    <li>
-                                        <a href="tables/tables.html">
-                                            <span class="sub-item">Basic Table</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="tables/datatables.html">
-                                            <span class="sub-item">Datatables</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="tables-general.html">
+                        <i class="bi bi-circle"></i><span>General Tables</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="tables-data.html">
+                        <i class="bi bi-circle"></i><span>Data Tables</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Tables Nav -->
 
-                        <li class="nav-item">
-                            <a href="widgets.html">
-                                <i class="fas fa-desktop"></i>
-                                <p>Widgets</p>
-                                <span class="badge badge-success">4</span>
-                            </a>
-                        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-bar-chart"></i><span>Charts</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="charts-chartjs.html">
+                        <i class="bi bi-circle"></i><span>Chart.js</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="charts-apexcharts.html">
+                        <i class="bi bi-circle"></i><span>ApexCharts</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="charts-echarts.html">
+                        <i class="bi bi-circle"></i><span>ECharts</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Charts Nav -->
 
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-gem"></i><span>Icons</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="icons-bootstrap.html">
+                        <i class="bi bi-circle"></i><span>Bootstrap Icons</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="icons-remix.html">
+                        <i class="bi bi-circle"></i><span>Remix Icons</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="icons-boxicons.html">
+                        <i class="bi bi-circle"></i><span>Boxicons</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Icons Nav -->
 
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!-- End Sidebar -->
+        <li class="nav-heading">Pages</li>
 
-        <div class="main-panel">
-            <div class="main-header">
-                <!-- Navbar Header -->
-                <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
-                    <div class="container-fluid">
-                        <nav
-                            class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <button type="submit" class="btn btn-search pe-1">
-                                        <i class="fa fa-search search-icon"></i>
-                                    </button>
-                                </div>
-                                <input type="text" placeholder="Search ..." class="form-control" />
-                            </div>
-                        </nav>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="users-profile.html">
+                <i class="bi bi-person"></i>
+                <span>Profile</span>
+            </a>
+        </li><!-- End Profile Page Nav -->
 
-                        <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
-                            <!-- <li
-                  class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none"
-                >
-                  <a
-                    class="nav-link dropdown-toggle"
-                    data-bs-toggle="dropdown"
-                    href="#"
-                    role="button"
-                    aria-expanded="false"
-                    aria-haspopup="true"
-                  >
-                    <i class="fa fa-search"></i>
-                  </a>
-                  <ul class="dropdown-menu dropdown-search animated fadeIn">
-                    <form class="navbar-left navbar-form nav-search">
-                      <div class="input-group">
-                        <input
-                          type="text"
-                          placeholder="Search ..."
-                          class="form-control"
-                        />
-                      </div>
-                    </form>
-                  </ul>
-                </li> -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="pages-faq.html">
+                <i class="bi bi-question-circle"></i>
+                <span>F.A.Q</span>
+            </a>
+        </li><!-- End F.A.Q Page Nav -->
 
-                            <li class="nav-item topbar-user dropdown hidden-caret">
-                                <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#"
-                                    aria-expanded="false">
-                                    <div class="avatar-sm">
-                                        <img src="assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle" />
-                                    </div>
-                                    <span class="profile-username">
-                                        <span class="op-7">Hi,</span>
-                                        <span class="fw-bold">Hizrian</span>
-                                    </span>
-                                </a>
-                                <ul class="dropdown-menu dropdown-user animated fadeIn">
-                                    <div class="dropdown-user-scroll scrollbar-outer">
-                                        <li>
-                                            <div class="user-box">
-                                                <div class="avatar-lg">
-                                                    <img src="assets/img/profile.jpg" alt="image profile"
-                                                        class="avatar-img rounded" />
-                                                </div>
-                                                <div class="u-text">
-                                                    <h4>Hizrian</h4>
-                                                    <p class="text-muted">hello@example.com</p>
-                                                    <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View
-                                                        Profile</a>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">My Profile</a>
-                                            <a class="dropdown-item" href="#">My Balance</a>
-                                            <a class="dropdown-item" href="#">Inbox</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Account Setting</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Logout</a>
-                                        </li>
-                                    </div>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-                <!-- End Navbar -->
-            </div>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="pages-contact.html">
+                <i class="bi bi-envelope"></i>
+                <span>Contact</span>
+            </a>
+        </li><!-- End Contact Page Nav -->
 
-        </div>
-    </div>
-    <!--   Core JS Files   -->
-    <!-- <script src="assets/js/core/jquery-3.7.1.min.js"></script>
-  <script src="assets/js/core/popper.min.js"></script>
-  <script src="assets/js/core/bootstrap.min.js"></script> -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="pages-register.html">
+                <i class="bi bi-card-list"></i>
+                <span>Register</span>
+            </a>
+        </li><!-- End Register Page Nav -->
 
-    <!-- jQuery Scrollbar -->
-    <!-- <script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script> -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="pages-login.html">
+                <i class="bi bi-box-arrow-in-right"></i>
+                <span>Login</span>
+            </a>
+        </li><!-- End Login Page Nav -->
 
-    <!-- Chart JS -->
-    <!-- <script src="assets/js/plugin/chart.js/chart.min.js"></script> -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="pages-error-404.html">
+                <i class="bi bi-dash-circle"></i>
+                <span>Error 404</span>
+            </a>
+        </li><!-- End Error 404 Page Nav -->
 
-    <!-- jQuery Sparkline -->
-    <!-- <script src="assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script> -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="pages-blank.html">
+                <i class="bi bi-file-earmark"></i>
+                <span>Blank</span>
+            </a>
+        </li><!-- End Blank Page Nav -->
 
-    <!-- Chart Circle -->
-    <!-- <script src="assets/js/plugin/chart-circle/circles.min.js"></script> -->
+    </ul>
 
-    <!-- Datatables -->
-    <!-- <script src="assets/js/plugin/datatables/datatables.min.js"></script> -->
-
-    <!-- Bootstrap Notify -->
-    <!-- <script src="assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script> -->
-
-    <!-- jQuery Vector Maps -->
-    <!-- <script src="assets/js/plugin/jsvectormap/jsvectormap.min.js"></script>
-  <script src="assets/js/plugin/jsvectormap/world.js"></script> -->
-
-    <!-- Sweet Alert -->
-    <!-- <script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script> -->
-
-    <!-- Kaiadmin JS -->
-    <!-- <script src="assets/js/kaiadmin.min.js"></script> -->
-
-    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
-    <!-- <script src="assets/js/setting-demo.js"></script>
-  <script src="assets/js/demo.js"></script> -->
-</body>
-
-</html>
+</aside><!-- End Sidebar-->
