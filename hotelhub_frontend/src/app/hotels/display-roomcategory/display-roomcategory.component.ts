@@ -1,13 +1,15 @@
-import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component,AfterViewInit, OnDestroy } from '@angular/core';
 import { RoomcategoryserviceService } from 'src/app/hotelservices/roomcategoryservice.service';
 import { DataTable } from 'simple-datatables';
+
+declare var $: any; // Declare jQuery globally
 
 @Component({
   selector: 'app-display-roomcategory',
   templateUrl: './display-roomcategory.component.html',
   styleUrls: ['./display-roomcategory.component.css']
 })
-export class DisplayRoomcategoryComponent implements OnInit, AfterViewInit {
+export class DisplayRoomcategoryComponent{
 
   categories: any[] = [];
   
@@ -20,11 +22,23 @@ export class DisplayRoomcategoryComponent implements OnInit, AfterViewInit {
       console.log(this.categories);
     });
   }
-  
-  // For Datatables
-  @ViewChild('dataTable', { static: true }) table!: ElementRef;
+
+  private table: any;
+
   ngAfterViewInit(): void {
-    // Initialize Simple DataTable after view is initialized
-    new DataTable(this.table.nativeElement);
+    this.table = $('#example1').DataTable({
+      responsive: true,
+      lengthChange: false,
+      autoWidth: false,
+      buttons: ['copy', 'csv', 'excel', 'pdf', 'print', 'colvis']
+    });
+
+    this.table.buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+  }
+
+  ngOnDestroy(): void {
+    if (this.table) {
+      this.table.destroy();
+    }
   }
 }
