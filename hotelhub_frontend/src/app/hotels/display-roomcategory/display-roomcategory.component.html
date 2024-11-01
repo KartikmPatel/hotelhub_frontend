@@ -29,9 +29,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr *ngFor="let cat of categories">
                                     <td>
-                                        hello
+                                        {{cat.categoryName}}
                                     </td>
                                     <td>
                                         <a>Edit </a>
