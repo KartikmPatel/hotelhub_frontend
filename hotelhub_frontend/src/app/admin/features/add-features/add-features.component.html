@@ -2,11 +2,11 @@
 <main id="main" class="main">
 
   <div class="pagetitle">
-    <h1>Add Facilities</h1>
+    <h1>Add Features</h1>
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-        <li class="breadcrumb-item active">Add Facilities</li>
+        <li class="breadcrumb-item active">Add Features</li>
       </ol>
     </nav>
   </div><!-- End Page Title -->
@@ -16,13 +16,13 @@
       <div class="col-lg-12">
         <div class="card" style="margin-top: 10px;">
           <div class="card-body">
-            <h5 class="card-title">Add Facility</h5>
+            <h5 class="card-title">Add Features</h5>
 
             <form class="row g-3" (ngSubmit)="onSubmit()">
               <div class="col-md-12">
                 <div class="form-floating">
-                  <input type="text" name="facilityName" [(ngModel)]="newFacility.facilityName" class="form-control" placeholder="Facility Name" required>
-                  <label for="floatingName">Facility Name</label>
+                  <input type="text" name="facilityName" [(ngModel)]="newFeature.featureName" class="form-control" placeholder="Feature Name" required>
+                  <label for="floatingName">Feature Name</label>
                 </div>
               </div>
               <div class="col-md-12">
@@ -31,7 +31,7 @@
                 </div>
               </div>
               <div class="text-center">
-                <button type="submit" class="btn btn-primary">Add Facility</button>
+                <button type="submit" class="btn btn-primary">Add Feature</button>
               </div>
             </form>
           </div>

@@ -13,6 +13,11 @@ import { AddroomcategoryComponent } from './admin/addroomcategory/addroomcategor
 import { FormsModule } from '@angular/forms';
 import { EditroomcategoryComponent } from './admin/editroomcategory/editroomcategory.component';
 import { AddfacilityComponent } from './admin/addfacility/addfacility.component';
+import { DisplayfacilityComponent } from './admin/displayfacility/displayfacility.component';
+import { EditFacilityComponent } from './admin/edit-facility/edit-facility.component';
+import { DisplayFeaturesComponent } from './admin/features/display-features/display-features.component';
+import { AddFeaturesComponent } from './admin/features/add-features/add-features.component';
+import { EditFeatureComponent } from './admin/features/edit-feature/edit-feature.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,12 @@ import { AddfacilityComponent } from './admin/addfacility/addfacility.component'
     AdminheaderComponent,
     AddroomcategoryComponent,
     EditroomcategoryComponent,
-    AddfacilityComponent
+    AddfacilityComponent,
+    DisplayfacilityComponent,
+    EditFacilityComponent,
+    DisplayFeaturesComponent,
+    AddFeaturesComponent,
+    EditFeatureComponent
   ],
   imports: [
     BrowserModule,

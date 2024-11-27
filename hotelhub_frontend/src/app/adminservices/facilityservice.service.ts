@@ -12,12 +12,24 @@ export class FacilityserviceService {
   constructor(private http:HttpClient) { }
 
   // Add Facility
-  addfacility(facilityData:any):Observable<any>{
+  addfacility(facilityData:FormData):Observable<any>{
     return this.http.post(this.facilityApiUrl,facilityData);
   }
 
   // display Facility
   getFacility():Observable<any>{
     return this.http.get(this.facilityApiUrl);
+  }
+
+  deleteFacility(facilityId:string):Observable<any>{
+    return this.http.delete(`${this.facilityApiUrl}/${facilityId}`);
+  }
+
+  editFacility(facilityId:string):Observable<any>{
+    return this.http.get(`${this.facilityApiUrl}/${facilityId}`);
+  }
+
+  updateFacility(facilityId:string,facilityData:FormData):Observable<any>{
+    return this.http.put(`${this.facilityApiUrl}/${facilityId}`,facilityData);
   }
 }

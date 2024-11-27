@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class RoomcategoryserviceService {
 
   private categoryApiUrl = "http://localhost:5161/api/RoomCategorytbs";
+  private facilityApiUrl = "http://localhost:5161/api/Facilitytbs";
 
   constructor(private http:HttpClient){}
 
