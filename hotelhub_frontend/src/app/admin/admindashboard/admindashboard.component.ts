@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, OnInit } from '@angular/core';
+import { RoomcategoryserviceService } from 'src/app/adminservices/roomcategoryservice.service';
 
 @Component({
   selector: 'app-admindashboard',
@@ -7,4 +8,36 @@ import { Component } from '@angular/core';
 })
 export class AdmindashboardComponent {
 
+  categorycount:number=0;
+  facilitycount:number=0;
+  featurecount:number=0;
+
+  constructor(private roomcategoryservice: RoomcategoryserviceService) { }
+
+  ngOnInit(): void {
+    this.getcatcount();
+    this.getfaccount();
+    this.getfeacount();
+  }
+
+  getcatcount()
+  {
+    this.roomcategoryservice.getcategorycount().subscribe(data => {
+      this.categorycount = data;
+    });
+  }
+
+  getfaccount()
+  {
+    this.roomcategoryservice.getfacilitycount().subscribe(data => {
+      this.facilitycount = data;
+    });
+  }
+
+  getfeacount()
+  {
+    this.roomcategoryservice.getfeaturescount().subscribe(data => {
+      this.featurecount = data;
+    })
+  }
 }

@@ -1,0 +1,83 @@
+<main>
+    <div class="container">
+        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+                        <div class="d-flex justify-content-center py-4">
+                            <a class="logo d-flex align-items-center w-auto">
+                                <img src="assets/img/logo.png" alt="">
+                                <span class="d-none d-lg-block">NiceAdmin</span>
+                            </a>
+                        </div><!-- End Logo -->
+
+                        <div class="card mb-3">
+                            <div class="card-body">
+
+                                <div class="pt-4 pb-2">
+                                    <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
+                                    <p class="text-center small">Enter your company details to create account</p>
+                                </div>
+
+                                <!-- Show Error Message -->
+                                <div *ngIf="errorMessage" class="alert alert-danger">
+                                    {{ errorMessage }}
+                                </div>
+
+                                <form class="row g-3 needs-validation" (ngSubmit)="onSubmit()" novalidate>
+                                    <div class="col-12">
+                                        <label for="yourName" class="form-label">Hotel Name</label>
+                                        <input type="text" name="hname" [(ngModel)]="newHotel.hname"
+                                            class="form-control" id="yourName" required>
+                                        <div class="invalid-feedback">Please, enter hotel name!</div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="yourEmail" class="form-label">Email</label>
+                                        <input type="email" name="email" [(ngModel)]="newHotel.email"
+                                            class="form-control" id="yourEmail" required>
+                                        <div class="invalid-feedback">Please enter a valid Email address!</div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="yourPassword" class="form-label">Password</label>
+                                        <input type="password" name="password" [(ngModel)]="newHotel.password"
+                                            class="form-control" id="yourPassword" required>
+                                        <div class="invalid-feedback">Please enter the password!</div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="image" class="form-label">Image</label>
+                                        <div class="input-group has-validation">
+                                            <input type="file" name="image" [(ngModel)]="newHotel.image"
+                                                class="form-control" (change)="onFileSelected($event)" id="image"
+                                                required>
+                                            <div class="invalid-feedback">Please choose an Image.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <label for="city" class="form-label">City</label>
+                                        <input type="text" name="city" [(ngModel)]="newHotel.city" class="form-control"
+                                            id="city" required>
+                                        <div class="invalid-feedback">Please enter the city!</div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <button class="btn btn-primary w-100" type="submit">Create Account</button>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="small mb-0">Already have an account? <a
+                                                [routerLink]="['/hotellogin']">Log in</a></p>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+</main><!-- End #main -->

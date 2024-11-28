@@ -18,6 +18,8 @@ import { EditFacilityComponent } from './admin/edit-facility/edit-facility.compo
 import { DisplayFeaturesComponent } from './admin/features/display-features/display-features.component';
 import { AddFeaturesComponent } from './admin/features/add-features/add-features.component';
 import { EditFeatureComponent } from './admin/features/edit-feature/edit-feature.component';
+import { HotelregisterComponent } from './hotels/hotelregister/hotelregister.component';
+import { HotelloginComponent } from './hotels/hotellogin/hotellogin.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { EditFeatureComponent } from './admin/features/edit-feature/edit-feature
     EditFacilityComponent,
     DisplayFeaturesComponent,
     AddFeaturesComponent,
-    EditFeatureComponent
+    EditFeatureComponent,
+    HotelregisterComponent,
+    HotelloginComponent
   ],
   imports: [
     BrowserModule,

@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 export class RoomcategoryserviceService {
 
   private categoryApiUrl = "http://localhost:5161/api/RoomCategorytbs";
-  private facilityApiUrl = "http://localhost:5161/api/Facilitytbs";
+  private facilitycountapi = "http://localhost:5161/api/Facilitytbs/getfacilitycount";
+  private featurescountapi = "http://localhost:5161/api/Featurestbs/getfeaturescount";
 
   constructor(private http:HttpClient){}
 
@@ -37,4 +38,18 @@ export class RoomcategoryserviceService {
     return this.http.put(`${this.categoryApiUrl}/${categoryId}`,categoryData);
   }
 
+  // getcount of category for dashboard
+  getcategorycount():Observable<any>{
+    return this.http.get(`${this.categoryApiUrl}/getcategorycount`)
+  }
+
+  // get count of Facility for dashboard
+  getfacilitycount():Observable<any>{
+    return this.http.get(this.facilitycountapi)
+  }
+
+  // getcount of Facility for dashboard
+  getfeaturescount():Observable<any>{
+    return this.http.get(this.featurescountapi)
+  }
 }
