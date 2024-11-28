@@ -21,6 +21,10 @@ import { EditFeatureComponent } from './admin/features/edit-feature/edit-feature
 import { HotelregisterComponent } from './hotels/hotelregister/hotelregister.component';
 import { HotelloginComponent } from './hotels/hotellogin/hotellogin.component';
 import { HotelapproveComponent } from './admin/hotelapprove/hotelapprove.component';
+import { DisplayroomsComponent } from './hotels/rooms/displayrooms/displayrooms.component';
+import { AddRoomsComponent } from './hotels/rooms/add-rooms/add-rooms.component';
+import { EditRoomComponent } from './hotels/rooms/edit-room/edit-room.component';
+import { AddImagesComponent } from './hotels/rooms/add-images/add-images.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,11 @@ import { HotelapproveComponent } from './admin/hotelapprove/hotelapprove.compone
     EditFeatureComponent,
     HotelregisterComponent,
     HotelloginComponent,
-    HotelapproveComponent
+    HotelapproveComponent,
+    DisplayroomsComponent,
+    AddRoomsComponent,
+    EditRoomComponent,
+    AddImagesComponent,
   ],
   imports: [
     BrowserModule,

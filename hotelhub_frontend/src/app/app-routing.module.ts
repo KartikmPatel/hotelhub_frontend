@@ -13,6 +13,11 @@ import { AddFeaturesComponent } from './admin/features/add-features/add-features
 import { EditFeatureComponent } from './admin/features/edit-feature/edit-feature.component';
 import { HotelregisterComponent } from './hotels/hotelregister/hotelregister.component';
 import { HotelloginComponent } from './hotels/hotellogin/hotellogin.component';
+import { DisplayroomsComponent } from './hotels/rooms/displayrooms/displayrooms.component';
+import { AddRoomsComponent } from './hotels/rooms/add-rooms/add-rooms.component';
+import { EditRoomComponent } from './hotels/rooms/edit-room/edit-room.component';
+import { AddImagesComponent } from './hotels/rooms/add-images/add-images.component';
+import { HotelapproveComponent } from './admin/hotelapprove/hotelapprove.component';
 
 const routes: Routes = [
   {
@@ -66,6 +71,26 @@ const routes: Routes = [
   {
     path:"hotellogin",
     component:HotelloginComponent
+  },
+  {
+    path:"displayRooms",
+    component:DisplayroomsComponent
+  },
+  {
+    path:"addRoom",
+    component:AddRoomsComponent
+  },
+  {
+    path:"editRoom/:id",
+    component:EditRoomComponent
+  },
+  {
+    path:"addRoomImages/:id",
+    component:AddImagesComponent
+  },
+  {
+    path:"hotelsapprove",
+    component:HotelapproveComponent
   }
 ];
 
