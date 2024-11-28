@@ -9,17 +9,26 @@ declare var $: any;
   styleUrls: ['./display-features.component.css']
 })
 export class DisplayFeaturesComponent {
-  features:any[] = [];
-  private table:any;
+  features: any[] = [];
+  successmsg: string = '';
 
-  constructor(private featureservice:FeatureServiceService){}
+  private table: any;
 
-  ngOnInit():void{
-    this.featureservice.getFeature().subscribe(data=>{
+  constructor(private featureservice: FeatureServiceService) { }
+
+  ngOnInit(): void {
+    const featuresuccessmsg = sessionStorage.getItem('featuresuccessmsg');
+    if (featuresuccessmsg !== null) {
+      this.successmsg = featuresuccessmsg;
+
+      sessionStorage.removeItem('featuresuccessmsg');
+      sessionStorage.clear();
+    }
+
+    this.featureservice.getFeature().subscribe(data => {
       this.features = data.$values;
 
-      if(this.table)
-      {
+      if (this.table) {
         this.table.destroy();
       }
 
@@ -28,6 +37,14 @@ export class DisplayFeaturesComponent {
   }
 
   getFeatureafterdelete() {
+    const featuresuccessmsg = sessionStorage.getItem('featuresuccessmsg');
+    if (featuresuccessmsg !== null) {
+      this.successmsg = featuresuccessmsg;
+
+      sessionStorage.removeItem('featuresuccessmsg');
+      sessionStorage.clear();
+    }
+
     this.featureservice.getFeature().subscribe(data => {
       this.features = data.$values;
 
@@ -43,8 +60,13 @@ export class DisplayFeaturesComponent {
 
   deleteFeature(featureId: string) {
     this.featureservice.deleteFeature(featureId).subscribe(() => {
+      sessionStorage.setItem("featuresuccessmsg", "Features Successfully Deleted");
       this.getFeatureafterdelete();
     })
+  }
+
+  closeSuccessMessage(): void {
+    this.successmsg = '';
   }
 
   initializeDataTable(): void {

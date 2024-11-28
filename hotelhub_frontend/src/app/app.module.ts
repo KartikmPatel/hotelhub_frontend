@@ -20,6 +20,7 @@ import { AddFeaturesComponent } from './admin/features/add-features/add-features
 import { EditFeatureComponent } from './admin/features/edit-feature/edit-feature.component';
 import { HotelregisterComponent } from './hotels/hotelregister/hotelregister.component';
 import { HotelloginComponent } from './hotels/hotellogin/hotellogin.component';
+import { HotelapproveComponent } from './admin/hotelapprove/hotelapprove.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { HotelloginComponent } from './hotels/hotellogin/hotellogin.component';
     AddFeaturesComponent,
     EditFeatureComponent,
     HotelregisterComponent,
-    HotelloginComponent
+    HotelloginComponent,
+    HotelapproveComponent
   ],
   imports: [
     BrowserModule,

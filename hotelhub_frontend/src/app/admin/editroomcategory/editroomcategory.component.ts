@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RoomcategoryserviceService } from 'src/app/adminservices/roomcategoryservice.service';
-import { ActivatedRoute,Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-editroomcategory',
@@ -8,9 +8,10 @@ import { ActivatedRoute,Router } from '@angular/router';
   styleUrls: ['./editroomcategory.component.css']
 })
 export class EditroomcategoryComponent {
-  categories:any = {}
+  categories: any = {}
+  errorMessage: string = ''
 
-  constructor(private roomcategoryservice: RoomcategoryserviceService,private router:Router,private route: ActivatedRoute) { }
+  constructor(private roomcategoryservice: RoomcategoryserviceService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     const categoryId = this.route.snapshot.paramMap.get('id') || '';
@@ -19,10 +20,19 @@ export class EditroomcategoryComponent {
     })
   }
 
-  onSubmit()
-  {
-     this.roomcategoryservice.updateCategory(this.categories.id,this.categories).subscribe(() => {
+  onSubmit() {
+    this.errorMessage = '';
+
+    // Validation checks
+    if (!this.categories.categoryName) {
+      this.errorMessage = 'All fields are required.';
+      return; // Stop further execution if fields are missing
+    }
+
+    this.roomcategoryservice.updateCategory(this.categories.id, this.categories).subscribe(() => {
       this.router.navigate(['/displaycategory']);
-     })
+
+      sessionStorage.setItem("categorysuccessmsg", "Category Successfully Edited");
+    })
   }
 }

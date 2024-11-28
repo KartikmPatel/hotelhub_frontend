@@ -10,12 +10,13 @@ import { FeatureServiceService } from 'src/app/adminservices/feature-service.ser
 export class EditFeatureComponent {
   feature: any = {};
   selectedFile: File | null = null;
+  errorMessage: string = '';
 
   constructor(
     private featureservice: FeatureServiceService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const feaId = this.route.snapshot.paramMap.get('id') || '';
@@ -31,6 +32,14 @@ export class EditFeatureComponent {
   }
 
   onSubmit() {
+    this.errorMessage = '';
+
+    // Validation checks
+    if (!this.feature.featureName) {
+      this.errorMessage = 'All fields are required.';
+      return; // Stop further execution if fields are missing
+    }
+
     const formData = new FormData();
     formData.append('featureName', this.feature.featureName);
 
@@ -45,6 +54,8 @@ export class EditFeatureComponent {
       this.featureservice.updateFeature(this.feature.id, formData).subscribe(
         () => {
           this.router.navigate(['/displayFeatures']);
+
+          sessionStorage.setItem("featuresuccessmsg", "Features Successfully Edited");
         },
         (error) => {
           console.error('Error:', error);

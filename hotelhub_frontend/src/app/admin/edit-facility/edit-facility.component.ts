@@ -10,12 +10,13 @@ import { FacilityserviceService } from 'src/app/adminservices/facilityservice.se
 export class EditFacilityComponent implements OnInit {
   facility: any = {};
   selectedFile: File | null = null;
+  errorMessage: string = '';
 
   constructor(
     private facilityService: FacilityserviceService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const facId = this.route.snapshot.paramMap.get('id') || '';
@@ -31,6 +32,14 @@ export class EditFacilityComponent implements OnInit {
   }
 
   onSubmit() {
+    this.errorMessage = '';
+
+    // Validation checks
+    if (!this.facility.facilityName) {
+      this.errorMessage = 'All fields are required.';
+      return; // Stop further execution if fields are missing
+    }
+
     const formData = new FormData();
     formData.append('facilityName', this.facility.facilityName);
 
@@ -45,6 +54,8 @@ export class EditFacilityComponent implements OnInit {
       this.facilityService.updateFacility(this.facility.id, formData).subscribe(
         () => {
           this.router.navigate(['/displayFacility']);
+
+          sessionStorage.setItem("facilitysuccessmsg", "Facility Successfully Edited");
         },
         (error) => {
           console.error('Error:', error);

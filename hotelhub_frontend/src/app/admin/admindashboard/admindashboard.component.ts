@@ -11,6 +11,7 @@ export class AdmindashboardComponent {
   categorycount:number=0;
   facilitycount:number=0;
   featurecount:number=0;
+  hotelcount:number=0;
 
   constructor(private roomcategoryservice: RoomcategoryserviceService) { }
 
@@ -18,6 +19,7 @@ export class AdmindashboardComponent {
     this.getcatcount();
     this.getfaccount();
     this.getfeacount();
+    this.gethotelcount();
   }
 
   getcatcount()
@@ -38,6 +40,13 @@ export class AdmindashboardComponent {
   {
     this.roomcategoryservice.getfeaturescount().subscribe(data => {
       this.featurecount = data;
+    })
+  }
+
+  gethotelcount()
+  {
+    this.roomcategoryservice.gethotelcount().subscribe(data => {
+      this.hotelcount = data;
     })
   }
 }

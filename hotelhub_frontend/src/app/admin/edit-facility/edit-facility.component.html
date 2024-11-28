@@ -16,10 +16,17 @@
         <div class="card" style="margin-top: 10px;">
           <div class="card-body">
             <h5 class="card-title">Edit Facility</h5>
+
+            <!-- Show Error Message -->
+            <div *ngIf="errorMessage" class="alert alert-danger">
+              {{ errorMessage }}
+            </div>
+
             <form class="row g-3" (ngSubmit)="onSubmit()">
               <div class="col-md-12">
                 <div class="form-floating">
-                  <input type="text" name="facilityName" [(ngModel)]="facility.facilityName" class="form-control" placeholder="Facility Name" required>
+                  <input type="text" name="facilityName" [(ngModel)]="facility.facilityName" class="form-control"
+                    placeholder="Facility Name" required>
                   <label for="floatingName">Facility Name</label>
                 </div>
               </div>

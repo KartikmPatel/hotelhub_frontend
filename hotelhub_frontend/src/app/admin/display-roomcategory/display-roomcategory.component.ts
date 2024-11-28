@@ -11,6 +11,7 @@ declare var $: any; // Declare jQuery globally
 export class DisplayRoomcategoryComponent implements OnInit, OnDestroy {
 
   categories: any[] = [];
+  successmsg: string = '';
 
   // datatable part
   private table: any;
@@ -18,6 +19,14 @@ export class DisplayRoomcategoryComponent implements OnInit, OnDestroy {
   constructor(private roomcategoryservice: RoomcategoryserviceService) { }
 
   ngOnInit(): void {
+    const categorySuccessMsg = sessionStorage.getItem('categorysuccessmsg');
+    if (categorySuccessMsg !== null) {
+      this.successmsg = categorySuccessMsg;
+
+      sessionStorage.removeItem('categorysuccessmsg');
+      sessionStorage.clear();
+    }
+
     this.roomcategoryservice.getCategory().subscribe(data => {
       this.categories = data.$values;
 
@@ -31,7 +40,19 @@ export class DisplayRoomcategoryComponent implements OnInit, OnDestroy {
     });
   }
 
+  closeSuccessMessage(): void {
+    this.successmsg = '';
+  }
+
   getCategoryafterdelete() {
+    const categorySuccessMsg = sessionStorage.getItem('categorysuccessmsg');
+    if (categorySuccessMsg !== null) {
+      this.successmsg = categorySuccessMsg;
+
+      sessionStorage.removeItem('categorysuccessmsg');
+      sessionStorage.clear();
+    }
+
     this.roomcategoryservice.getCategory().subscribe(data => {
       this.categories = data.$values;
 
@@ -47,6 +68,7 @@ export class DisplayRoomcategoryComponent implements OnInit, OnDestroy {
 
   deleteCategory(categoryId: string) {
     this.roomcategoryservice.deleteCategory(categoryId).subscribe(() => {
+      sessionStorage.setItem("categorysuccessmsg", "Category Successfully Deleted");
       this.getCategoryafterdelete();
     })
   }

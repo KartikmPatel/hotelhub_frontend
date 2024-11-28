@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class AddfacilityComponent {
   newFacility: any = {};
   selectedFile: File | null = null;
+  errorMessage: string = '';
 
   constructor(private facilityserviceService: FacilityserviceService, private router: Router) { }
 
@@ -18,6 +19,14 @@ export class AddfacilityComponent {
   }
 
   onSubmit() {
+    this.errorMessage = '';
+
+    // Validation checks
+    if (!this.newFacility.facilityName) {
+      this.errorMessage = 'All fields are required.';
+      return; // Stop further execution if fields are missing
+    }
+
     if (this.selectedFile) {
       const formData = new FormData();
       formData.append('facilityName', this.newFacility.facilityName); // Add facility name
@@ -25,11 +34,13 @@ export class AddfacilityComponent {
 
       this.facilityserviceService.addfacility(formData).subscribe(() => {
         this.router.navigate(['/displayFacility']);
+
+        sessionStorage.setItem("facilitysuccessmsg", "Facility Successfully Inserted");
       }, error => {
         console.error('Error:', error);
       });
     } else {
-      console.error('No file selected');
+      this.errorMessage = "No file selected";
     }
   }
 }

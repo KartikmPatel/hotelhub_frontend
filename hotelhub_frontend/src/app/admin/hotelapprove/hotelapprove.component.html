@@ -1,0 +1,89 @@
+<app-adminheader></app-adminheader>
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Hotels</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active">Hotels</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <!-- Success Message -->
+    <div *ngIf="successmessage" class="alert alert-success alert-dismissible fade show">
+        {{ successmessage }}
+        <!-- Close Button -->
+        <button type="button" class="btn-close" (click)="closeSuccessMessage()"></button>
+    </div>
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card" style="margin-top: 10px;">
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <h5 class="card-title">Hotels</h5>
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Hotel Name
+                                    </th>
+                                    <th>
+                                        Email
+                                    </th>
+                                    <th>
+                                        Image
+                                    </th>
+                                    <th>
+                                        City
+                                    </th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let h of hotels">
+                                    <td>
+                                        {{h.hname}}
+                                    </td>
+                                    <td>
+                                        {{h.email}}
+                                    </td>
+                                    <td>
+                                        <img [src]="'http://localhost:5161/uploads/' + h.image" alt="Hotel Image"
+                                            width="100px" height="100px">
+                                    </td>
+                                    <td>
+                                        {{h.city}}
+                                    </td>
+                                    <td style="text-align: center;" *ngIf="h.isApproved == 1; else notApproved">
+                                        <!-- Button when the hotel is approved -->
+                                        <button type="button" class="btn btn-success" disabled>
+                                            <i class="bi bi-check-circle"></i> Approved
+                                        </button>
+                                    </td>
+                                    <ng-template #notApproved>
+                                        <!-- Form and button when the hotel is not approved -->
+                                        <td style="text-align: center;">
+                                            <form (submit)="approveHotel(h.id)">
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="bi bi-x-circle"></i> Approve
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </ng-template>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->

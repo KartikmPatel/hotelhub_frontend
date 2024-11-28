@@ -9,17 +9,26 @@ declare var $: any;
   styleUrls: ['./displayfacility.component.css']
 })
 export class DisplayfacilityComponent {
-  facilities :any[] = [];
-  private table:any;
+  facilities: any[] = [];
+  successmsg: string = '';
 
-  constructor(private facilityservice:FacilityserviceService){}
+  private table: any;
 
-  ngOnInit():void{
-    this.facilityservice.getFacility().subscribe(data =>{
+  constructor(private facilityservice: FacilityserviceService) { }
+
+  ngOnInit(): void {
+    const facilitysuccessmsg = sessionStorage.getItem('facilitysuccessmsg');
+    if (facilitysuccessmsg !== null) {
+      this.successmsg = facilitysuccessmsg;
+
+      sessionStorage.removeItem('facilitysuccessmsg');
+      sessionStorage.clear();
+    }
+
+    this.facilityservice.getFacility().subscribe(data => {
       this.facilities = data.$values;
 
-      if(this.table)
-      {
+      if (this.table) {
         this.table.destroy();
       }
 
@@ -28,6 +37,14 @@ export class DisplayfacilityComponent {
   }
 
   getFacilityafterdelete() {
+    const facilitysuccessmsg = sessionStorage.getItem('facilitysuccessmsg');
+    if (facilitysuccessmsg !== null) {
+      this.successmsg = facilitysuccessmsg;
+
+      sessionStorage.removeItem('facilitysuccessmsg');
+      sessionStorage.clear();
+    }
+
     this.facilityservice.getFacility().subscribe(data => {
       this.facilities = data.$values;
 
@@ -41,8 +58,13 @@ export class DisplayfacilityComponent {
     });
   }
 
+  closeSuccessMessage(): void {
+    this.successmsg = '';
+  }
+
   deleteFacility(facilityId: string) {
     this.facilityservice.deleteFacility(facilityId).subscribe(() => {
+      sessionStorage.setItem("facilitysuccessmsg", "Facility Successfully Deleted");
       this.getFacilityafterdelete();
     })
   }

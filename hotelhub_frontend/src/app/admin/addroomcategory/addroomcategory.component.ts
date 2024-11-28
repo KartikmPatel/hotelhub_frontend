@@ -8,13 +8,24 @@ import { Router } from '@angular/router';
   styleUrls: ['./addroomcategory.component.css']
 })
 export class AddroomcategoryComponent {
-  newCategory:any = {}
+  newCategory: any = {}
+  errorMessage: string = '';
 
-  constructor(private roomcategoryservice: RoomcategoryserviceService,private router:Router) { }
-  
-  onSubmit(){
+  constructor(private roomcategoryservice: RoomcategoryserviceService, private router: Router) { }
+
+  onSubmit() {
+    this.errorMessage = '';
+
+    // Validation checks
+    if (!this.newCategory.categoryName) {
+      this.errorMessage = 'All fields are required.';
+      return; // Stop further execution if fields are missing
+    }
+
     this.roomcategoryservice.addCategory(this.newCategory).subscribe(() => {
       this.router.navigate(['/displaycategory']);
+
+      sessionStorage.setItem("categorysuccessmsg", "Category Successfully Inserted");
     })
   }
 }
