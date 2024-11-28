@@ -1,0 +1,96 @@
+<app-hotelheader></app-hotelheader>
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Rooms</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active">Rooms</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <!-- <button type="button" class="btn btn-primary">Add Category</button> -->
+                <a type="button" class="btn btn-success" [routerLink]="['/addRoom']">
+                    <i class="bi bi-plus-circle"></i> Add Room
+                </a>
+                <div class="card" style="margin-top: 10px;">
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <h5 class="card-title">Rooms</h5>
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Room Category
+                                    </th>
+                                    <th>
+                                       Adult Capacity
+                                  </th>
+                                    <th>Children Capacity</th>
+                                    <th>
+                                      Quantity
+                                    </th>
+                                    <th>
+                                      Rent
+                                    </th>
+                                    <th>
+                                      Discount
+                                    </th>
+                                    <th>
+                                      Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let r of rooms">
+                                    <td>
+                                        {{r.categoryName}}
+                                    </td>
+                                    <td>
+                                      {{r.adultCapacity}}
+                                    </td>
+                                    <td>
+                                      {{r.childrenCapacity}}
+                                    </td>
+                                    <td>
+                                      {{r.quantity}}
+                                    </td>
+                                    <td>
+                                      {{r.rent}}
+                                    </td>
+                                    <td>
+                                      {{r.discount}}
+                                    </td>
+
+                                    <td style="text-align: center;">
+
+                                      <a [routerLink]="['/addRoomImages', r.id]">
+                                        <button type="button" class="btn btn-primary me-3">
+                                          <i class="bi bi-camera"></i> <!-- Bootstrap camera icon -->
+                                        </button>
+                                      </a>
+                                        <a [routerLink]="['/editRoom',r.id]"><button type="button" class="btn btn-primary me-3">
+                                                <i class="bi bi-pencil-square"></i> Edit
+                                            </button></a>
+                                        <a><button class="btn btn-danger" (click)="deleteRoom(r.id)">
+                                                <i class="bi bi-trash"></i> Delete
+                                            </button></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
