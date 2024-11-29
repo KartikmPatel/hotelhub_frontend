@@ -11,8 +11,18 @@ export class RoomserviceService {
   private roomFeatureUrl = "http://localhost:5161/api/RoomFeaturetbs";
   private roomFacilityUrl = "http://localhost:5161/api/RoomFacilitytbs";
   private roomImageUrl = "http://localhost:5161/api/RoomImagetbs";
+  private hotelfacility = "http://localhost:5161/api/RoomFacilitytbs";//getAllFacilityByHotel/1
+  private hotelfeature = "http://localhost:5161/api/RoomFeaturetbs";//getAllFeatureByHotel/1
 
   constructor(private http:HttpClient) { }
+
+  getHotelFacility(hid:any):Observable<any>{
+    return this.http.get(`${this.hotelfacility}/getAllFacilityByHotel/${hid}`);
+  }
+
+  getHotelFeature(hid:any):Observable<any>{
+    return this.http.get(`${this.hotelfeature}/getAllFeatureByHotel/${hid}`);
+  }
 
   addRoom(roomData:any):Observable<any>{
     return this.http.post(this.roomApiUrl,roomData);

@@ -1,0 +1,53 @@
+<app-hotelheader></app-hotelheader>
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Feature</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active">Feature</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card" style="margin-top: 10px;">
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <h5 class="card-title">Feature</h5>
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Feature
+                                    </th>
+                                    <th>
+                                       Image
+                                  </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let f of feature">
+                                    <td>
+                                        {{f.featureName}}
+                                    </td>
+                                    <td>
+                                        <img [src]="'http://localhost:5161/uploads/' +f.image" alt="Feature Image"
+                                        width="100px" height="100px">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->

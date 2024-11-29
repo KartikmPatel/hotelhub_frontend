@@ -18,6 +18,8 @@ import { AddRoomsComponent } from './hotels/rooms/add-rooms/add-rooms.component'
 import { EditRoomComponent } from './hotels/rooms/edit-room/edit-room.component';
 import { AddImagesComponent } from './hotels/rooms/add-images/add-images.component';
 import { HotelapproveComponent } from './admin/hotelapprove/hotelapprove.component';
+import { HotelfacilityComponent } from './hotels/hotelfacility/hotelfacility.component';
+import { HotelfeatureComponent } from './hotels/hotelfeature/hotelfeature.component';
 
 const routes: Routes = [
   {
@@ -91,6 +93,14 @@ const routes: Routes = [
   {
     path:"hotelsapprove",
     component:HotelapproveComponent
+  },
+  {
+    path:"hotelfacility",
+    component:HotelfacilityComponent
+  },
+  {
+    path:"hotelfeature",
+    component:HotelfeatureComponent
   }
 ];
 
