@@ -13,7 +13,9 @@ export class DisplayroomsComponent {
   constructor(private roomservice:RoomserviceService){}
 
   ngOnInit():void{
-    this.roomservice.getRooms().subscribe(data=>{
+    const hid = localStorage.getItem("hotelid");
+    console.log(hid);
+    this.roomservice.getRooms(hid).subscribe(data=>{
       this.rooms = data.$values;
       console.log(data.$values);
 
@@ -27,7 +29,8 @@ export class DisplayroomsComponent {
   }
 
   getRoomafterdelete(){
-    this.roomservice.getRooms().subscribe(data=>{
+    const hid = localStorage.getItem("hotelid");
+    this.roomservice.getRooms(hid).subscribe(data=>{
       this.rooms = data.$values;
 
       if (this.table) {

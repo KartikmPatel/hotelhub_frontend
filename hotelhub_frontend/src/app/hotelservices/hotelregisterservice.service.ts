@@ -17,12 +17,16 @@ export class HotelregisterserviceService {
     return this.http.post(this.hotelapiUrl,hotelData);
   }
   
+  // Login
   checkuser(hotelData: any): Observable<any> {
     return this.http.post(`${this.hotelapiUrl}/login`, hotelData);
   }  
 
-  // Retrive for update Category
-  // editCategory(categoryId:string):Observable<any>{
-  //   return this.http.get(`${this.categoryApiUrl}/${categoryId}`);
-  // }
+  // get hotel id based on email
+  gethotelid(email: string): Observable<any> {
+    const payload = { email: email };
+    return this.http.post(`${this.hotelapiUrl}/gethid`, payload, {
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
 }

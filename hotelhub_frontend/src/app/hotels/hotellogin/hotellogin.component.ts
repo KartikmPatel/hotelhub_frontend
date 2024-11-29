@@ -25,7 +25,12 @@ export class HotelloginComponent {
     this.hotelregisterserviceService.checkuser(this.userdata).subscribe({
       next: (response) => {
         if (response.message === "Login successful.") {
-          this.router.navigate(['/']); // Redirect on success
+          this.hotelregisterserviceService.gethotelid(this.userdata.email).subscribe((data) => {
+            const hid = data.hotelId;
+            console.log(hid);
+            localStorage.setItem("hotelid",hid);
+            this.router.navigate(['/']); // Redirect on success
+          });
         }
       },
       error: (err) => {

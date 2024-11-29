@@ -48,6 +48,8 @@ export class AddRoomsComponent {
   }
 
   onSubmit() {
+    const hid = localStorage.getItem("hotelid");
+    console.log(hid);
     // Step 1: Prepare the base room data without featureIds and facilityIds
     const roomData = {
       roomcategoryid: this.newRoom.roomcategoryid,
@@ -58,7 +60,7 @@ export class AddRoomsComponent {
       discount: this.newRoom.discount,
       activeStatus: 0,
       festivalId: null,
-      hid:1
+      hid:hid
     };
 
     this.roomservice.addRoom(roomData).subscribe(

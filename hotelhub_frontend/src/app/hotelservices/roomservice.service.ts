@@ -22,8 +22,8 @@ export class RoomserviceService {
     return this.http.get(this.roomApiUrl+"/allrooms");
   }
 
-  getRooms():Observable<any>{
-    return this.http.get(this.roomApiUrl);
+  getRooms(hid:any):Observable<any>{
+    return this.http.get(`${this.roomApiUrl}/hotel/${hid}`);
   }
 
   deleteRoom(roomId:string):Observable<any>{
