@@ -24,6 +24,7 @@ import { DisplayfesdiscountComponent } from './admin/festivaldiscount/displayfes
 import { AddfesdiscountComponent } from './admin/festivaldiscount/addfesdiscount/addfesdiscount.component';
 import { EditfesdiscountComponent } from './admin/festivaldiscount/editfesdiscount/editfesdiscount.component';
 import { HotelprofileComponent } from './hotels/hotelprofile/hotelprofile.component';
+import { DisplayFeedbackComponent } from './hotels/feedback/display-feedback/display-feedback.component';
 
 const routes: Routes = [
   {
@@ -121,6 +122,10 @@ const routes: Routes = [
   {
     path:"hotelprofile",
     component:HotelprofileComponent
+  },
+  {
+    path:"displayFeedback",
+    component:DisplayFeedbackComponent
   }
 ];
 

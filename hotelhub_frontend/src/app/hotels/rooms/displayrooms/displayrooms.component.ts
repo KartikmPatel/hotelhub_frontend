@@ -13,22 +13,11 @@ export class DisplayroomsComponent {
   constructor(private roomservice:RoomserviceService){}
 
   ngOnInit():void{
-    const hid = localStorage.getItem("hotelid");
-    console.log(hid);
-    this.roomservice.getRooms(hid).subscribe(data=>{
-      this.rooms = data.$values;
-      console.log(data.$values);
-
-      if(this.table)
-      {
-        this.table.destroy();
-      }
-
-      this.initializeDataTable();
-    })
+    this.displayRooms();
   }
 
-  getRoomafterdelete(){
+  displayRooms()
+  {
     const hid = localStorage.getItem("hotelid");
     this.roomservice.getRooms(hid).subscribe(data=>{
       this.rooms = data.$values;
@@ -41,12 +30,13 @@ export class DisplayroomsComponent {
     })
   }
 
+
   deleteRoom(roomId:string)
   {
     this.roomservice.deleteRoomFacility(roomId).subscribe(()=>{
       this.roomservice.deleteRoomFeature(roomId).subscribe(()=>{
         this.roomservice.deleteRoom(roomId).subscribe(()=>{
-          this.getRoomafterdelete();
+          this.displayRooms();
         })
       })
     })
@@ -63,5 +53,11 @@ export class DisplayroomsComponent {
       });
       this.table.buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     }, 0);
+  }
+
+  changeActiveStatus(roomid:any,status:any){
+    this.roomservice.changeActiveStatus(roomid,status).subscribe(()=>{
+      this.displayRooms();
+    })
   }
 }

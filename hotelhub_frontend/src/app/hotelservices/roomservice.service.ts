@@ -122,4 +122,8 @@ export class RoomserviceService {
   addRoomImages(imageData: FormData): Observable<any> {
     return this.http.post(`${this.roomImageUrl}/upload`, imageData);
   }
+
+  changeActiveStatus(roomid:any,status :any):Observable<any>{
+    return this.http.get(`${this.roomApiUrl}/changeActiveStatus/${status}?roomid=${roomid}`);
+  }
 }

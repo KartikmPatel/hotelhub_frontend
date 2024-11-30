@@ -43,6 +43,9 @@
                                       Discount
                                     </th>
                                     <th>
+                                      Active Status
+                                    </th>
+                                    <th>
                                       Action
                                     </th>
                                 </tr>
@@ -67,7 +70,12 @@
                                     <td>
                                       {{r.discount}}
                                     </td>
-
+                                    <td *ngIf="r.activeStatus == 0">
+                                      <button type="button" class="btn btn-danger me-3" (click)="changeActiveStatus(r.id,r.activeStatus)">Inactive</button>
+                                    </td>
+                                    <td *ngIf="r.activeStatus == 1">
+                                      <button type="button" class="btn btn-success me-3" (click)="changeActiveStatus(r.id,r.activeStatus)">Active</button>
+                                    </td>
                                     <td style="text-align: center;">
 
                                       <a [routerLink]="['/addRoomImages', r.id]">
@@ -76,10 +84,10 @@
                                         </button>
                                       </a>
                                         <a [routerLink]="['/editRoom',r.id]"><button type="button" class="btn btn-primary me-3">
-                                                <i class="bi bi-pencil-square"></i> Edit
+                                                <i class="bi bi-pencil-square"></i>
                                             </button></a>
                                         <a><button class="btn btn-danger" (click)="deleteRoom(r.id)">
-                                                <i class="bi bi-trash"></i> Delete
+                                                <i class="bi bi-trash"></i>
                                             </button></a>
                                     </td>
                                 </tr>

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class HotelregisterserviceService {
 
   private hotelapiUrl = "http://localhost:5161/api/Hoteltbs";
-
+  private hotelFeedbackUrl = "http://localhost:5161/api/Feedbacktbs";
 
   constructor(private http:HttpClient) { }
 
@@ -16,11 +16,11 @@ export class HotelregisterserviceService {
   addnewhotel(hotelData:FormData):Observable<any>{
     return this.http.post(this.hotelapiUrl,hotelData);
   }
-  
+
   // Login
   checkuser(hotelData: any): Observable<any> {
     return this.http.post(`${this.hotelapiUrl}/login`, hotelData);
-  }  
+  }
 
   // get hotel id based on email
   gethotelid(email: string): Observable<any> {
@@ -37,5 +37,14 @@ export class HotelregisterserviceService {
   updateProfile(hid:any, profileData:FormData):Observable<any>{
     console.log(hid+"------------------------"+FormData);
     return this.http.put(`${this.hotelapiUrl}/${hid}`,profileData);
+  }
+
+  getFeedbacks(hid:any):Observable<any>
+  {
+    return this.http.get(`${this.hotelFeedbackUrl}/getByHotel/${hid}`);
+  }
+
+  markAsRead(id:any):Observable<any>{
+    return this.http.get(`${this.hotelFeedbackUrl}/markAsRead/${id}`);
   }
 }
