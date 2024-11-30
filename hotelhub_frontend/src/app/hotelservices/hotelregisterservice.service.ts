@@ -10,11 +10,11 @@ export class HotelregisterserviceService {
   private hotelapiUrl = "http://localhost:5161/api/Hoteltbs";
   private hotelFeedbackUrl = "http://localhost:5161/api/Feedbacktbs";
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   // Add New Hotel(Registration)
-  addnewhotel(hotelData:FormData):Observable<any>{
-    return this.http.post(this.hotelapiUrl,hotelData);
+  addnewhotel(hotelData: FormData): Observable<any> {
+    return this.http.post(this.hotelapiUrl, hotelData);
   }
 
   // Login
@@ -30,28 +30,38 @@ export class HotelregisterserviceService {
     });
   }
 
-  displayProfile(hid:any): Observable<any>{
+  displayProfile(hid: any): Observable<any> {
     return this.http.get(`${this.hotelapiUrl}/${hid}`);
   }
 
-  updateProfile(hid:any, profileData:FormData):Observable<any>{
-    return this.http.put(`${this.hotelapiUrl}/${hid}`,profileData);
+  updateProfile(hid: any, profileData: FormData): Observable<any> {
+    return this.http.put(`${this.hotelapiUrl}/${hid}`, profileData);
   }
 
-  getFeedbacks(hid:any):Observable<any>
-  {
+  getFeedbacks(hid: any): Observable<any> {
     return this.http.get(`${this.hotelFeedbackUrl}/getByHotel/${hid}`);
   }
 
-  markAsRead(id:any):Observable<any>{
+  markAsRead(id: any): Observable<any> {
     return this.http.get(`${this.hotelFeedbackUrl}/markAsRead/${id}`);
   }
 
-  changePassword(hid:any,profileData:FormData):Observable<any>{
-    return this.http.put(`${this.hotelapiUrl}/changeHotelPassword/${hid}`,profileData);
+  changePassword(hid: any, profileData: FormData): Observable<any> {
+    return this.http.put(`${this.hotelapiUrl}/changeHotelPassword/${hid}`, profileData);
   }
 
-  forgotPassword(profileData:any):Observable<any>{
-    return this.http.post(`${this.hotelapiUrl}/forgotpassword`,profileData);
+  forgotPassword(email: string): Observable<any> {
+    console.log('Sending email for:', email);
+    const payload = { email: email };
+    return this.http.post(`${this.hotelapiUrl}/forgotpassword`, payload, {
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
+  resethotelpassword(email: string, password: string): Observable<any> {
+    const payload = { email: email, password: password };
+    return this.http.post(`${this.hotelapiUrl}/resetpassword`, payload, {
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 }

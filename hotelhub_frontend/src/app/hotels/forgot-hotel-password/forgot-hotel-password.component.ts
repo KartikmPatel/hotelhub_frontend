@@ -5,51 +5,47 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-forgot-hotel-password',
   templateUrl: './forgot-hotel-password.component.html',
-  styleUrls: ['./forgot-hotel-password.component.css']
+  styleUrls: ['./forgot-hotel-password.component.css'],
 })
 export class ForgotHotelPasswordComponent {
-  userdata: any = {};
-  errorMessage: string = '';
-  successmsg: string = '';
+  userdata = { email: '' }; // Ensuring consistent data structure
   isLoading = false;
+  successmsg = '';
+  errormsg = '';
 
-  constructor(private hotelregisterserviceService: HotelregisterserviceService, private router: Router) { }
+  constructor(private hotelRegisterService: HotelregisterserviceService, private router: Router) {}
 
+  // Method triggered on form submission
   onSubmit() {
-    this.errorMessage = '';
+    this.errormsg = '';
     this.successmsg = '';
     this.isLoading = true;
 
+    // Input validation
     if (!this.userdata.email) {
-      this.errorMessage = 'Email is required.';
+      this.errormsg = 'Email is required.';
       this.isLoading = false;
       return;
     }
 
-    this.hotelregisterserviceService.checkuser(this.userdata).subscribe({
-      next: (response) => {
-        if (response && response.message === "Login successful.") {
-          this.hotelregisterserviceService.forgotPassword(this.userdata.email).subscribe({
-            next: (data) => {
-              this.successmsg = 'Please check your email for the password reset link.';
-              this.isLoading = false;
-            },
-            error: (err) => {
-              console.error('Error during email sending:', err);
-              this.isLoading = false;
-              this.errorMessage = err.error?.message || 'An unexpected error occurred. Please try again later.';
-            }
-          });
-        }
+    console.log('Email:', this.userdata.email);
+
+    // API call for forgot password functionality
+    this.hotelRegisterService.forgotPassword(this.userdata.email).subscribe({
+      next: (data) => {
+        this.successmsg = 'Please check your email for the password reset link.';
+        this.isLoading = false;
+        this.closeSuccessMessage(); // Automatically close success message
       },
       error: (err) => {
-        console.error('Error during user check:', err);
+        console.error('Error during email sending:', err);
         this.isLoading = false;
-        this.errorMessage = err.error?.message || 'An unexpected error occurred. Please try again later.';
-      }
+        this.errormsg = err.error?.message || 'An unexpected error occurred. Please try again later.';
+      },
     });
   }
 
+  // Automatically close success message after a few seconds
   closeSuccessMessage(): void {
     setTimeout(() => {
       this.successmsg = '';
