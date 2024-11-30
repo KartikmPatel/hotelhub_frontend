@@ -35,7 +35,6 @@ export class HotelregisterserviceService {
   }
 
   updateProfile(hid:any, profileData:FormData):Observable<any>{
-    console.log(hid+"------------------------"+FormData);
     return this.http.put(`${this.hotelapiUrl}/${hid}`,profileData);
   }
 
@@ -46,5 +45,13 @@ export class HotelregisterserviceService {
 
   markAsRead(id:any):Observable<any>{
     return this.http.get(`${this.hotelFeedbackUrl}/markAsRead/${id}`);
+  }
+
+  changePassword(hid:any,profileData:FormData):Observable<any>{
+    return this.http.put(`${this.hotelapiUrl}/changeHotelPassword/${hid}`,profileData);
+  }
+
+  forgotPassword(profileData:any):Observable<any>{
+    return this.http.post(`${this.hotelapiUrl}/forgotpassword`,profileData);
   }
 }

@@ -25,6 +25,8 @@ import { AddfesdiscountComponent } from './admin/festivaldiscount/addfesdiscount
 import { EditfesdiscountComponent } from './admin/festivaldiscount/editfesdiscount/editfesdiscount.component';
 import { HotelprofileComponent } from './hotels/hotelprofile/hotelprofile.component';
 import { DisplayFeedbackComponent } from './hotels/feedback/display-feedback/display-feedback.component';
+import { ChangeHotelPasswordComponent } from './hotels/change-hotel-password/change-hotel-password.component';
+import { ForgotHotelPasswordComponent } from './hotels/forgot-hotel-password/forgot-hotel-password.component';
 
 const routes: Routes = [
   {
@@ -126,6 +128,14 @@ const routes: Routes = [
   {
     path:"displayFeedback",
     component:DisplayFeedbackComponent
+  },
+  {
+    path:"changeHotelPassword",
+    component:ChangeHotelPasswordComponent
+  },
+  {
+    path:"forgotHotelPassword",
+    component:ForgotHotelPasswordComponent
   }
 ];
 

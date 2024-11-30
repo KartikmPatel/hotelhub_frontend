@@ -92,7 +92,7 @@ export class HotelprofileComponent {
       this.errorMessage = 'Profile ID is missing for editing.';
       console.error('Profile ID is missing for editing.');
     }
-  }  
+  }
   
   closeSuccessMessage(): void {
     this.successmsg = '';

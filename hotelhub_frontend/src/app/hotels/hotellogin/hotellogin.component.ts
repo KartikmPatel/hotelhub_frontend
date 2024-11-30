@@ -11,6 +11,7 @@ export class HotelloginComponent {
 
   userdata: any = {}
   errorMessage: string = '';
+  showPassword: boolean = false;
 
   constructor(private hotelregisterserviceService: HotelregisterserviceService, private router: Router) { }
 
