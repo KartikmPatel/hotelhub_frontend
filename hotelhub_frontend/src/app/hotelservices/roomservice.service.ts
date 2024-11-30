@@ -11,89 +11,115 @@ export class RoomserviceService {
   private roomFeatureUrl = "http://localhost:5161/api/RoomFeaturetbs";
   private roomFacilityUrl = "http://localhost:5161/api/RoomFacilitytbs";
   private roomImageUrl = "http://localhost:5161/api/RoomImagetbs";
-  private hotelfacility = "http://localhost:5161/api/RoomFacilitytbs";//getAllFacilityByHotel/1
-  private hotelfeature = "http://localhost:5161/api/RoomFeaturetbs";//getAllFeatureByHotel/1
+  private hotelfacility = "http://localhost:5161/api/RoomFacilitytbs"; // getAllFacilityByHotel/1
+  private hotelfeature = "http://localhost:5161/api/RoomFeaturetbs";   // getAllFeatureByHotel/1
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getHotelFacility(hid:any):Observable<any>{
+  // Get all facilities associated with a hotel
+  getHotelFacility(hid: any): Observable<any> {
     return this.http.get(`${this.hotelfacility}/getAllFacilityByHotel/${hid}`);
   }
 
-  getHotelFeature(hid:any):Observable<any>{
+  // Get all features associated with a hotel
+  getHotelFeature(hid: any): Observable<any> {
     return this.http.get(`${this.hotelfeature}/getAllFeatureByHotel/${hid}`);
   }
 
-  addRoom(roomData:any):Observable<any>{
-    return this.http.post(this.roomApiUrl,roomData);
+  // Add a new room
+  addRoom(roomData: any): Observable<any> {
+    return this.http.post(this.roomApiUrl, roomData);
   }
 
-  getAllRooms():Observable<any>{
-    return this.http.get(this.roomApiUrl+"/allrooms");
+  // Get all rooms
+  getAllRooms(): Observable<any> {
+    return this.http.get(this.roomApiUrl + "/allrooms");
   }
 
-  getRooms(hid:any):Observable<any>{
+  // Get rooms by hotel ID
+  getRooms(hid: any): Observable<any> {
     return this.http.get(`${this.roomApiUrl}/hotel/${hid}`);
   }
 
-  deleteRoom(roomId:string):Observable<any>{
+  // Delete a room
+  deleteRoom(roomId: string): Observable<any> {
     return this.http.delete(`${this.roomApiUrl}/${roomId}`);
   }
 
-  getRoomById(roomId:string):Observable<any>{
+  // Get a room by its ID
+  getRoomById(roomId: string): Observable<any> {
     return this.http.get(`${this.roomApiUrl}/${roomId}`);
   }
 
-  updateRoom(roomId:string,roomData:any):Observable<any>{
-    return this.http.put(`${this.roomApiUrl}/${roomId}`,roomData);
+  // Update room details
+  updateRoom(roomId: any, roomData: any): Observable<any> {
+    return this.http.put(`${this.roomApiUrl}/${roomId}`, roomData);
   }
 
+  // Add a room feature
   addRoomFeature(roomFeatureId: string, roomId: any): Observable<any> {
     const body = {
       featureid: roomFeatureId,
       roomid: roomId
     };
-
     return this.http.post(this.roomFeatureUrl, body);
   }
 
+  // Get features associated with a room
   getRoomFeatures(roomId: string): Observable<any> {
     const url = `${this.roomFeatureUrl}?roomId=${roomId}`;
     return this.http.get(url);
   }
 
-  addRoomFacility(roomFacilityId:string,roomId:any):Observable<any>{
+  // Add a room facility
+  addRoomFacility(roomFacilityId: string, roomId: any): Observable<any> {
     const body = {
       facilityid: roomFacilityId,
       roomid: roomId
     };
-
     return this.http.post(this.roomFacilityUrl, body);
   }
 
+  // Get facilities associated with a room
   getRoomFacility(roomId: string): Observable<any> {
     const url = `${this.roomFacilityUrl}?roomId=${roomId}`;
     return this.http.get(url);
   }
 
-  deleteRoomFacility(roomId:string):Observable<any>{
+  // Delete all facilities of a room
+  deleteRoomFacility(roomId: string): Observable<any> {
     return this.http.delete(`${this.roomFacilityUrl}/${roomId}`);
   }
 
-  deleteRoomFeature(roomId:string):Observable<any>{
+  // Delete all features of a room
+  deleteRoomFeature(roomId: string): Observable<any> {
     return this.http.delete(`${this.roomFeatureUrl}/${roomId}`);
   }
 
+  // Update facilities associated with a room
+  updateRoomFacilities(roomId: any, facilityIds: number[]): Observable<any> {
+    const url = `${this.roomFacilityUrl}/updateRoomFacilities/${roomId}`;
+    return this.http.put(url, facilityIds);
+  }
+
+  // Update features associated with a room
+  updateRoomFeatures(roomId: any, featureIds: number[]): Observable<any> {
+    const url = `${this.roomFeatureUrl}/updateRoomFeatures/${roomId}`;
+    return this.http.put(url, featureIds);
+  }
+
+  // Get all images associated with a room
   getRoomImages(roomId: string): Observable<any> {
     return this.http.get(`${this.roomImageUrl}/roomimages/${roomId}`);
   }
 
-  deleteRoomImages(imageId:string):Observable<any>{
+  // Delete a room image by its ID
+  deleteRoomImages(imageId: string): Observable<any> {
     return this.http.delete(`${this.roomImageUrl}/${imageId}`);
   }
 
+  // Upload room images
   addRoomImages(imageData: FormData): Observable<any> {
     return this.http.post(`${this.roomImageUrl}/upload`, imageData);
   }
-
 }

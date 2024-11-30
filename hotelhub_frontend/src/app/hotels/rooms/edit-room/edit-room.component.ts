@@ -52,27 +52,42 @@ export class EditRoomComponent implements OnInit {
   }
 
   loadFacilities(roomId: string) {
-    this.roomservice.getRoomFacility(roomId).subscribe(data => {
-      const facilityIds = data.$values;  // Facility IDs associated with this room
-      this.selectedFacilities = {};
-      this.facilitys.forEach(facility => {
-        this.selectedFacilities[facility.id] = facilityIds.includes(facility.id);
-      });
-    });
+    this.roomservice.getRoomFacility(roomId).subscribe(
+      (data: any) => {
+        const facilityIds = data.$values.map((facility: any) => facility.facilityId);
+
+        this.selectedFacilities = {};
+        this.facilitys.forEach((facility: any) => {
+          this.selectedFacilities[facility.id] = facilityIds.includes(facility.id);
+        });
+      },
+      (error) => {
+        console.error('Error fetching room facilities:', error);
+      }
+    );
   }
 
   loadFeatures(roomId: string) {
-    this.roomservice.getRoomFeatures(roomId).subscribe(data => {
-      const featureIds = data.$values;  // Feature IDs associated with this room
-      this.selectedFeatures = {};
-      this.features.forEach(feature => {
-        this.selectedFeatures[feature.id] = featureIds.includes(feature.id);
-      });
-    });
+    this.roomservice.getRoomFeatures(roomId).subscribe((data: any) => {
+        const featureIds = data.$values.map((feature: any) => feature.featureId);
+
+        this.selectedFeatures = {};
+        this.features.forEach((feature: any) => {
+          this.selectedFeatures[feature.id] = featureIds.includes(feature.id);
+        });
+      },
+      (error) => {
+        console.error('Error fetching room features:', error);
+      }
+    );
   }
 
+
   onSubmit() {
+    const hid = localStorage.getItem("hotelid");
+    console.log(hid);
     const updatedRoom = {
+      id:this.room.id,
       roomcategoryid: this.room.roomcategoryid,
       adultCapacity: this.room.adultCapacity,
       childrenCapacity: this.room.childrenCapacity,
@@ -81,13 +96,15 @@ export class EditRoomComponent implements OnInit {
       discount: this.room.discount,
       activeStatus: this.room.activeStatus,
       festivalId: null,
-      hid: 1
+      hid: hid
     };
+
+    console.log("Final Room Data for API:", updatedRoom);
 
     this.roomservice.updateRoom(this.room.id, updatedRoom).subscribe(
       () => {
-        // this.updateRoomFacilities(this.room.id);
-        // this.updateRoomFeatures(this.room.id);
+        this.updateRoomFacilities(this.room.id);
+        this.updateRoomFeatures(this.room.id);
         this.router.navigate(['/displayRooms']);
       },
       (error) => {
@@ -96,25 +113,25 @@ export class EditRoomComponent implements OnInit {
     );
   }
 
-  // updateRoomFacilities(roomId: number) {
-  //   const selectedFacilityIds = this.facilitys
-  //     .filter(facility => this.selectedFacilities[facility.id])
-  //     .map(facility => facility.id);
+  updateRoomFacilities(roomId: number) {
+    const selectedFacilityIds = this.facilitys
+      .filter(facility => this.selectedFacilities[facility.id])
+      .map(facility => facility.id);
 
-  //   this.roomservice.updateRoomFacilities(roomId, selectedFacilityIds).subscribe(
-  //     () => console.log('Facilities updated'),
-  //     (error) => console.error('Error updating facilities:', error)
-  //   );
-  // }
+    this.roomservice.updateRoomFacilities(roomId, selectedFacilityIds).subscribe(
+      () => console.log('Facilities updated'),
+      (error) => console.error('Error updating facilities:', error)
+    );
+  }
 
-  // updateRoomFeatures(roomId: number) {
-  //   const selectedFeatureIds = this.features
-  //     .filter(feature => this.selectedFeatures[feature.id])
-  //     .map(feature => feature.id);
+  updateRoomFeatures(roomId: number) {
+    const selectedFeatureIds = this.features
+      .filter(feature => this.selectedFeatures[feature.id])
+      .map(feature => feature.id);
 
-  //   this.roomservice.updateRoomFeatures(roomId, selectedFeatureIds).subscribe(
-  //     () => console.log('Features updated'),
-  //     (error) => console.error('Error updating features:', error)
-  //   );
-  // }
+    this.roomservice.updateRoomFeatures(roomId, selectedFeatureIds).subscribe(
+      () => console.log('Features updated'),
+      (error) => console.error('Error updating features:', error)
+    );
+  }
 }
