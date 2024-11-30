@@ -20,6 +20,9 @@ import { AddImagesComponent } from './hotels/rooms/add-images/add-images.compone
 import { HotelapproveComponent } from './admin/hotelapprove/hotelapprove.component';
 import { HotelfacilityComponent } from './hotels/hotelfacility/hotelfacility.component';
 import { HotelfeatureComponent } from './hotels/hotelfeature/hotelfeature.component';
+import { DisplayfesdiscountComponent } from './admin/festivaldiscount/displayfesdiscount/displayfesdiscount.component';
+import { AddfesdiscountComponent } from './admin/festivaldiscount/addfesdiscount/addfesdiscount.component';
+import { EditfesdiscountComponent } from './admin/festivaldiscount/editfesdiscount/editfesdiscount.component';
 
 const routes: Routes = [
   {
@@ -101,6 +104,18 @@ const routes: Routes = [
   {
     path:"hotelfeature",
     component:HotelfeatureComponent
+  },
+  {
+    path:"festivaldiscount",
+    component:DisplayfesdiscountComponent
+  },
+  {
+    path:"addfesdicount",
+    component:AddfesdiscountComponent
+  },
+  {
+    path:"editfesdiscount/:id",
+    component:EditfesdiscountComponent
   }
 ];
 

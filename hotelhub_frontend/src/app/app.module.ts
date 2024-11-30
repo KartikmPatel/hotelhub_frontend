@@ -27,6 +27,9 @@ import { EditRoomComponent } from './hotels/rooms/edit-room/edit-room.component'
 import { AddImagesComponent } from './hotels/rooms/add-images/add-images.component';
 import { HotelfacilityComponent } from './hotels/hotelfacility/hotelfacility.component';
 import { HotelfeatureComponent } from './hotels/hotelfeature/hotelfeature.component';
+import { DisplayfesdiscountComponent } from './admin/festivaldiscount/displayfesdiscount/displayfesdiscount.component';
+import { AddfesdiscountComponent } from './admin/festivaldiscount/addfesdiscount/addfesdiscount.component';
+import { EditfesdiscountComponent } from './admin/festivaldiscount/editfesdiscount/editfesdiscount.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,9 @@ import { HotelfeatureComponent } from './hotels/hotelfeature/hotelfeature.compon
     AddImagesComponent,
     HotelfacilityComponent,
     HotelfeatureComponent,
+    DisplayfesdiscountComponent,
+    AddfesdiscountComponent,
+    EditfesdiscountComponent,
   ],
   imports: [
     BrowserModule,

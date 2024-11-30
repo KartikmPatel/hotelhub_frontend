@@ -1,0 +1,82 @@
+<app-adminheader></app-adminheader>
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Facility</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item active">Festival Discount</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <!-- Success Message -->
+    <div *ngIf="successmsg" class="alert alert-success alert-dismissible fade show">
+        {{ successmsg }}
+        <!-- Close Button -->
+        <button type="button" class="btn-close" (click)="closeSuccessMessage()"></button>
+    </div>
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <!-- <button type="button" class="btn btn-primary">Add Category</button> -->
+                <a type="button" class="btn btn-success" [routerLink]="['/addfesdicount']">
+                    <i class="bi bi-plus-circle"></i> Add Festival Discount
+                </a>
+
+                <div class="card" style="margin-top: 10px;">
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <h5 class="card-title">Festival Discount</h5>
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Festival Name
+                                    </th>
+                                    <th>
+                                        Discount
+                                    </th>
+                                    <th>
+                                        Festival Date
+                                    </th>
+                                    <th>
+                                        Action
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let fd of fesdiscount">
+                                    <td>
+                                        {{fd.festname}}
+                                    </td>
+                                    <td>
+                                        {{fd.discount}}
+                                    </td>
+                                    <td>
+                                        {{fd.fesdate}}
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <a [routerLink]="['/editfesdiscount',fd.id]"><button type="button"
+                                                class="btn btn-primary me-3">
+                                                <i class="bi bi-pencil-square"></i> Edit
+                                            </button></a>
+                                        <a><button class="btn btn-danger" (click)="deleteDiscount(fd.id)">
+                                                <i class="bi bi-trash"></i> Delete
+                                            </button></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
