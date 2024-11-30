@@ -23,6 +23,7 @@ import { HotelfeatureComponent } from './hotels/hotelfeature/hotelfeature.compon
 import { DisplayfesdiscountComponent } from './admin/festivaldiscount/displayfesdiscount/displayfesdiscount.component';
 import { AddfesdiscountComponent } from './admin/festivaldiscount/addfesdiscount/addfesdiscount.component';
 import { EditfesdiscountComponent } from './admin/festivaldiscount/editfesdiscount/editfesdiscount.component';
+import { HotelprofileComponent } from './hotels/hotelprofile/hotelprofile.component';
 
 const routes: Routes = [
   {
@@ -116,6 +117,10 @@ const routes: Routes = [
   {
     path:"editfesdiscount/:id",
     component:EditfesdiscountComponent
+  },
+  {
+    path:"hotelprofile",
+    component:HotelprofileComponent
   }
 ];
 

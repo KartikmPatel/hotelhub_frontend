@@ -29,4 +29,13 @@ export class HotelregisterserviceService {
       headers: { 'Content-Type': 'application/json' }
     });
   }
+
+  displayProfile(hid:any): Observable<any>{
+    return this.http.get(`${this.hotelapiUrl}/${hid}`);
+  }
+
+  updateProfile(hid:any, profileData:FormData):Observable<any>{
+    console.log(hid+"------------------------"+FormData);
+    return this.http.put(`${this.hotelapiUrl}/${hid}`,profileData);
+  }
 }

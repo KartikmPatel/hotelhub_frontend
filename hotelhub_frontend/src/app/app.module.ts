@@ -30,6 +30,7 @@ import { HotelfeatureComponent } from './hotels/hotelfeature/hotelfeature.compon
 import { DisplayfesdiscountComponent } from './admin/festivaldiscount/displayfesdiscount/displayfesdiscount.component';
 import { AddfesdiscountComponent } from './admin/festivaldiscount/addfesdiscount/addfesdiscount.component';
 import { EditfesdiscountComponent } from './admin/festivaldiscount/editfesdiscount/editfesdiscount.component';
+import { HotelprofileComponent } from './hotels/hotelprofile/hotelprofile.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { EditfesdiscountComponent } from './admin/festivaldiscount/editfesdiscou
     DisplayfesdiscountComponent,
     AddfesdiscountComponent,
     EditfesdiscountComponent,
+    HotelprofileComponent,
   ],
   imports: [
     BrowserModule,
