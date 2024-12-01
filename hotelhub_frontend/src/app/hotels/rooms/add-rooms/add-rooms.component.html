@@ -17,12 +17,18 @@
           <div class="card-body">
             <h5 class="card-title">Add Room</h5>
 
+            <!-- Show Error Message -->
+            <div *ngIf="errorMessage" class="alert alert-danger">
+              {{ errorMessage }}
+            </div>
+
             <form class="row g-3" (ngSubmit)="onSubmit()">
               <div class="col-md-12">
                 <div class="form-floating">
                   <select name="category" [(ngModel)]="newRoom.roomcategoryid" class="form-control" required>
                     <option value="" disabled selected>Select Category</option>
-                    <option *ngFor="let category of categorys" [value]="category.id">{{ category.categoryName }}</option>
+                    <option *ngFor="let category of categorys" [value]="category.id">{{ category.categoryName }}
+                    </option>
                   </select>
                   <label for="category">Room Category</label>
                 </div>
@@ -34,11 +40,7 @@
                 <div class="row">
                   <div class="col-md-2" *ngFor="let feature of features; let i = index">
                     <div class="form-check">
-                      <input
-                        type="checkbox"
-                        [(ngModel)]="selectedFeatures[i]"
-                        [value]="feature.id"
-                        name="features"
+                      <input type="checkbox" [(ngModel)]="selectedFeatures[i]" [value]="feature.id" name="features"
                         class="form-check-input">
                       <label class="form-check-label">{{ feature.featureName }}</label>
                     </div>
@@ -52,11 +54,7 @@
                 <div class="row">
                   <div class="col-md-2" *ngFor="let facility of facilitys; let i = index">
                     <div class="form-check">
-                      <input
-                        type="checkbox"
-                        [(ngModel)]="selectedFacilities[i]"
-                        [value]="facility.id"
-                        name="facilities"
+                      <input type="checkbox" [(ngModel)]="selectedFacilities[i]" [value]="facility.id" name="facilities"
                         class="form-check-input">
                       <label class="form-check-label">{{ facility.facilityName }}</label>
                     </div>
@@ -67,35 +65,40 @@
               <!-- Room Details Section -->
               <div class="col-md-12">
                 <div class="form-floating">
-                  <input type="number" name="adultCapacity" [(ngModel)]="newRoom.adultCapacity" class="form-control" placeholder="Adult Capacity" required>
+                  <input type="number" name="adultCapacity" [(ngModel)]="newRoom.adultCapacity" class="form-control"
+                    placeholder="Adult Capacity" required>
                   <label for="floatingName">Adult Capacity</label>
                 </div>
               </div>
 
               <div class="col-md-12">
                 <div class="form-floating">
-                  <input type="number" name="childrenCapacity" [(ngModel)]="newRoom.childrenCapacity" class="form-control" placeholder="Children Capacity" required>
+                  <input type="number" name="childrenCapacity" [(ngModel)]="newRoom.childrenCapacity"
+                    class="form-control" placeholder="Children Capacity" required>
                   <label for="floatingName">Children Capacity</label>
                 </div>
               </div>
 
               <div class="col-md-12">
                 <div class="form-floating">
-                  <input type="number" name="quantity" [(ngModel)]="newRoom.quantity" class="form-control" placeholder="Quantity" required>
+                  <input type="number" name="quantity" [(ngModel)]="newRoom.quantity" class="form-control"
+                    placeholder="Quantity" required>
                   <label for="floatingName">Quantity</label>
                 </div>
               </div>
 
               <div class="col-md-12">
                 <div class="form-floating">
-                  <input type="number" name="rent" [(ngModel)]="newRoom.rent" class="form-control" placeholder="Rent" required>
+                  <input type="number" name="rent" [(ngModel)]="newRoom.rent" class="form-control" placeholder="Rent"
+                    required>
                   <label for="floatingName">Rent</label>
                 </div>
               </div>
 
               <div class="col-md-12">
                 <div class="form-floating">
-                  <input type="number" name="discount" [(ngModel)]="newRoom.discount" class="form-control" placeholder="Discount" required>
+                  <input type="number" name="discount" [(ngModel)]="newRoom.discount" class="form-control"
+                    placeholder="Discount" required>
                   <label for="floatingName">Discount</label>
                 </div>
               </div>

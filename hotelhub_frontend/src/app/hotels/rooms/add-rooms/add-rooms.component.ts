@@ -19,6 +19,7 @@ export class AddRoomsComponent {
   categorys: any[] = [];
   features: any[] = [];
   facilitys: any[] = [];
+  errorMessage:string='';
 
   selectedFeatures: boolean[] = []; // Tracks selected features (boolean)
   selectedFacilities: boolean[] = []; // Tracks selected facilities (boolean)
@@ -48,6 +49,14 @@ export class AddRoomsComponent {
   }
 
   onSubmit() {
+    this.errorMessage = '';
+
+    // Validation checks
+    if (!this.newRoom.roomcategoryid || !this.newRoom.adultCapacity || !this.newRoom.childrenCapacity || !this.newRoom.quantity || !this.newRoom.rent || !this.newRoom.discount) {
+      this.errorMessage = 'All fields are required.';
+      return; // Stop further execution if fields are missing
+    }
+
     const hid = localStorage.getItem("hotelid");
     console.log(hid);
     // Step 1: Prepare the base room data without featureIds and facilityIds
@@ -71,6 +80,8 @@ export class AddRoomsComponent {
         this.addRoomFeatures(roomId);
 
         this.router.navigate(['/displayRooms']);
+
+        sessionStorage.setItem("roomsuccessmsg", "Room Successfully Inserted");
       },
       (error) => {
         console.error('Error adding room:', error);

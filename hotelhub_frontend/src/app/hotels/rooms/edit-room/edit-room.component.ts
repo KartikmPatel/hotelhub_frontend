@@ -15,6 +15,7 @@ export class EditRoomComponent implements OnInit {
   categorys: any[] = [];
   features: any[] = [];
   facilitys: any[] = [];
+  errorMessage:string='';
 
   selectedFeatures: { [key: number]: boolean } = {};  // Track selected features with object mapping
   selectedFacilities: { [key: number]: boolean } = {};  // Track selected facilities with object mapping
@@ -84,6 +85,14 @@ export class EditRoomComponent implements OnInit {
 
 
   onSubmit() {
+    this.errorMessage = '';
+
+    // Validation checks
+    if (!this.room.roomcategoryid || !this.room.adultCapacity || !this.room.childrenCapacity || !this.room.quantity || !this.room.rent || !this.room.discount) {
+      this.errorMessage = 'All fields are required.';
+      return; // Stop further execution if fields are missing
+    }
+
     const hid = localStorage.getItem("hotelid");
     console.log(hid);
     const updatedRoom = {
@@ -106,6 +115,8 @@ export class EditRoomComponent implements OnInit {
         this.updateRoomFacilities(this.room.id);
         this.updateRoomFeatures(this.room.id);
         this.router.navigate(['/displayRooms']);
+
+        sessionStorage.setItem("roomsuccessmsg", "Room Successfully Edited");
       },
       (error) => {
         console.error('Error updating room:', error);

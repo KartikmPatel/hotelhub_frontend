@@ -9,6 +9,10 @@ export class HotelregisterserviceService {
 
   private hotelapiUrl = "http://localhost:5161/api/Hoteltbs";
   private hotelFeedbackUrl = "http://localhost:5161/api/Feedbacktbs";
+  private roomUrlApi = "http://localhost:5161/api/Roomtbs";
+  private roomfeatureUrlApi = "http://localhost:5161/api/RoomFeaturetbs";
+  private roomfacilityUrlApi = "http://localhost:5161/api/RoomFacilitytbs";
+  private feedbackUrlApi = "http://localhost:5161/api/Feedbacktbs";
 
   constructor(private http: HttpClient) { }
 
@@ -28,6 +32,26 @@ export class HotelregisterserviceService {
     return this.http.post(`${this.hotelapiUrl}/gethid`, payload, {
       headers: { 'Content-Type': 'application/json' }
     });
+  }
+
+  // get Rooms Count for Dashboard
+  getroomfeaturescountByhid(hid:any):Observable<any>{
+    return this.http.get(`${this.roomfeatureUrlApi}/getRoomFeatureCountByHotel/${hid}`);
+  }
+
+  // get Rooms Count for Dashboard
+  getroomfacalitycountByhid(hid:any):Observable<any>{
+    return this.http.get(`${this.roomfacilityUrlApi}/getRoomFacilityCountByHotel/${hid}`);
+  }
+
+  // get Rooms Count for Dashboard
+  getfeedbackcountByhid(hid:any):Observable<any>{
+    return this.http.get(`${this.feedbackUrlApi}/getFeedbackCountByHotel/${hid}`);
+  }
+
+  // get Rooms Count for Dashboard
+  getroomcount(hid:any):Observable<any>{
+    return this.http.get(`${this.roomUrlApi}/getroomcount/${hid}`);
   }
 
   displayProfile(hid: any): Observable<any> {

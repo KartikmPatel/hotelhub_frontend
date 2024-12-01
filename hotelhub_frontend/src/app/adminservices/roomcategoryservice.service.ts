@@ -11,6 +11,7 @@ export class RoomcategoryserviceService {
   private facilitycountapi = "http://localhost:5161/api/Facilitytbs/getfacilitycount";
   private featurescountapi = "http://localhost:5161/api/Featurestbs/getfeaturescount";
   private hotelapiUrl = "http://localhost:5161/api/Hoteltbs";
+  private fesdiscountUrl = "http://localhost:5161/api/FestivalDiscounts";
 
   constructor(private http:HttpClient){}
 
@@ -57,6 +58,11 @@ export class RoomcategoryserviceService {
   // getcount of Hotels for dashboard
   gethotelcount():Observable<any>{
     return this.http.get(`${this.hotelapiUrl}/gethotelcount`)
+  }
+
+  // getcount of festival discount for dashboard
+  getfesdiscountcount():Observable<any>{
+    return this.http.get(`${this.fesdiscountUrl}/getfesdiscountcount`)
   }
 
   // display new hotels

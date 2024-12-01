@@ -8,25 +8,40 @@ declare var $: any;
 })
 export class DisplayFeedbackComponent {
 
-  feedbacks:any[] = [];
-  private table:any;
+  feedbacks: any[] = [];
+  private table: any;
+  successmsg: string = '';
 
-  constructor(private hotelService: HotelregisterserviceService){
+  constructor(private hotelService: HotelregisterserviceService) {
 
   }
 
-  ngOnInit():void{
+  ngOnInit(): void {
+    const feedbackreadsuccessmsg = sessionStorage.getItem('feedbackreadsuccessmsg');
+    if (feedbackreadsuccessmsg !== null) {
+      this.successmsg = feedbackreadsuccessmsg;
+
+      sessionStorage.removeItem('feedbackreadsuccessmsg');
+      sessionStorage.clear();
+    }
+
     this.displayFeedbacks();
   }
 
-  displayFeedbacks()
-  {
+  displayFeedbacks() {
+    const feedbackreadsuccessmsg = sessionStorage.getItem('feedbackreadsuccessmsg');
+    if (feedbackreadsuccessmsg !== null) {
+      this.successmsg = feedbackreadsuccessmsg;
+
+      sessionStorage.removeItem('feedbackreadsuccessmsg');
+      sessionStorage.clear();
+    }
+
     const hid = localStorage.getItem("hotelid");
-    this.hotelService.getFeedbacks(hid).subscribe(data=>{
+    this.hotelService.getFeedbacks(hid).subscribe(data => {
       this.feedbacks = data.$values;
 
-      if(this.table)
-      {
+      if (this.table) {
         this.table.destroy();
       }
 
@@ -48,10 +63,15 @@ export class DisplayFeedbackComponent {
     }, 0);
   }
 
-  markAsRead(id:any){
-    this.hotelService.markAsRead(id).subscribe(()=>{
+  markAsRead(id: any) {
+    this.hotelService.markAsRead(id).subscribe(() => {
+      sessionStorage.setItem("feedbackreadsuccessmsg", "Feedback marked as read successfully.");
       this.displayFeedbacks();
     })
+  }
+
+  closeSuccessMessage(): void {
+    this.successmsg = '';
   }
 
 }

@@ -2,11 +2,11 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Facility</h1>
+        <h1>Room Facility</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item active">Facility</li>
+                <li class="breadcrumb-item active">Room Facility</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -21,7 +21,7 @@
                         <h5 class="card-title">Facility</h5>
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
-                                <tr>
+                                <tr style="text-align: center;">
                                     <th>
                                         Facility
                                     </th>
@@ -31,7 +31,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let f of facility">
+                                <tr *ngFor="let f of facility" style="text-align: center;">
                                     <td>
                                         {{f.facilityName}}
                                     </td>

@@ -9,15 +9,32 @@ declare var $: any;
 export class DisplayroomsComponent {
   rooms:any[] = [];
   private table:any;
+  successmsg: string = '';
 
   constructor(private roomservice:RoomserviceService){}
 
   ngOnInit():void{
+    const roomsuccessmsg = sessionStorage.getItem('roomsuccessmsg');
+    if (roomsuccessmsg !== null) {
+      this.successmsg = roomsuccessmsg;
+
+      sessionStorage.removeItem('roomsuccessmsg');
+      sessionStorage.clear();
+    }
+
     this.displayRooms();
   }
 
   displayRooms()
   {
+    const roomsuccessmsg = sessionStorage.getItem('roomsuccessmsg');
+    if (roomsuccessmsg !== null) {
+      this.successmsg = roomsuccessmsg;
+
+      sessionStorage.removeItem('roomsuccessmsg');
+      sessionStorage.clear();
+    }
+
     const hid = localStorage.getItem("hotelid");
     this.roomservice.getRooms(hid).subscribe(data=>{
       this.rooms = data.$values;
@@ -30,12 +47,16 @@ export class DisplayroomsComponent {
     })
   }
 
+  closeSuccessMessage(): void {
+    this.successmsg = '';
+  }
 
   deleteRoom(roomId:string)
   {
     this.roomservice.deleteRoomFacility(roomId).subscribe(()=>{
       this.roomservice.deleteRoomFeature(roomId).subscribe(()=>{
         this.roomservice.deleteRoom(roomId).subscribe(()=>{
+          sessionStorage.setItem("roomsuccessmsg", "Room Successfully Deleted");
           this.displayRooms();
         })
       })
