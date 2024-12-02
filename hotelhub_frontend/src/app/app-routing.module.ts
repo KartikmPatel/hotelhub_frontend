@@ -28,6 +28,8 @@ import { DisplayFeedbackComponent } from './hotels/feedback/display-feedback/dis
 import { ChangeHotelPasswordComponent } from './hotels/change-hotel-password/change-hotel-password.component';
 import { ForgotHotelPasswordComponent } from './hotels/forgot-hotel-password/forgot-hotel-password.component';
 import { ResethotelpasswordComponent } from './hotels/resethotelpassword/resethotelpassword.component';
+import { HotelcityComponent } from './hotels/hotelcities/hotelcity/hotelcity.component';
+import { AddCityComponent } from './hotels/hotelcities/add-city/add-city.component';
 
 const routes: Routes = [
   {
@@ -141,6 +143,14 @@ const routes: Routes = [
   {
     path:"resethotelpassword",
     component:ResethotelpasswordComponent
+  },
+  {
+    path:"displayHotelCities",
+    component:HotelcityComponent
+  },
+  {
+    path:"addHotelCity",
+    component:AddCityComponent
   }
 ];
 

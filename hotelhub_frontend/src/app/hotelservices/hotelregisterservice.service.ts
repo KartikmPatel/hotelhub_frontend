@@ -93,4 +93,13 @@ export class HotelregisterserviceService {
   getCityByHotel(hid:any):Observable<any>{
     return this.http.get(`${this.hotelCityUrl}/getByHotel/${hid}`);
   }
+
+  addCityInHotel(cityData: any): Observable<any> {
+    return this.http.post(`${this.hotelCityUrl}`, cityData);  // Base URL without `{hid}`
+  }
+
+  removeCityInHotel(id:any):Observable<any>{
+    return this.http.delete(`${this.hotelCityUrl}/${id}`);
+  }
+
 }

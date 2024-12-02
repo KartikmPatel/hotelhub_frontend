@@ -1,68 +1,68 @@
-<app-hotelheader></app-hotelheader>
-<main id="main" class="main">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <app-hotelheader></app-hotelheader>
+  <main id="main" class="main">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 
-    <div class="pagetitle">
-        <h1>Feedbacks</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item active">Feedbacks</li>
-            </ol>
-        </nav>
-    </div><!-- End Page Title -->
+      <div class="pagetitle">
+          <h1>Feedbacks</h1>
+          <nav>
+              <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                  <li class="breadcrumb-item active">Feedbacks</li>
+              </ol>
+          </nav>
+      </div><!-- End Page Title -->
 
-    <!-- Success Message -->
-    <div *ngIf="successmsg" class="alert alert-success alert-dismissible fade show">
-        {{ successmsg }}
-        <!-- Close Button -->
-        <button type="button" class="btn-close" (click)="closeSuccessMessage()"></button>
-    </div>
+      <!-- Success Message -->
+      <div *ngIf="successmsg" class="alert alert-success alert-dismissible fade show">
+          {{ successmsg }}
+          <!-- Close Button -->
+          <button type="button" class="btn-close" (click)="closeSuccessMessage()"></button>
+      </div>
 
-    <section class="section">
-        <div class="row">
-            <div class="col-lg-12">
+      <section class="section">
+          <div class="row">
+              <div class="col-lg-12">
 
-                <div class="card" style="margin-top: 10px;">
-                    <div class="card-body">
-                        <h5 class="card-title">Feedbacks</h5>
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr style="text-align: center;">
-                                    <th>Comment</th>
-                                    <th>Rating</th>
-                                    <th>Room Category</th>
-                                    <th>User Name</th>
-                                    <th>Read Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let f of feedbacks" style="text-align: center;">
-                                    <td>{{f.comments}}</td>
-                                    <td>
-                                        <!-- Loop to display stars -->
-                                        <ng-container *ngFor="let star of [].constructor(f.rating); let i = index">
-                                            <i class="fas fa-star text-warning"></i>
-                                        </ng-container>
-                                    </td>
-                                    <td>{{f.categoryname}}</td>
-                                    <td>{{f.username}}</td>
-                                    <td *ngIf="f.readStatus == 0">
-                                        <button type="button" class="btn btn-primary me-3"
-                                            (click)="markAsRead(f.id)">Mark As Read</button>
-                                    </td>
-                                    <td *ngIf="f.readStatus == 1">
-                                        <span class="badge bg-success">Feedback Read</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                  <div class="card" style="margin-top: 10px;">
+                      <div class="card-body">
+                          <h5 class="card-title">Feedbacks</h5>
+                          <table id="example1" class="table table-bordered table-striped">
+                              <thead>
+                                  <tr style="text-align: center;">
+                                      <th>Comment</th>
+                                      <th>Rating</th>
+                                      <th>Room Category</th>
+                                      <th>User Name</th>
+                                      <th>Read Status</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor="let f of feedbacks" style="text-align: center;">
+                                      <td>{{f.comments}}</td>
+                                      <td>
+                                          <!-- Loop to display stars -->
+                                          <ng-container *ngFor="let star of [].constructor(f.rating); let i = index">
+                                              <i class="fas fa-star text-warning"></i>
+                                          </ng-container>
+                                      </td>
+                                      <td>{{f.categoryname}}</td>
+                                      <td>{{f.username}}</td>
+                                      <td *ngIf="f.readStatus == 0">
+                                          <button type="button" class="btn btn-primary me-3"
+                                              (click)="markAsRead(f.id)">Mark As Read</button>
+                                      </td>
+                                      <td *ngIf="f.readStatus == 1">
+                                          <span class="badge bg-success">Feedback Read</span>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
 
-            </div>
-        </div>
-    </section>
+              </div>
+          </div>
+      </section>
 
-</main><!-- End #main -->
+  </main><!-- End #main -->
