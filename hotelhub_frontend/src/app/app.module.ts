@@ -40,6 +40,9 @@ import { UserheaderComponent } from './users/layout/userheader/userheader.compon
 import { UserloginComponent } from './users/authentication/userlogin/userlogin.component';
 import { HotelcityComponent } from './hotels/hotelcities/hotelcity/hotelcity.component';
 import { AddCityComponent } from './hotels/hotelcities/add-city/add-city.component';
+import { AdminprofileComponent } from './admin/adminprofile/adminprofile.component';
+import { ForgotuserpasswordComponent } from './users/forgotuserpassword/forgotuserpassword.component';
+import { ResetuserpasswordComponent } from './users/resetuserpassword/resetuserpassword.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +82,9 @@ import { AddCityComponent } from './hotels/hotelcities/add-city/add-city.compone
     UserloginComponent,
     HotelcityComponent,
     AddCityComponent,
+    AdminprofileComponent,
+    ForgotuserpasswordComponent,
+    ResetuserpasswordComponent,
   ],
   imports: [
     BrowserModule,

@@ -33,6 +33,9 @@ import { AddCityComponent } from './hotels/hotelcities/add-city/add-city.compone
 import { UserregisterComponent } from './users/authentication/userregister/userregister.component';
 import { UserloginComponent } from './users/authentication/userlogin/userlogin.component';
 import { UserheaderComponent } from './users/layout/userheader/userheader.component';
+import { AdminprofileComponent } from './admin/adminprofile/adminprofile.component';
+import { ResetuserpasswordComponent } from './users/resetuserpassword/resetuserpassword.component';
+import { ForgotuserpasswordComponent } from './users/forgotuserpassword/forgotuserpassword.component';
 
 const routes: Routes = [
   {
@@ -166,6 +169,18 @@ const routes: Routes = [
   {
     path: "userheader",
     component: UserheaderComponent
+  },
+  {
+    path: "adminprofile",
+    component: AdminprofileComponent
+  },
+  {
+    path: "forgotUserPassword",
+    component: ForgotuserpasswordComponent
+  },
+  {
+    path: "resetuserpassword",
+    component: ResetuserpasswordComponent
   }
 ];
 

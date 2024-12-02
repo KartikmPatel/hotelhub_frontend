@@ -12,6 +12,7 @@ export class RoomcategoryserviceService {
   private featurescountapi = "http://localhost:5161/api/Featurestbs/getfeaturescount";
   private hotelapiUrl = "http://localhost:5161/api/Hoteltbs";
   private fesdiscountUrl = "http://localhost:5161/api/FestivalDiscounts";
+  private userapiUrl = "http://localhost:5161/api/Usertbs";
 
   constructor(private http:HttpClient){}
 
@@ -42,36 +43,40 @@ export class RoomcategoryserviceService {
 
   // getcount of category for dashboard
   getcategorycount():Observable<any>{
-    return this.http.get(`${this.categoryApiUrl}/getcategorycount`)
+    return this.http.get(`${this.categoryApiUrl}/getcategorycount`);
   }
 
   // get count of Facility for dashboard
   getfacilitycount():Observable<any>{
-    return this.http.get(this.facilitycountapi)
+    return this.http.get(this.facilitycountapi);
   }
 
   // getcount of Facility for dashboard
   getfeaturescount():Observable<any>{
-    return this.http.get(this.featurescountapi)
+    return this.http.get(this.featurescountapi);
   }
 
   // getcount of Hotels for dashboard
   gethotelcount():Observable<any>{
-    return this.http.get(`${this.hotelapiUrl}/gethotelcount`)
+    return this.http.get(`${this.hotelapiUrl}/gethotelcount`);
   }
 
   // getcount of festival discount for dashboard
   getfesdiscountcount():Observable<any>{
-    return this.http.get(`${this.fesdiscountUrl}/getfesdiscountcount`)
+    return this.http.get(`${this.fesdiscountUrl}/getfesdiscountcount`);
   }
 
   // display new hotels
   gethotels():Observable<any>{
-    return this.http.get(this.hotelapiUrl)
+    return this.http.get(this.hotelapiUrl);
   }
 
   // approval new hotels
   approveHotel(hotelId: number) {
     return this.http.post(`${this.hotelapiUrl}/approve`, { id: hotelId });
+  }
+
+  getAdmin(adminId:any):Observable<any>{
+    return this.http.get(`${this.userapiUrl}/${adminId}`);
   }
 }

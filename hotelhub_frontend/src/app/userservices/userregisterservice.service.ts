@@ -28,4 +28,19 @@ export class UserregisterserviceService {
       headers: { 'Content-Type': 'application/json' }
     });
   }
+
+  forgotPassword(email: string): Observable<any> {
+    console.log('Sending email for:', email);
+    const payload = { email: email };
+    return this.http.post(`${this.userUrlApi}/forgotpassword`, payload, {
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
+  resethotelpassword(email: string, password: string): Observable<any> {
+    const payload = { email: email, password: password };
+    return this.http.post(`${this.userUrlApi}/resetpassword`, payload, {
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
 }

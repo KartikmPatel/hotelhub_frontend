@@ -3,16 +3,19 @@ import { RoomcategoryserviceService } from 'src/app/adminservices/roomcategoryse
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-adminheader',
-  templateUrl: './adminheader.component.html',
-  styleUrls: ['./adminheader.component.css']
+  selector: 'app-adminprofile',
+  templateUrl: './adminprofile.component.html',
+  styleUrls: ['./adminprofile.component.css']
 })
-export class AdminheaderComponent {
+export class AdminprofileComponent {
   profile:any;
+  errorMessage: string = '';
+
   constructor(private roomcategoryservice: RoomcategoryserviceService, private router: Router) { }
 
   ngOnInit(): void {
     const aid = localStorage.getItem("adminid");
+    console.log("------+++",aid);
     if (aid == null) {
       this.router.navigate(['/userlogin']);
     }
@@ -21,6 +24,18 @@ export class AdminheaderComponent {
       this.profile = data;
       console.log(data);
     })
+  }
+
+  loadProfile(aid: string): void {
+    this.roomcategoryservice.getAdmin(aid).subscribe(
+      (data) => {
+        this.profile = data;
+      },
+      (error) => {
+        this.errorMessage = 'Failed to load profile. Please try again.';
+        console.error('Error loading profile:', error);
+      }
+    );
   }
 
   logout(): void {
