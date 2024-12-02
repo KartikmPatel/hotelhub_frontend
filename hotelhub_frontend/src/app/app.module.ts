@@ -35,6 +35,9 @@ import { DisplayFeedbackComponent } from './hotels/feedback/display-feedback/dis
 import { ChangeHotelPasswordComponent } from './hotels/change-hotel-password/change-hotel-password.component';
 import { ForgotHotelPasswordComponent } from './hotels/forgot-hotel-password/forgot-hotel-password.component';
 import { ResethotelpasswordComponent } from './hotels/resethotelpassword/resethotelpassword.component';
+import { UserregisterComponent } from './users/authentication/userregister/userregister.component';
+import { UserheaderComponent } from './users/layout/userheader/userheader.component';
+import { UserloginComponent } from './users/authentication/userlogin/userlogin.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +72,9 @@ import { ResethotelpasswordComponent } from './hotels/resethotelpassword/resetho
     ChangeHotelPasswordComponent,
     ForgotHotelPasswordComponent,
     ResethotelpasswordComponent,
+    UserregisterComponent,
+    UserheaderComponent,
+    UserloginComponent,
   ],
   imports: [
     BrowserModule,
