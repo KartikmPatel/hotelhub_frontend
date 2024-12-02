@@ -91,6 +91,17 @@
 
               <div class="col-md-12">
                 <div class="form-floating">
+                  <select name="city" [(ngModel)]="room.city" class="form-control" required>
+                    <option value="" disabled>Select City</option>
+                    <option *ngFor="let city of citys" [value]="city.city">{{ city.city }}
+                    </option>
+                  </select>
+                  <label for="city">City</label>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="form-floating">
                   <input type="number" name="rent" [(ngModel)]="room.rent" class="form-control" placeholder="Rent"
                     required>
                   <label for="rent">Rent</label>

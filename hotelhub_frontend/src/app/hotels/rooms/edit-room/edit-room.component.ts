@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FacilityserviceService } from 'src/app/adminservices/facilityservice.service';
 import { FeatureServiceService } from 'src/app/adminservices/feature-service.service';
 import { RoomcategoryserviceService } from 'src/app/adminservices/roomcategoryservice.service';
+import { HotelregisterserviceService } from 'src/app/hotelservices/hotelregisterservice.service';
 import { RoomserviceService } from 'src/app/hotelservices/roomservice.service';
 
 @Component({
@@ -16,6 +17,7 @@ export class EditRoomComponent implements OnInit {
   features: any[] = [];
   facilitys: any[] = [];
   errorMessage:string='';
+  citys:any[] = [];
 
   selectedFeatures: { [key: number]: boolean } = {};  // Track selected features with object mapping
   selectedFacilities: { [key: number]: boolean } = {};  // Track selected facilities with object mapping
@@ -26,10 +28,13 @@ export class EditRoomComponent implements OnInit {
     private route: ActivatedRoute,
     private facilityservice: FacilityserviceService,
     private featureservice: FeatureServiceService,
-    private categoryservice: RoomcategoryserviceService
+    private categoryservice: RoomcategoryserviceService,
+    private hotelservice:HotelregisterserviceService
   ) {}
 
   ngOnInit(): void {
+    const hid = localStorage.getItem("hotelid");
+    console.log(hid);
     const roomId = this.route.snapshot.paramMap.get('id');
     if (roomId) {
       this.roomservice.getRoomById(roomId).subscribe(data => {
@@ -49,6 +54,10 @@ export class EditRoomComponent implements OnInit {
         this.features = data.$values;
         this.loadFeatures(roomId);
       });
+
+      this.hotelservice.getCityByHotel(hid).subscribe(data=>{
+        this.citys = data.$values;
+      })
     }
   }
 
@@ -101,6 +110,7 @@ export class EditRoomComponent implements OnInit {
       adultCapacity: this.room.adultCapacity,
       childrenCapacity: this.room.childrenCapacity,
       quantity: this.room.quantity,
+      city:this.room.city,
       rent: this.room.rent,
       discount: this.room.discount,
       activeStatus: this.room.activeStatus,

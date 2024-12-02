@@ -13,6 +13,7 @@ export class HotelregisterserviceService {
   private roomfeatureUrlApi = "http://localhost:5161/api/RoomFeaturetbs";
   private roomfacilityUrlApi = "http://localhost:5161/api/RoomFacilitytbs";
   private feedbackUrlApi = "http://localhost:5161/api/Feedbacktbs";
+  private hotelCityUrl = "http://localhost:5161/api/HotelCitytbs";
 
   constructor(private http: HttpClient) { }
 
@@ -87,5 +88,9 @@ export class HotelregisterserviceService {
     return this.http.post(`${this.hotelapiUrl}/resetpassword`, payload, {
       headers: { 'Content-Type': 'application/json' },
     });
+  }
+
+  getCityByHotel(hid:any):Observable<any>{
+    return this.http.get(`${this.hotelCityUrl}/getByHotel/${hid}`);
   }
 }

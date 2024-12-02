@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FacilityserviceService } from 'src/app/adminservices/facilityservice.service';
 import { FeatureServiceService } from 'src/app/adminservices/feature-service.service';
 import { RoomcategoryserviceService } from 'src/app/adminservices/roomcategoryservice.service';
+import { HotelregisterserviceService } from 'src/app/hotelservices/hotelregisterservice.service';
 import { RoomserviceService } from 'src/app/hotelservices/roomservice.service';
 
 @Component({
@@ -16,6 +17,7 @@ export class AddRoomsComponent {
     facilityIds: [] // Store selected facility IDs in an array
   };
 
+  citys:any[] = [];
   categorys: any[] = [];
   features: any[] = [];
   facilitys: any[] = [];
@@ -29,10 +31,13 @@ export class AddRoomsComponent {
     private router: Router,
     private facilityservice: FacilityserviceService,
     private featureservice: FeatureServiceService,
-    private categoryservice: RoomcategoryserviceService
+    private categoryservice: RoomcategoryserviceService,
+    private hotelservice:HotelregisterserviceService
   ) {}
 
   ngOnInit(): void {
+    const hid = localStorage.getItem("hotelid");
+    console.log(hid);
     this.categoryservice.getCategory().subscribe(data => {
       this.categorys = data.$values;
     });
@@ -46,6 +51,10 @@ export class AddRoomsComponent {
       this.features = data.$values;
       this.selectedFeatures = new Array(this.features.length).fill(false); // Initialize the selectedFeatures array
     });
+
+    this.hotelservice.getCityByHotel(hid).subscribe(data=>{
+      this.citys = data.$values;
+    })
   }
 
   onSubmit() {
@@ -65,6 +74,7 @@ export class AddRoomsComponent {
       adultCapacity: this.newRoom.adultCapacity,
       childrenCapacity: this.newRoom.childrenCapacity,
       quantity: this.newRoom.quantity,
+      city:this.newRoom.city,
       rent: this.newRoom.rent,
       discount: this.newRoom.discount,
       activeStatus: 0,
