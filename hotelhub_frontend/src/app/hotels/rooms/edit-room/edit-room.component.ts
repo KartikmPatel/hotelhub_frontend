@@ -16,8 +16,8 @@ export class EditRoomComponent implements OnInit {
   categorys: any[] = [];
   features: any[] = [];
   facilitys: any[] = [];
-  errorMessage:string='';
-  citys:any[] = [];
+  errorMessage: string = '';
+  citys: any[] = [];
 
   selectedFeatures: { [key: number]: boolean } = {};  // Track selected features with object mapping
   selectedFacilities: { [key: number]: boolean } = {};  // Track selected facilities with object mapping
@@ -29,7 +29,7 @@ export class EditRoomComponent implements OnInit {
     private facilityservice: FacilityserviceService,
     private featureservice: FeatureServiceService,
     private categoryservice: RoomcategoryserviceService,
-    private hotelservice:HotelregisterserviceService
+    private hotelservice: HotelregisterserviceService
   ) {}
 
   ngOnInit(): void {
@@ -55,9 +55,9 @@ export class EditRoomComponent implements OnInit {
         this.loadFeatures(roomId);
       });
 
-      this.hotelservice.getCityByHotel(hid).subscribe(data=>{
+      this.hotelservice.getCityByHotel(hid).subscribe(data => {
         this.citys = data.$values;
-      })
+      });
     }
   }
 
@@ -92,7 +92,6 @@ export class EditRoomComponent implements OnInit {
     );
   }
 
-
   onSubmit() {
     this.errorMessage = '';
 
@@ -104,32 +103,47 @@ export class EditRoomComponent implements OnInit {
 
     const hid = localStorage.getItem("hotelid");
     console.log(hid);
-    const updatedRoom = {
-      id:this.room.id,
-      roomcategoryid: this.room.roomcategoryid,
-      adultCapacity: this.room.adultCapacity,
-      childrenCapacity: this.room.childrenCapacity,
-      quantity: this.room.quantity,
-      city:this.room.city,
-      rent: this.room.rent,
-      discount: this.room.discount,
-      activeStatus: this.room.activeStatus,
-      festivalId: null,
-      hid: hid
-    };
 
-    console.log("Final Room Data for API:", updatedRoom);
+    // Step 1: Check if the updated room data already exists in the database
+    this.roomservice.checkRoomExistence(this.room.id, this.room.city, this.room.roomcategoryid, this.room.hid).subscribe(
+      (response: any) => {
+        if (response.exists) {
+          this.errorMessage = 'A room with the same Category, and City already exists.';
+          return;
+        }
 
-    this.roomservice.updateRoom(this.room.id, updatedRoom).subscribe(
-      () => {
-        this.updateRoomFacilities(this.room.id);
-        this.updateRoomFeatures(this.room.id);
-        this.router.navigate(['/displayRooms']);
+        // Step 2: Proceed with room update
+        const updatedRoom = {
+          id: this.room.id,
+          roomcategoryid: this.room.roomcategoryid,
+          adultCapacity: this.room.adultCapacity,
+          childrenCapacity: this.room.childrenCapacity,
+          quantity: this.room.quantity,
+          city: this.room.city,
+          rent: this.room.rent,
+          discount: this.room.discount,
+          activeStatus: this.room.activeStatus,
+          festivalId: null,
+          hid: hid
+        };
 
-        sessionStorage.setItem("roomsuccessmsg", "Room Successfully Edited");
+        console.log("Final Room Data for API:", updatedRoom);
+
+        this.roomservice.updateRoom(this.room.id, updatedRoom).subscribe(
+          () => {
+            this.updateRoomFacilities(this.room.id);
+            this.updateRoomFeatures(this.room.id);
+            this.router.navigate(['/displayRooms']);
+
+            sessionStorage.setItem("roomsuccessmsg", "Room Successfully Edited");
+          },
+          (error) => {
+            console.error('Error updating room:', error);
+          }
+        );
       },
       (error) => {
-        console.error('Error updating room:', error);
+        console.error('Error checking room existence:', error);
       }
     );
   }

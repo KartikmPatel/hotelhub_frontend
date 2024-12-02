@@ -38,6 +38,8 @@ import { ResethotelpasswordComponent } from './hotels/resethotelpassword/resetho
 import { UserregisterComponent } from './users/authentication/userregister/userregister.component';
 import { UserheaderComponent } from './users/layout/userheader/userheader.component';
 import { UserloginComponent } from './users/authentication/userlogin/userlogin.component';
+import { HotelcityComponent } from './hotels/hotelcities/hotelcity/hotelcity.component';
+import { AddCityComponent } from './hotels/hotelcities/add-city/add-city.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +77,8 @@ import { UserloginComponent } from './users/authentication/userlogin/userlogin.c
     UserregisterComponent,
     UserheaderComponent,
     UserloginComponent,
+    HotelcityComponent,
+    AddCityComponent,
   ],
   imports: [
     BrowserModule,

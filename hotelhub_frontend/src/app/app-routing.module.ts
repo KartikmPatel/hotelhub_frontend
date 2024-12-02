@@ -28,119 +28,144 @@ import { DisplayFeedbackComponent } from './hotels/feedback/display-feedback/dis
 import { ChangeHotelPasswordComponent } from './hotels/change-hotel-password/change-hotel-password.component';
 import { ForgotHotelPasswordComponent } from './hotels/forgot-hotel-password/forgot-hotel-password.component';
 import { ResethotelpasswordComponent } from './hotels/resethotelpassword/resethotelpassword.component';
+import { HotelcityComponent } from './hotels/hotelcities/hotelcity/hotelcity.component';
+import { AddCityComponent } from './hotels/hotelcities/add-city/add-city.component';
+import { UserregisterComponent } from './users/authentication/userregister/userregister.component';
+import { UserloginComponent } from './users/authentication/userlogin/userlogin.component';
+import { UserheaderComponent } from './users/layout/userheader/userheader.component';
 
 const routes: Routes = [
   {
-    path:"",
-    component:HoteldashboardComponent
+    path: "",
+    component: HoteldashboardComponent
   },
   {
-    path:"displaycategory",
-    component:DisplayRoomcategoryComponent
+    path: "displaycategory",
+    component: DisplayRoomcategoryComponent
   },
   {
-    path:"admindashboard",
-    component:AdmindashboardComponent
+    path: "admindashboard",
+    component: AdmindashboardComponent
   },
   {
-    path:"addcategory",
-    component:AddroomcategoryComponent
+    path: "addcategory",
+    component: AddroomcategoryComponent
   },
   {
-    path:"editcategory/:id",
-    component:EditroomcategoryComponent
+    path: "editcategory/:id",
+    component: EditroomcategoryComponent
   },
   {
-    path:"addfacility",
-    component:AddfacilityComponent
+    path: "addfacility",
+    component: AddfacilityComponent
   },
   {
-    path:"displayFacility",
-    component:DisplayfacilityComponent
+    path: "displayFacility",
+    component: DisplayfacilityComponent
   },
   {
-    path:"editFacility/:id",
-    component:EditFacilityComponent
+    path: "editFacility/:id",
+    component: EditFacilityComponent
   },
   {
-    path:"displayFeatures",
-    component:DisplayFeaturesComponent
+    path: "displayFeatures",
+    component: DisplayFeaturesComponent
   },
   {
-    path:"addFeature",
-    component:AddFeaturesComponent
+    path: "addFeature",
+    component: AddFeaturesComponent
   },
   {
-    path:"editFeature/:id",
-    component:EditFeatureComponent
+    path: "editFeature/:id",
+    component: EditFeatureComponent
   },
   {
-    path:"hotelregister",
-    component:HotelregisterComponent
+    path: "hotelregister",
+    component: HotelregisterComponent
   },
   {
-    path:"hotellogin",
-    component:HotelloginComponent
+    path: "hotellogin",
+    component: HotelloginComponent
   },
   {
-    path:"displayRooms",
-    component:DisplayroomsComponent
+    path: "displayRooms",
+    component: DisplayroomsComponent
   },
   {
-    path:"addRoom",
-    component:AddRoomsComponent
+    path: "addRoom",
+    component: AddRoomsComponent
   },
   {
-    path:"editRoom/:id",
-    component:EditRoomComponent
+    path: "editRoom/:id",
+    component: EditRoomComponent
   },
   {
-    path:"addRoomImages/:id",
-    component:AddImagesComponent
+    path: "addRoomImages/:id",
+    component: AddImagesComponent
   },
   {
-    path:"hotelsapprove",
-    component:HotelapproveComponent
+    path: "hotelsapprove",
+    component: HotelapproveComponent
   },
   {
-    path:"hotelfacility",
-    component:HotelfacilityComponent
+    path: "hotelfacility",
+    component: HotelfacilityComponent
   },
   {
-    path:"hotelfeature",
-    component:HotelfeatureComponent
+    path: "hotelfeature",
+    component: HotelfeatureComponent
   },
   {
-    path:"festivaldiscount",
-    component:DisplayfesdiscountComponent
+    path: "festivaldiscount",
+    component: DisplayfesdiscountComponent
   },
   {
-    path:"addfesdicount",
-    component:AddfesdiscountComponent
+    path: "addfesdicount",
+    component: AddfesdiscountComponent
   },
   {
-    path:"editfesdiscount/:id",
-    component:EditfesdiscountComponent
+    path: "editfesdiscount/:id",
+    component: EditfesdiscountComponent
   },
   {
-    path:"hotelprofile",
-    component:HotelprofileComponent
+    path: "hotelprofile",
+    component: HotelprofileComponent
   },
   {
-    path:"displayFeedback",
-    component:DisplayFeedbackComponent
+    path: "displayFeedback",
+    component: DisplayFeedbackComponent
   },
   {
-    path:"changeHotelPassword",
-    component:ChangeHotelPasswordComponent
+    path: "changeHotelPassword",
+    component: ChangeHotelPasswordComponent
   },
   {
-    path:"forgotHotelPassword",
-    component:ForgotHotelPasswordComponent
+    path: "forgotHotelPassword",
+    component: ForgotHotelPasswordComponent
   },
   {
-    path:"resethotelpassword",
-    component:ResethotelpasswordComponent
+    path: "resethotelpassword",
+    component: ResethotelpasswordComponent
+  },
+  {
+    path: "displayHotelCities",
+    component: HotelcityComponent
+  },
+  {
+    path: "addHotelCity",
+    component: AddCityComponent
+  },
+  {
+    path: "userregister",
+    component: UserregisterComponent
+  },
+  {
+    path: "userlogin",
+    component: UserloginComponent
+  },
+  {
+    path: "userheader",
+    component: UserheaderComponent
   }
 ];
 

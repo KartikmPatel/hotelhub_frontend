@@ -126,4 +126,8 @@ export class RoomserviceService {
   changeActiveStatus(roomid:any,status :any):Observable<any>{
     return this.http.get(`${this.roomApiUrl}/changeActiveStatus/${status}?roomid=${roomid}`);
   }
+
+  checkRoomExistence(roomId: number, city: string, categoryId: number, hid: string) {
+    return this.http.get<any>(`${this.roomApiUrl}/check-existence/${roomId}?city=${city}&categoryId=${categoryId}&hid=${hid}`);
+  }
 }
