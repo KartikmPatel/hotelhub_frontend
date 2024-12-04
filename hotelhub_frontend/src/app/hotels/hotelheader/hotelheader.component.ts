@@ -30,5 +30,4 @@ export class HotelheaderComponent {
     localStorage.clear();
     this.router.navigate(['/hotellogin']);
   }
-
 }

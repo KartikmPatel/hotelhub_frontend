@@ -24,8 +24,7 @@ export class AdminheaderComponent {
   }
 
   logout(): void {
-    // localStorage.clear();
-    localStorage.setItem("adminid", "");
+    localStorage.clear();
     this.router.navigate(['/userlogin']);
   }
 }

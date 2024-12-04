@@ -1,4 +1,46 @@
 <app-adminheader></app-adminheader>
+<style>
+    /* General card styling */
+.custom-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect */
+.custom-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Card title styling */
+.custom-card .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+/* Card icon styling */
+.custom-card .card-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 1.75rem;
+    border-radius: 50%;
+}
+
+/* Box shadow for icons */
+.card-icon {
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .custom-card {
+        margin-bottom: 20px;
+    }
+}
+
+</style>
 <main id="main" class="main">
 
     <div class="pagetitle">
@@ -18,147 +60,107 @@
             <div class="col-lg-8">
                 <div class="row">
 
-                    <!-- Sales Card -->
+                    <!-- Room Category Card -->
                     <div class="col-xxl-4 col-md-6">
-                        <div class="card info-card sales-card">
+                        <div class="card info-card custom-card shadow-lg">
 
-                            <!-- <div class="filter">
-                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
-                                    </li>
-
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                                </ul>
-                            </div> -->
-
-                            <div class="card-body">
-                                <h5 class="card-title">Room Category</h5>
+                            <div class="card-body" [routerLink]="['/displaycategory']" style="cursor: pointer;">
+                                <h5 class="card-title text-primary fw-bold">Room Category</h5>
 
                                 <div class="d-flex align-items-center">
                                     <div
-                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-house-door"></i>
+                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-light text-primary shadow-sm">
+                                        <i class="bi bi-house-door fs-3"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>{{categorycount}}</h6>
-                                        <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span
-                                            class="text-muted small pt-2 ps-1">increase</span> -->
-
+                                        <h6 class="fw-bold fs-4 text-dark">{{categorycount}}</h6>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-                    </div><!-- End Sales Card -->
+                    </div><!-- End Room Category Card -->
 
-                    <!-- Revenue Card -->
+                    <!-- Facilities Card -->
                     <div class="col-xxl-4 col-md-6">
-                        <div class="card info-card revenue-card">
+                        <div class="card info-card custom-card shadow-lg">
 
-                            <div class="card-body">
-                                <h5 class="card-title">Facilities</h5>
-
-                                <div class="d-flex align-items-center">
-                                    <div
-                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-door-open"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h6>{{facilitycount}}</h6>
-                                        <!-- <span class="text-success small pt-1 fw-bold">8%</span> <span
-                                            class="text-muted small pt-2 ps-1">increase</span> -->
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div><!-- End Revenue Card -->
-
-                    <!-- Customers Card -->
-                    <div class="col-xxl-4 col-xl-12">
-
-                        <div class="card info-card customers-card">
-
-                            <div class="card-body">
-                                <h5 class="card-title">Features</h5>
+                            <div class="card-body" [routerLink]="['/displayFacility']" style="cursor: pointer;">
+                                <h5 class="card-title text-success fw-bold">Facilities</h5>
 
                                 <div class="d-flex align-items-center">
                                     <div
-                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-star-fill"></i>
+                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-light text-success shadow-sm">
+                                        <i class="bi bi-door-open fs-3"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>{{featurecount}}</h6>
-                                        <!-- <span class="text-danger small pt-1 fw-bold">12%</span> <span
-                                            class="text-muted small pt-2 ps-1">decrease</span> -->
-
+                                        <h6 class="fw-bold fs-4 text-dark">{{facilitycount}}</h6>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
+                    </div><!-- End Facilities Card -->
 
-                    </div><!-- End Customers Card -->
+                    <!-- Features Card -->
+                    <div class="col-xxl-4 col-md-6">
+                        <div class="card info-card custom-card shadow-lg">
 
-                    <!-- Customers Card -->
-                    <div class="col-xxl-4 col-xl-12">
-
-                        <div class="card info-card customers-card">
-
-                            <div class="card-body">
-                                <h5 class="card-title">Hotels</h5>
+                            <div class="card-body" [routerLink]="['/displayFeatures']" style="cursor: pointer;">
+                                <h5 class="card-title text-warning fw-bold">Features</h5>
 
                                 <div class="d-flex align-items-center">
                                     <div
-                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-building"></i>
+                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-light text-warning shadow-sm">
+                                        <i class="bi bi-star-fill fs-3"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>{{hotelcount}}</h6>
-                                        <!-- <span class="text-danger small pt-1 fw-bold">12%</span> <span
-                                            class="text-muted small pt-2 ps-1">decrease</span> -->
-
+                                        <h6 class="fw-bold fs-4 text-dark">{{featurecount}}</h6>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
+                    </div><!-- End Features Card -->
 
-                    </div><!-- End Customers Card -->
+                    <!-- Hotels Card -->
+                    <div class="col-xxl-4 col-md-6">
+                        <div class="card info-card custom-card shadow-lg">
 
-                    <!-- Customers Card -->
-                    <div class="col-xxl-4 col-xl-12">
-
-                        <div class="card info-card customers-card">
-
-                            <div class="card-body">
-                                <h5 class="card-title">Festival discount</h5>
+                            <div class="card-body" [routerLink]="['/hotelsapprove']" style="cursor: pointer;">
+                                <h5 class="card-title text-danger fw-bold">Hotels</h5>
 
                                 <div class="d-flex align-items-center">
                                     <div
-                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-gift"></i>
+                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-light text-danger shadow-sm">
+                                        <i class="bi bi-building fs-3"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>{{fesdiscountcount}}</h6>
-                                        <!-- <span class="text-danger small pt-1 fw-bold">12%</span> <span
-                                            class="text-muted small pt-2 ps-1">decrease</span> -->
-
+                                        <h6 class="fw-bold fs-4 text-dark">{{hotelcount}}</h6>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
+                    </div><!-- End Hotels Card -->
 
-                    </div><!-- End Customers Card -->
+                    <!-- Festival Discount Card -->
+                    <div class="col-xxl-4 col-md-6">
+                        <div class="card info-card custom-card shadow-lg">
 
-                </div><!-- End Right side columns -->
+                            <div class="card-body" [routerLink]="['/festivaldiscount']" style="cursor: pointer;">
+                                <h5 class="card-title text-info fw-bold">Festival Discount</h5>
 
+                                <div class="d-flex align-items-center">
+                                    <div
+                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-light text-info shadow-sm">
+                                        <i class="bi bi-gift fs-3"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6 class="fw-bold fs-4 text-dark">{{fesdiscountcount}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- End Festival Discount Card -->
+
+                </div>
             </div>
         </div>
     </section>

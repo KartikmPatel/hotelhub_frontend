@@ -1,4 +1,46 @@
 <app-hotelheader></app-hotelheader>
+<style>
+    /* General card styling */
+.custom-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect */
+.custom-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Card title styling */
+.custom-card .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+/* Card icon styling */
+.custom-card .card-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 1.75rem;
+    border-radius: 50%;
+}
+
+/* Box shadow for icons */
+.card-icon {
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .custom-card {
+        margin-bottom: 20px;
+    }
+}
+
+</style>
 <main id="main" class="main">
 
     <div class="pagetitle">
@@ -18,119 +60,107 @@
             <div class="col-lg-8">
                 <div class="row">
 
-                    <!-- Sales Card -->
+                    <!-- Rooms Card -->
                     <div class="col-xxl-4 col-md-6">
-                        <div class="card info-card sales-card">
+                        <div class="card info-card custom-card shadow-lg">
 
-                            <!-- <div class="filter">
-                                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
-                                    </li>
-
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                                </ul>
-                            </div> -->
-
-                            <div class="card-body">
-                                <h5 class="card-title">Rooms</h5>
+                            <div class="card-body" [routerLink]="['/displayRooms']" style="cursor: pointer;">
+                                <h5 class="card-title text-primary fw-bold">Rooms</h5>
 
                                 <div class="d-flex align-items-center">
                                     <div
-                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi-house"></i>
+                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-light text-primary shadow-sm">
+                                        <i class="bi-house fs-3"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>{{roomcount}}</h6>
-                                        <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span
-                                            class="text-muted small pt-2 ps-1">increase</span> -->
-
+                                        <h6 class="fw-bold fs-4 text-dark">{{roomcount}}</h6>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-                    </div><!-- End Sales Card -->
+                    </div>
 
-                    <!-- Revenue Card -->
+                    <!-- Room Facility Card -->
                     <div class="col-xxl-4 col-md-6">
-                        <div class="card info-card revenue-card">
+                        <div class="card info-card custom-card shadow-lg">
 
-                            <div class="card-body">
-                                <h5 class="card-title">Room Facility</h5>
+                            <div class="card-body" [routerLink]="['/hotelfacility']" style="cursor: pointer;">
+                                <h5 class="card-title text-success fw-bold">Room Facility</h5>
 
                                 <div class="d-flex align-items-center">
                                     <div
-                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-door-open"></i>
+                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-light text-success shadow-sm">
+                                        <i class="bi bi-door-open fs-3"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>{{roomfacilitycount}}</h6>
-                                        <!-- <span class="text-success small pt-1 fw-bold">8%</span> <span
-                                            class="text-muted small pt-2 ps-1">increase</span> -->
-
+                                        <h6 class="fw-bold fs-4 text-dark">{{roomfacilitycount}}</h6>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-                    </div><!-- End Revenue Card -->
+                    </div>
 
-                    <!-- Customers Card -->
+                    <!-- Room Features Card -->
                     <div class="col-xxl-4 col-xl-12">
+                        <div class="card info-card custom-card shadow-lg">
 
-                        <div class="card info-card customers-card">
-
-                            <div class="card-body">
-                                <h5 class="card-title">Room Features</h5>
+                            <div class="card-body" [routerLink]="['/hotelfeature']" style="cursor: pointer;">
+                                <h5 class="card-title text-warning fw-bold">Room Features</h5>
 
                                 <div class="d-flex align-items-center">
                                     <div
-                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-star-fill"></i>
+                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-light text-warning shadow-sm">
+                                        <i class="bi bi-star-fill fs-3"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>{{roomfeaturescount}}</h6>
-                                        <!-- <span class="text-danger small pt-1 fw-bold">12%</span> <span
-                                            class="text-muted small pt-2 ps-1">decrease</span> -->
+                                        <h6 class="fw-bold fs-4 text-dark">{{roomfeaturescount}}</h6>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
+                    </div>
 
-                    </div><!-- End Customers Card -->
-
-                    <!-- Customers Card -->
+                    <!-- Feedback Card -->
                     <div class="col-xxl-4 col-xl-12">
+                        <div class="card info-card custom-card shadow-lg">
 
-                        <div class="card info-card customers-card">
-
-                            <div class="card-body">
-                                <h5 class="card-title">Feedback</h5>
+                            <div class="card-body" [routerLink]="['/displayFeedback']" style="cursor: pointer;">
+                                <h5 class="card-title text-danger fw-bold">Feedback</h5>
 
                                 <div class="d-flex align-items-center">
                                     <div
-                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi-chat-square-text"></i>
+                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-light text-danger shadow-sm">
+                                        <i class="bi-chat-square-text fs-3"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>{{feedbackcount}}</h6>
-                                        <!-- <span class="text-danger small pt-1 fw-bold">12%</span> <span
-                                            class="text-muted small pt-2 ps-1">decrease</span> -->
+                                        <h6 class="fw-bold fs-4 text-dark">{{feedbackcount}}</h6>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
+                    </div>
 
-                    </div><!-- End Customers Card -->
+                    <!-- Branch Card -->
+                    <div class="col-xxl-4 col-xl-12">
+                        <div class="card info-card custom-card shadow-lg">
 
-                </div><!-- End Right side columns -->
+                            <div class="card-body" [routerLink]="['/displayHotelCities']" style="cursor: pointer;">
+                                <h5 class="card-title text-info fw-bold">Branch</h5>
 
+                                <div class="d-flex align-items-center">
+                                    <div
+                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-light text-info shadow-sm">
+                                        <i class="bi bi-building fs-3"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6 class="fw-bold fs-4 text-dark">{{branchcount}}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </section>

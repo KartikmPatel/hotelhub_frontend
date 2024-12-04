@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, OnDestroy, OnInit } from '@angular/core';
 import { RoomcategoryserviceService } from 'src/app/adminservices/roomcategoryservice.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admindashboard',
@@ -14,7 +15,7 @@ export class AdmindashboardComponent {
   hotelcount:number=0;
   fesdiscountcount:number=0;
 
-  constructor(private roomcategoryservice: RoomcategoryserviceService) { }
+  constructor(private roomcategoryservice: RoomcategoryserviceService, private router: Router) { }
 
   ngOnInit(): void {
     this.getcatcount();

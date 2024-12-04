@@ -12,6 +12,7 @@ export class HoteldashboardComponent {
   roomfacilitycount:number=0;
   roomcount:number=0;
   feedbackcount:number=0;
+  branchcount:number=0;
 
   constructor(private hotelregisterserviceService: HotelregisterserviceService, private router: Router) { }
 

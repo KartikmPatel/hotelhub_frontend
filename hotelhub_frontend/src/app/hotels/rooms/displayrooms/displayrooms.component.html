@@ -41,7 +41,7 @@
                   </th>
                   <th>Children Capacity</th>
                   <th>
-                    Quantity
+                    Rooms
                   </th>
                   <th>
                     City
@@ -98,10 +98,12 @@
                         <i class="bi bi-camera"></i> <!-- Bootstrap camera icon -->
                       </button>
                     </a>
-                    <a [routerLink]="['/editRoom',r.id]"><button type="button" class="btn btn-primary ">
+                    <a [routerLink]="['/editRoom',r.id]">
+                      <button type="button" class="btn btn-primary me-3">
                         <i class="bi bi-pencil-square"></i>
                       </button></a>
-                    <a><button class="btn btn-danger" (click)="deleteRoom(r.id)">
+                    <a>
+                      <button class="btn btn-danger" (click)="deleteRoom(r.id)">
                         <i class="bi bi-trash"></i>
                       </button></a>
                   </td>
