@@ -5,7 +5,8 @@
         <h1>Edit Festival Discount</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a [routerLink]="['/admindashboard']">Home</a></li>
+                <li class="breadcrumb-item"><a [routerLink]="['/festivaldiscount']">Festival Discount</a></li>
                 <li class="breadcrumb-item active">Edit Festival Discount</li>
             </ol>
         </nav>
@@ -16,9 +17,11 @@
             <div class="col-lg-12">
 
                 <div class="card" style="margin-top: 10px;">
-                    <!-- /.card-header -->
+                    <div class="card-header">
+                        Edit Festival Discount
+                    </div><!-- /.card-header -->
                     <div class="card-body">
-                        <h5 class="card-title">Edit Festival Discount</h5>
+                        <h5 class="fw-bold text-secondary">Edit Festival Discount</h5>
 
                         <!-- Show Error Message -->
                         <div *ngIf="errorMessage" class="alert alert-danger">
@@ -47,20 +50,117 @@
                                 <div class="form-floating">
                                     <input type="date" name="fesdate" [(ngModel)]="editfesdicount.fesdate"
                                         class="form-control" placeholder="Festival Date" required>
-                                    <label for="floatingName"> Festival Date</label>
+                                    <label for="floatingName">Festival Date</label>
                                 </div>
                             </div>
 
-                            <div class="text-center">
+                            <div class="text-center mt-3">
                                 <button type="submit" class="btn btn-primary">Edit Discount</button>
                             </div>
                         </form><!-- End floating Labels Form -->
-                    </div>
-                    <!-- /.card-body -->
-                </div>
+                    </div><!-- /.card-body -->
+                </div><!-- /.card -->
 
             </div>
         </div>
     </section>
 
 </main><!-- End #main -->
+
+<!-- Style adjustments -->
+<style>
+/* General Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.pagetitle h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #4a5568;
+}
+
+.breadcrumb {
+    font-size: 0.9rem;
+    background-color: #f9f9f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.breadcrumb a {
+    color: #2b6cb0;
+}
+
+.card {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #4a90e2;
+    border-bottom: none;
+    padding: 15px;
+    border-radius: 12px 12px 0 0;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.alert {
+    animation: fadeIn 0.3s ease-in-out;
+    border: 1px solid #e53e3e;
+    background-color: #fce2e2;
+    color: #e53e3e;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Form Floating Labels */
+.form-floating {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.form-control {
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+label {
+    font-size: 1rem;
+}
+
+/* Button Styling */
+.btn-primary {
+    background-color: #4a90e2;
+    border: 1px solid #4a90e2;
+}
+
+.btn-primary:hover {
+    background-color: #357ab7;
+    border-color: #357ab7;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Additional Styling for the Section */
+section .row {
+    margin-top: 20px;
+}
+</style>

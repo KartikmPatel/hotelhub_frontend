@@ -1,85 +1,215 @@
 <app-adminheader></app-adminheader>
+
+<style>
+/* General Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.pagetitle h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #4a5568;
+}
+
+.breadcrumb {
+    font-size: 0.9rem;
+    background-color: #f9f9f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.breadcrumb a {
+    color: #2b6cb0;
+}
+
+.card {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #4a90e2;
+    border-bottom: none;
+    padding: 15px;
+    border-radius: 12px 12px 0 0;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+}
+
+.table th {
+    text-align: center;
+    background-color: #edf2f7;
+    color: #4a5568;
+    font-weight: bold;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.table td {
+    text-align: center;
+    padding: 12px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f7fafc;
+}
+
+.btn-outline-primary, .btn-outline-danger {
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary {
+    color: #4a90e2;
+    border-color: #4a90e2;
+}
+
+.btn-outline-primary:hover {
+    background-color: #4a90e2;
+    color: #ffffff;
+}
+
+.btn-outline-danger {
+    color: #e53e3e;
+    border-color: #e53e3e;
+}
+
+.btn-outline-danger:hover {
+    background-color: #e53e3e;
+    color: #ffffff;
+}
+
+.alert {
+    animation: fadeIn 0.3s ease-in-out;
+    border: 1px solid #38a169;
+    background-color: #f0fff4;
+    color: #276749;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Additional Styling for the Hotels Page */
+.table img {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: cover;
+}
+
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.card-header {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #4a90e2;
+}
+
+.card-body h5 {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #4a5568;
+}
+
+</style>
+
 <main id="main" class="main">
 
     <div class="pagetitle">
         <h1>Hotels</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a [routerLink]="['/admindashboard']">Home</a></li>
                 <li class="breadcrumb-item active">Hotels</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
 
     <!-- Success Message -->
-    <div *ngIf="successmessage" class="alert alert-success alert-dismissible fade show">
-        {{ successmessage }}
-        <!-- Close Button -->
-        <button type="button" class="btn-close" (click)="closeSuccessMessage()"></button>
+    <div *ngIf="successmessage" class="alert alert-dismissible fade show shadow-sm">
+        <strong>Success!</strong> {{ successmessage }}
+        <button type="button" class="btn-close" (click)="closeSuccessMessage()" aria-label="Close"></button>
     </div>
 
     <section class="section">
         <div class="row">
             <div class="col-lg-12">
 
-                <div class="card" style="margin-top: 10px;">
-                    <!-- /.card-header -->
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold text-secondary">Hotel Management</h5>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        Hotels
+                    </div>
                     <div class="card-body">
-                        <h5 class="card-title">Hotels</h5>
-                        <table id="example1" class="table table-bordered table-striped">
+                        <table id="example1" class="table table-hover align-middle">
                             <thead>
-                                <tr style="text-align: center;">
-                                    <th>
-                                        Hotel Name
-                                    </th>
-                                    <th>
-                                        Email
-                                    </th>
-                                    <th>
-                                        Image
-                                    </th>
-                                    <th>
-                                        City
-                                    </th>
+                                <tr>
+                                    <th>Hotel Name</th>
+                                    <th>Email</th>
+                                    <th>Image</th>
+                                    <th>City</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let h of hotels" style="text-align: center;">
+                                <tr *ngFor="let h of hotels">
+                                    <td class="fw-bold">{{ h.hname }}</td>
+                                    <td>{{ h.email }}</td>
                                     <td>
-                                        {{h.hname}}
+                                        <img [src]="'http://localhost:5161/uploads/' + h.image" alt="Hotel Image" height="60px" width="100px">
                                     </td>
+                                    <td>{{ h.city }}</td>
                                     <td>
-                                        {{h.email}}
-                                    </td>
-                                    <td>
-                                        <img [src]="'http://localhost:5161/uploads/' + h.image" alt="Hotel Image"
-                                            width="100px" height="100px">
-                                    </td>
-                                    <td>
-                                        {{h.city}}
-                                    </td>
-                                    <td style="text-align: center;" *ngIf="h.isApproved == 1; else notApproved">
-                                        <!-- Button when the hotel is approved -->
-                                        <button type="button" class="btn btn-success" disabled>
-                                            <i class="bi bi-check-circle"></i> Approved
-                                        </button>
-                                    </td>
-                                    <ng-template #notApproved>
-                                        <!-- Form and button when the hotel is not approved -->
-                                        <td style="text-align: center;">
+                                        <ng-container *ngIf="h.isApproved == 1; else notApproved">
+                                            <!-- Button when the hotel is approved -->
+                                            <button type="button" class="btn btn-success" disabled>
+                                                <i class="bi bi-check-circle"></i> Approved
+                                            </button>
+                                        </ng-container>
+                                        <ng-template #notApproved>
+                                            <!-- Form and button when the hotel is not approved -->
                                             <form (submit)="approveHotel(h.id)">
                                                 <button type="submit" class="btn btn-primary">
                                                     <i class="bi bi-x-circle"></i> Approve
                                                 </button>
                                             </form>
-                                        </td>
-                                    </ng-template>
+                                        </ng-template>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="hotels.length === 0">
+                                    <td colspan="5" class="text-center text-muted">No hotels available</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <!-- /.card-body -->
                 </div>
 
             </div>

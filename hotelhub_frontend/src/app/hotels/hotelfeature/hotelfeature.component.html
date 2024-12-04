@@ -1,53 +1,168 @@
 <app-hotelheader></app-hotelheader>
+
+<style>
+    /* General Styling */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    .pagetitle h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #4a5568;
+    }
+    
+    .breadcrumb {
+        font-size: 0.9rem;
+        background-color: #f9f9f9;
+        border: 1px solid #e2e8f0;
+        border-radius: 5px;
+        padding: 5px 10px;
+    }
+    
+    .breadcrumb a {
+        color: #2b6cb0;
+    }
+    
+    .card {
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    
+    .card-header {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #ffffff;
+        background-color: #4a90e2;
+        border-bottom: none;
+        padding: 15px;
+        border-radius: 12px 12px 0 0;
+    }
+    
+    .card-body {
+        padding: 20px;
+    }
+    
+    .table {
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 100%;
+    }
+    
+    .table th {
+        text-align: center;
+        background-color: #edf2f7;
+        color: #4a5568;
+        font-weight: bold;
+        border-bottom: 2px solid #e2e8f0;
+    }
+    
+    .table td {
+        text-align: center;
+        padding: 12px;
+        border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .table-hover tbody tr:hover {
+        background-color: #f7fafc;
+    }
+    
+    .btn-outline-primary, .btn-outline-danger {
+        transition: all 0.3s ease;
+    }
+    
+    .btn-outline-primary {
+        color: #4a90e2;
+        border-color: #4a90e2;
+    }
+    
+    .btn-outline-primary:hover {
+        background-color: #4a90e2;
+        color: #ffffff;
+    }
+    
+    .btn-outline-danger {
+        color: #e53e3e;
+        border-color: #e53e3e;
+    }
+    
+    .btn-outline-danger:hover {
+        background-color: #e53e3e;
+        color: #ffffff;
+    }
+    
+    .alert {
+        animation: fadeIn 0.3s ease-in-out;
+        border: 1px solid #38a169;
+        background-color: #f0fff4;
+        color: #276749;
+    }
+    
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    
+    </style>
+    
 <main id="main" class="main">
 
-    <div class="pagetitle">
-        <h1>Room Feature</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item active">Room Feature</li>
-            </ol>
-        </nav>
-    </div><!-- End Page Title -->
+  <div class="pagetitle">
+    <h1>Room Feature</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
+        <li class="breadcrumb-item active">Room Feature</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
 
-    <section class="section">
-        <div class="row">
-            <div class="col-lg-12">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="fw-bold text-secondary">Manage Room Feature</h5>
+  </div>
 
-                <div class="card" style="margin-top: 10px;">
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <h5 class="card-title">Feature</h5>
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead>
-                                <tr style="text-align: center;">
-                                    <th>
-                                        Feature
-                                    </th>
-                                    <th>
-                                       Image
-                                  </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let f of feature" style="text-align: center;">
-                                    <td>
-                                        {{f.featureName}}
-                                    </td>
-                                    <td>
-                                        <img [src]="'http://localhost:5161/uploads/' +f.image" alt="Feature Image"
-                                        width="100px" height="100px">
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
 
-            </div>
-        </div>
-    </section>
+        <div class="card">
+          <!-- Card Header -->
+          <div class="card-header">
+            Feature List
+          </div>
+
+          <!-- Card Body -->
+          <div class="card-body">
+            <table id="example1" class="table table-hover align-middle">
+              <thead>
+                <tr style="text-align: center;">
+                  <th>Feature</th>
+                  <th>Image</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let f of feature" style="text-align: center;">
+                  <td>{{f.featureName}}</td>
+                  <td>
+                    <img [src]="'http://localhost:5161/uploads/' + f.image" alt="Feature Image" height="60px" width="100px">
+                  </td>
+                </tr>
+                <tr *ngIf="feature.length === 0">
+                  <td colspan="2" class="text-center text-muted">No features available</td>
+                </tr>
+              </tbody>
+            </table>
+          </div><!-- End Card Body -->
+        </div><!-- End Card -->
+
+      </div>
+    </div>
+  </section>
 
 </main><!-- End #main -->

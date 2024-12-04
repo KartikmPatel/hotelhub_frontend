@@ -1,21 +1,130 @@
 <app-hotelheader></app-hotelheader>
+
+<style>
+    /* General Styling */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    .pagetitle h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #4a5568;
+    }
+    
+    .breadcrumb {
+        font-size: 0.9rem;
+        background-color: #f9f9f9;
+        border: 1px solid #e2e8f0;
+        border-radius: 5px;
+        padding: 5px 10px;
+    }
+    
+    .breadcrumb a {
+        color: #2b6cb0;
+    }
+    
+    .card {
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    
+    .card-header {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #ffffff;
+        background-color: #4a90e2;
+        border-bottom: none;
+        padding: 15px;
+        border-radius: 12px 12px 0 0;
+    }
+    
+    .card-body {
+        padding: 20px;
+    }
+    
+    .table {
+        border-collapse: separate;
+        border-spacing: 0;
+        width: 100%;
+    }
+    
+    .table th {
+        text-align: center;
+        background-color: #edf2f7;
+        color: #4a5568;
+        font-weight: bold;
+        border-bottom: 2px solid #e2e8f0;
+    }
+    
+    .table td {
+        text-align: center;
+        padding: 12px;
+        border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .table-hover tbody tr:hover {
+        background-color: #f7fafc;
+    }
+    
+    .btn-outline-primary, .btn-outline-danger {
+        transition: all 0.3s ease;
+    }
+    
+    .btn-outline-primary {
+        color: #4a90e2;
+        border-color: #4a90e2;
+    }
+    
+    .btn-outline-primary:hover {
+        background-color: #4a90e2;
+        color: #ffffff;
+    }
+    
+    .btn-outline-danger {
+        color: #e53e3e;
+        border-color: #e53e3e;
+    }
+    
+    .btn-outline-danger:hover {
+        background-color: #e53e3e;
+        color: #ffffff;
+    }
+    
+    .alert {
+        animation: fadeIn 0.3s ease-in-out;
+        border: 1px solid #38a169;
+        background-color: #f0fff4;
+        color: #276749;
+    }
+    
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    
+</style>
+
 <main id="main" class="main">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-
     <div class="pagetitle">
         <h1>Cities</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
                 <li class="breadcrumb-item active">Cities</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
 
     <!-- Success Message -->
-    <div *ngIf="successmsg" class="alert alert-success alert-dismissible fade show">
-        {{ successmsg }}
+    <div *ngIf="successmsg" class="alert alert-dismissible fade show shadow-sm">
+        <strong>Success!</strong> {{ successmsg }}
         <!-- Close Button -->
         <button type="button" class="btn-close" (click)="closeSuccessMessage()"></button>
     </div>
@@ -24,14 +133,23 @@
         <div class="row">
             <div class="col-lg-12">
 
-              <a type="button" class="btn btn-success" [routerLink]="['/addHotelCity']">
-                <i class="bi bi-plus-circle"></i> Add City
-            </a>
+                <!-- Add City Button -->
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold text-secondary">Manage Cities</h5>
+                    <a class="btn btn-success shadow-sm" [routerLink]="['/addHotelCity']">
+                        <i class="bi bi-plus-circle"></i> Add City
+                    </a>
+                </div>
 
-                <div class="card" style="margin-top: 10px;">
+                <div class="card">
+                    <!-- Card Header -->
+                    <div class="card-header">
+                        Cities List
+                    </div>
+
+                    <!-- Card Body -->
                     <div class="card-body">
-                        <h5 class="card-title">Cities</h5>
-                        <table id="example1" class="table table-bordered table-striped">
+                        <table id="example1" class="table table-hover align-middle">
                             <thead>
                                 <tr style="text-align: center;">
                                     <th>City</th>
@@ -42,16 +160,19 @@
                                 <tr *ngFor="let c of citys" style="text-align: center;">
                                     <td>{{c.city}}</td>
                                     <td>
-                                      <a><button class="btn btn-danger" (click)="removeCity(c.id)">
-                                        <i class="bi bi-trash"></i> Remove
-                                    </button></a>
+                                        <button class="btn btn-outline-danger btn-sm"
+                                            (click)="removeCity(c.id)">
+                                            <i class="bi bi-trash"></i> Remove
+                                        </button>
                                     </td>
-
+                                </tr>
+                                <tr *ngIf="citys.length === 0">
+                                    <td colspan="2" class="text-center text-muted">No cities available</td>
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
-                </div>
+                    </div><!-- End Card Body -->
+                </div><!-- End Card -->
 
             </div>
         </div>

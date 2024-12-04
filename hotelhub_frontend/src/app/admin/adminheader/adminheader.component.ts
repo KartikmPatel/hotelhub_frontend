@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./adminheader.component.css']
 })
 export class AdminheaderComponent {
+  isSidebarOpen: boolean = true; // Sidebar initially open
   profile:any;
   constructor(private roomcategoryservice: RoomcategoryserviceService, private router: Router) { }
 
@@ -23,9 +24,12 @@ export class AdminheaderComponent {
     })
   }
 
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
+
   logout(): void {
-    // localStorage.clear();
-    localStorage.setItem("adminid", "");
+    localStorage.clear();
     this.router.navigate(['/userlogin']);
   }
 }
