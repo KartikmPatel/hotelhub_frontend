@@ -1,10 +1,11 @@
 <app-hotelheader></app-hotelheader>
 <main id="main" class="main">
   <div class="pagetitle">
-    <h1>Add Facilities</h1>
+    <h1>Add Room</h1>
     <nav>
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/displayRooms']">Rooms</a></li>
         <li class="breadcrumb-item active">Add Room</li>
       </ol>
     </nav>
@@ -14,33 +15,37 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="card" style="margin-top: 10px;">
+          <div class="card-header">
+            Add Room Details
+          </div>
           <div class="card-body">
-            <h5 class="card-title">Add Room</h5>
+            <h5 class="fw-bold text-secondary">Room Management</h5>
 
             <!-- Show Error Message -->
             <div *ngIf="errorMessage" class="alert alert-danger">
               {{ errorMessage }}
             </div>
 
+            <!-- Form -->
             <form class="row g-3" (ngSubmit)="onSubmit()">
+              <!-- Room Category -->
               <div class="col-md-12">
                 <div class="form-floating">
                   <select name="category" [(ngModel)]="newRoom.roomcategoryid" class="form-control" required>
                     <option value="" disabled selected>Select Category</option>
-                    <option *ngFor="let category of categorys" [value]="category.id">{{ category.categoryName }}
-                    </option>
+                    <option *ngFor="let category of categorys" [value]="category.id">{{ category.categoryName }}</option>
                   </select>
                   <label for="category">Room Category</label>
                 </div>
               </div>
 
-              <!-- Room Features Section (Only display once features data is available) -->
-              <div class="col-md-12" *ngIf="features.length > 0">
+              <!-- Room Features Section -->
+              <div class="col-md-12" style="margin-left: 5px;" *ngIf="features.length > 0">
                 <label for="features" class="form-label">Room Features</label>
-                <div class="row">
-                  <div class="col-md-2" *ngFor="let feature of features; let i = index">
+                <div class="row" style="margin-top: -5px; margin-left: 5px;"> <!-- Reduced margin-top -->
+                  <div class="col-md-2" *ngFor="let feature of features">
                     <div class="form-check">
-                      <input type="checkbox" [(ngModel)]="selectedFeatures[i]" [value]="feature.id" name="features"
+                      <input type="checkbox" [(ngModel)]="selectedFeatures[feature.id]" [name]="'feature' + feature.id"
                         class="form-check-input">
                       <label class="form-check-label">{{ feature.featureName }}</label>
                     </div>
@@ -48,21 +53,22 @@
                 </div>
               </div>
 
-              <!-- Room Facilities Section (Only display once facilities data is available) -->
-              <div class="col-md-12" *ngIf="facilitys.length > 0">
+              <!-- Room Facilities Section -->
+              <div class="col-md-12" style="margin-left: 5px;" *ngIf="facilitys.length > 0">
                 <label for="facilities" class="form-label">Room Facilities</label>
-                <div class="row">
-                  <div class="col-md-2" *ngFor="let facility of facilitys; let i = index">
+                <div class="row" style="margin-top: -5px; margin-left: 5px;"> <!-- Reduced margin-top -->
+                  <div class="col-md-2" *ngFor="let facility of facilitys">
                     <div class="form-check">
-                      <input type="checkbox" [(ngModel)]="selectedFacilities[i]" [value]="facility.id" name="facilities"
-                        class="form-check-input">
+                      <input type="checkbox" [(ngModel)]="selectedFacilities[facility.id]"
+                        [name]="'facility' + facility.id" class="form-check-input">
                       <label class="form-check-label">{{ facility.facilityName }}</label>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <!-- Room Details Section -->
+
+              <!-- Room Details -->
               <div class="col-md-12">
                 <div class="form-floating">
                   <input type="number" name="adultCapacity" [(ngModel)]="newRoom.adultCapacity" class="form-control"
@@ -91,8 +97,7 @@
                 <div class="form-floating">
                   <select name="city" [(ngModel)]="newRoom.city" class="form-control" required>
                     <option value="" disabled selected>Select city</option>
-                    <option *ngFor="let city of citys" [value]="city.city">{{ city.city }}
-                    </option>
+                    <option *ngFor="let city of citys" [value]="city.city">{{ city.city }}</option>
                   </select>
                   <label for="category">City</label>
                 </div>
@@ -114,13 +119,120 @@
                 </div>
               </div>
 
+              <!-- Submit Button -->
               <div class="text-center">
                 <button type="submit" class="btn btn-primary">Add Room</button>
               </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+            </form><!-- End Form -->
+          </div><!-- End Card Body -->
+        </div><!-- End Card -->
+      </div><!-- End Col -->
+    </div><!-- End Row -->
+  </section><!-- End Section -->
 </main><!-- End #main -->
+
+<!-- Additional Styling -->
+<style>
+  /* General Styling */
+  body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .pagetitle h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #4a5568;
+  }
+  
+  .breadcrumb {
+      font-size: 0.9rem;
+      background-color: #f9f9f9;
+      border: 1px solid #e2e8f0;
+      border-radius: 5px;
+      padding: 5px 10px;
+  }
+  
+  .breadcrumb a {
+      color: #2b6cb0;
+  }
+  
+  .card {
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .card-header {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #ffffff;
+      background-color: #4a90e2;
+      border-bottom: none;
+      padding: 15px;
+      border-radius: 12px 12px 0 0;
+  }
+  
+  .card-body {
+      padding: 10px;
+  }
+  
+  .alert {
+      animation: fadeIn 0.3s ease-in-out;
+      border: 1px solid #e53e3e;
+      background-color: #fce2e2;
+      color: #e53e3e;
+  }
+  
+  @keyframes fadeIn {
+      from {
+          opacity: 0;
+      }
+      to {
+          opacity: 1;
+      }
+  }
+  
+  /* Form Floating Labels */
+  .form-floating {
+      position: relative;
+      margin-bottom: 0.5rem; /* Reduced margin between fields */
+  }
+  
+  .form-control {
+      padding: 0.6rem; /* Reduced padding for a more compact input field */
+      font-size: 0.95rem;
+  }
+  
+  label {
+      font-size: 0.95rem;
+  }
+  
+  /* Button Styling */
+  .btn-primary {
+      background-color: #4a90e2;
+      border: 1px solid #4a90e2;
+      padding: 0.7rem 1.5rem;
+  }
+  
+  .btn-primary:hover {
+      background-color: #357ab7;
+      border-color: #357ab7;
+  }
+  
+  .text-center {
+      text-align: center;
+  }
+  
+  /* Additional Styling for the Section */
+  section .row {
+      margin-top: 10px; /* Reduced top margin for section */
+  }
+  
+  /* Adjust margin between features and facilities checkboxes */
+  .form-check {
+      margin-bottom: 0.5rem; /* Reduced margin between checkboxes */
+  }
+</style>
+
+  
