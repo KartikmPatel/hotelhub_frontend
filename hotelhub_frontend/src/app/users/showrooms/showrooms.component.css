@@ -1,0 +1,89 @@
+.room-image {
+    width: 100%; /* Ensures the image adapts to the container's width */
+    max-width: 560px; /* Limits the maximum width */
+    height: 350px; /* Fixed height to maintain consistency */
+    object-fit: cover; /* Ensures the image fills the dimensions without distortion */
+    border-radius: 8px; /* Optional: adds rounded corners */
+    margin-bottom: 10px; /* Optional: adds spacing below the image */
+}
+
+.card {
+    border: 1px solid #ddd; /* Adds a light gray border around each card */
+    border-radius: 8px; /* Rounded corners for better aesthetics */
+    margin-bottom: 20px; /* Spacing between cards */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.card-body {
+    padding: 20px; /* Adds padding inside each card */
+}
+
+.festival-banner {
+    background-color: #f2a900;
+    color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.5s ease-out forwards;
+}
+
+.festival-banner-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.festival-banner h4 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.festival-banner p {
+    font-size: 16px;
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+.close-banner-btn {
+    background: transparent;
+    border: none;
+    font-size: 28px;
+    color: #fff;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-banner-btn:hover {
+    color: #ffcc00;
+}
+
+.explore-btn {
+    background-color: #fff;
+    color: #f2a900;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.explore-btn:hover {
+    background-color: #f2a900;
+    color: #fff;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

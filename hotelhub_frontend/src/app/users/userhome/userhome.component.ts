@@ -1,21 +1,88 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { HotelregisterserviceService } from 'src/app/hotelservices/hotelregisterservice.service';
+import { UserhomeserviceService } from 'src/app/userservices/userhomeservice.service';
 
 @Component({
-  selector: 'app-add-city',
-  templateUrl: './add-city.component.html',
-  styleUrls: ['./add-city.component.css']
+  selector: 'app-userhome',
+  templateUrl: './userhome.component.html',
+  styleUrls: ['./userhome.component.css']
 })
-export class AddCityComponent implements OnInit {
-  newCity: any = {};
-  errorMessage: string = '';
+export class UserhomeComponent {
   gujaratCities: string[] = [];
+  newCity: any = {
+    city: ''
+  };
+  hotelData: any[] = []; // To store the hotels fetched based on the selected city
+  errorMessage: string = '';
 
-  constructor(private hotelservice: HotelregisterserviceService, private router: Router) {}
+  tophotels:any[]=[];
+
+  minDate: string='';
+  checkOutMinDate: string='';
+
+  constructor(
+    private UserhomeserviceService: UserhomeserviceService,
+    private router: Router
+  ) { 
+    // Set today's date as the minimum date for Check In
+    const today = new Date();
+    this.minDate = this.formatDate(today);
+
+    // Set tomorrow's date as the minimum date for Check Out
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    this.checkOutMinDate = this.formatDate(tomorrow);
+  }
+
+   // Handle Check In date changes
+   onCheckInDateChange(event: Event) {
+    const selectedDate = (event.target as HTMLInputElement).value;
+    if (selectedDate) {
+      const checkOutMin = new Date(selectedDate);
+      checkOutMin.setDate(checkOutMin.getDate() + 1);
+      this.checkOutMinDate = this.formatDate(checkOutMin);
+    }
+  }
+
+  // Utility to format date as yyyy-MM-dd
+  private formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    return `${year}-${month}-${day}`;
+  }
+
+  quantity: number = 1; // Default quantity
+
+  incrementQuantity(): void {
+    this.quantity++;
+  }
+
+  decrementQuantity(): void {
+    if (this.quantity > 1) {
+      this.quantity--;
+    }
+  }
+
+  quantity1: number = 1; // Default quantity
+
+  incrementQuantity1(): void {
+    this.quantity1++;
+  }
+
+  decrementQuantity1(): void {
+    if (this.quantity1 > 1) {
+      this.quantity1--;
+    }
+  } 
 
   ngOnInit() {
     this.loadCities();
+
+    this.UserhomeserviceService.getTopRatingHotels().subscribe((data) => {
+        this.tophotels = data.$values;
+        console.log(this.tophotels);
+    });
   }
 
   loadCities() {
@@ -25,26 +92,57 @@ export class AddCityComponent implements OnInit {
   }
 
   onSubmit() {
-    const hid = localStorage.getItem("hotelid");
-    this.errorMessage = '';
+    // Get the arrival and departure dates
+    const arrivalDate = (document.querySelector('input[placeholder="Arrival Date"]') as HTMLInputElement)?.value;
+    const departureDate = (document.querySelector('input[placeholder="Departure Date"]') as HTMLInputElement)?.value;
+    const adultQuantity = (document.querySelector('#quantity') as HTMLInputElement)?.value;
+    const childQuantity = (document.querySelector('#quantity1') as HTMLInputElement)?.value;
 
-    if (!hid) {
-      this.errorMessage = 'Hotel ID not found.';
+    if (!this.newCity.city) {
+      this.errorMessage = 'Please select a city.';
       return;
     }
 
-    const cityData = {
-      hid: parseInt(hid),
-      city: this.newCity.city
-    };
+    if (!arrivalDate) {
+      this.errorMessage = 'Please select an Check In Date.';
+      return;
+    }
+  
+    if (!departureDate) {
+      this.errorMessage = 'Please select a Check Out Date.';
+      return;
+    }
 
-    this.hotelservice.addCityInHotel(cityData).subscribe(() => {
-      this.router.navigate(['displayHotelCities']);
-      sessionStorage.setItem("hotelcityreadsuccessmsg", "City Successfully Added");
-    }, error => {
-      this.errorMessage = 'Error adding city. Please try again.';
+    if (!adultQuantity) {
+      this.errorMessage = 'Please Enter the Adult Quantity.';
+      return;
+    }
+  
+    if (!childQuantity) {
+      this.errorMessage = 'Please Enter the Child Quantity.';
+      return;
+    }
+
+    // Store values in sessionStorage or localStorage
+    sessionStorage.setItem('arrivalDate', arrivalDate);
+    sessionStorage.setItem('departureDate', departureDate);
+    sessionStorage.setItem('city', this.newCity.city);
+    sessionStorage.setItem('adultQuantity', adultQuantity);
+    sessionStorage.setItem('childQuantity', childQuantity);
+
+    this.UserhomeserviceService.getHotelsByCity(this.newCity.city).subscribe({
+      next: (data) => {
+        this.hotelData = data.$values;
+        this.errorMessage = '';
+        // Store the fetched hotels in the service and localStorage
+        this.UserhomeserviceService.setHotels(this.hotelData);
+        // Navigate to the hotel details component
+        this.router.navigate(['/showhoteldetails']);
+      },
+      error: (err) => {
+        this.errorMessage = 'Error fetching hotels. Please try again.';
+        console.error(err);
+      }
     });
   }
-
-
 }

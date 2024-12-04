@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AddfesdiscountComponent {
 
-  newFesdiscount: any = {}
+  newFesdiscount: any = {};
   errorMessage: string = '';
 
   constructor(private fesdiscountserviceService: FesdiscountserviceService, private router: Router) { }
@@ -23,10 +23,11 @@ export class AddfesdiscountComponent {
       return; // Stop further execution if fields are missing
     }
 
+    // Send the entire object to the service
     this.fesdiscountserviceService.addFesDiscount(this.newFesdiscount).subscribe(() => {
       this.router.navigate(['/festivaldiscount']);
-
       sessionStorage.setItem("fesdissuccessmsg", "Festival Discount Successfully Inserted");
-    })
+    });
   }
+
 }

@@ -1,0 +1,55 @@
+.feature-img img {
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.facility-icon, .feature-icon {
+    height: 24px;
+    width: 24px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.blog_details h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.blog_details p {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.card {
+    margin-bottom: 15px;
+}
+
+.card-img-top {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.card-text {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Add styles for the profile image */
+img.rounded-circle {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+/* Add some padding and margin for visual clarity */
+p.font-weight-bold {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+p {
+    font-style: italic;
+    font-size: 16px;
+}

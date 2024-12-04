@@ -1,0 +1,299 @@
+<app-userheader></app-userheader>
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area blog_banner_two">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle f_48">Room Details page</h2>
+            <ol class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog.html">Hotel</a></li>
+                <li class="active text-white">Room Details</li>
+            </ol>
+        </div>
+    </div>
+</section>
+<!--================Breadcrumb Area =================-->
+
+<!--================Blog Area =================-->
+<section class="blog_area single-post-area">
+    <div class="container d-flex justify-content-center align-items-center flex-column" style="min-height: 100vh;">
+
+        <div class="row w-100">
+            <div class="col-lg-8 mx-auto">
+                <div class="single-post row justify-content-center">
+                    <!-- Carousel Section -->
+                    <div class="col-lg-12 text-center mb-4">
+                        <div class="feature-img">
+                            <div id="roomImageCarousel" class="carousel slide" data-bs-ride="carousel">
+                                <!-- Indicators -->
+                                <div class="carousel-indicators">
+                                    <button type="button" data-bs-target="#roomImageCarousel" data-bs-slide-to="0"
+                                        class="active" aria-current="true" [attr.aria-label]="'Slide 1'"></button>
+                                    <button *ngFor="let img of roomDetails.images?.$values; let i = index" type="button"
+                                        data-bs-target="#roomImageCarousel" [attr.data-bs-slide-to]="i + 1"
+                                        [attr.aria-label]="'Slide ' + (i + 2)">
+                                    </button>
+                                </div>
+
+                                <!-- Carousel Items -->
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active"
+                                        *ngIf="roomDetails.images?.$values && roomDetails.images.$values.length > 0">
+                                        <img [src]="'http://localhost:5161/uploads/roomimages/' + roomDetails.images.$values[0].image"
+                                            alt="Room Image" class="d-block w-100">
+                                    </div>
+                                    <div class="carousel-item" *ngFor="let img of roomDetails.images?.$values.slice(1)">
+                                        <img [src]="'http://localhost:5161/uploads/roomimages/' + img.image"
+                                            alt="Room Image" class="d-block w-100">
+                                    </div>
+                                </div>
+
+                                <!-- Controls -->
+                                <button class="carousel-control-prev" type="button" data-bs-target="#roomImageCarousel"
+                                    data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#roomImageCarousel"
+                                    data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Blog Details Section -->
+                    <div class="col-lg-9 col-md-9 blog_details text-center">
+                        <h2>{{ roomDetails.roomCategory?.categoryName || 'Room Details' }}</h2>
+                        <p class="excert" style="font-size: 30px;">
+
+                            <del style="color: red;">{{ roomDetails.rent | currency: 'INR' }}</del>
+                                                {{ (roomDetails.rent) - ((roomDetails.rent * getDiscount(roomDetails)) / 100) | currency:
+                                                'INR' }} |
+
+                            <strong>Discount:</strong>{{ getDiscount(roomDetails) }}%
+                        </p>
+                        <p>
+                            <strong>Adult Capacity:</strong> {{ roomDetails.adultCapacity }} |
+                            <strong>Children Capacity:</strong> {{ roomDetails.childrenCapacity }}
+                        </p>
+
+                        <p>
+                            <strong>City:</strong> {{ roomDetails.city }}
+                        </p>
+                        <p>
+                            <strong>Available Room: </strong> {{ (roomDetails.quantity) - (availableCount.availableReservationsCount) }}
+                        </p>
+
+                        <div *ngIf="errorMessage" style="color: red;" class="error-message mb-2">
+                            {{ errorMessage }}
+                        </div>
+
+                        <div class="row">
+                            <div>Number of Rooms:</div>
+                            <div class="d-flex justify-content-center mt-4">
+                                <button class="btn btn-secondary" (click)="decreaseRoom()">-</button>
+                                <input type="text" class="form-control mx-3" style="width: 50px;text-align:center" [(ngModel)]="roomCount" min="0" readonly>
+                                <button class="btn btn-secondary" (click)="increaseRoom()">+</button>
+                            </div>
+                        </div>
+                        <!-- + and - Buttons with Textbox -->
+
+                        <!-- Book Room Button -->
+                        <button class="btn btn-primary mt-3" (click)="bookRoom()">Book Room</button>
+                    </div>
+
+                    <!-- Features Section -->
+                    <div class="col-lg-12 text-center mt-4">
+                        <h3>Features</h3>
+                        <div class="row justify-content-center">
+                            <div class="col-lg-4 col-md-6 col-sm-12 mb-3"
+                                *ngFor="let feature of roomDetails.features.$values">
+                                <div class="card text-center">
+                                    <img [src]="'http://localhost:5161/uploads/' + feature.image"
+                                        class="card-img-top img-fluid" alt="{{ feature.featureName }}"
+                                        style="height: 200px; width: 100%; object-fit: cover; border-radius: 10px;">
+                                    <div class="card-body">
+                                        <p class="card-text" style="font-size: 16px; font-weight: bold;">
+                                            {{ feature.featureName }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Facilities Section -->
+                    <div class="col-lg-12 text-center mt-4">
+                        <h3>Facilities</h3>
+                        <div class="row justify-content-center">
+                            <div class="col-lg-4 col-md-6 col-sm-12 mb-3"
+                                *ngFor="let facility of roomDetails.facilities.$values">
+                                <div class="card text-center">
+                                    <img [src]="'http://localhost:5161/uploads/' + facility.image"
+                                        class="card-img-top img-fluid" alt="{{ facility.facilityName }}"
+                                        style="height: 200px; width: 100%; object-fit: cover; border-radius: 10px;">
+                                    <div class="card-body">
+                                        <p class="card-text" style="font-size: 16px; font-weight: bold;">
+                                            {{ facility.facilityName }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quotes Section -->
+                    <div class="col-lg-12 mt-4">
+                        <div class="quotes text-center p-4" style="background-color: #f9f9f9; border-radius: 10px;">
+                            <!-- Feedback Carousel -->
+                            <div id="feedbackCarousel" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div *ngFor="let feedback of roomDetails.feedbacks?.$values; let i = index"
+                                        class="carousel-item" [class.active]="i === 0">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <img *ngIf="feedback.image"
+                                                    [src]="'http://localhost:5161/uploads/' + feedback.image"
+                                                    alt="User Image" class="rounded-circle"
+                                                    style="width: 50px; height: 50px; object-fit: cover;">
+                                                <p class="font-weight-bold" style="font-size: 18px;">{{
+                                                    feedback.userName }}</p>
+                                            </div>
+                                            <div class="col-12">
+                                                <p style="font-size: 16px; font-style: italic;">"{{ feedback.comments
+                                                    }}"</p>
+                                            </div>
+                                            <div class="col-12">
+                                                <div>
+                                                    <strong>Rating:</strong>
+                                                    <span class="text-warning">
+                                                        <i *ngFor="let star of [].constructor(feedback.rating)"
+                                                            class="bi bi-star-fill"></i>
+                                                        <i *ngFor="let star of [].constructor(5 - feedback.rating)"
+                                                            class="bi bi-star"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                    </div>
+                                </div>
+
+                                <!-- Carousel controls -->
+                                <button class="carousel-control-prev" type="button" data-bs-target="#feedbackCarousel"
+                                    data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span style="color: black;"><<</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#feedbackCarousel"
+                                    data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span style="color: black;">>></span>
+                                </button>
+                            </div>
+                            <!-- End Feedback Carousel -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!--================Blog Area =================-->
+
+<!--================ start footer Area  =================-->
+<footer class="footer-area section_gap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3  col-md-6 col-sm-6">
+                <div class="single-footer-widget">
+                    <h6 class="footer_title">About Agency</h6>
+                    <p>The world has become so fast paced that people don’t want to stand by reading a page of
+                        information, they would much rather look at a presentation and understand the message. It has
+                        come to a point </p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="single-footer-widget">
+                    <h6 class="footer_title">Navigation Links</h6>
+                    <div class="row">
+                        <div class="col-4">
+                            <ul class="list_style">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Feature</a></li>
+                                <li><a href="#">Services</a></li>
+                                <li><a href="#">Portfolio</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-4">
+                            <ul class="list_style">
+                                <li><a href="#">Team</a></li>
+                                <li><a href="#">Pricing</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="single-footer-widget">
+                    <h6 class="footer_title">Newsletter</h6>
+                    <p>For business professionals caught between high OEM price and mediocre print and graphic output,
+                    </p>
+                    <div id="mc_embed_signup">
+                        <form target="_blank"
+                            action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                            method="get" class="subscribe_form relative">
+                            <div class="input-group d-flex flex-row">
+                                <input name="EMAIL" placeholder="Email Address" onfocus="this.placeholder = ''"
+                                    onblur="this.placeholder = 'Email Address '" required="" type="email">
+                                <button class="btn sub-btn"><span class="lnr lnr-location"></span></button>
+                            </div>
+                            <div class="mt-10 info"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="single-footer-widget instafeed">
+                    <h6 class="footer_title">InstaFeed</h6>
+                    <ul class="list_style instafeed d-flex flex-wrap">
+                        <li><img src="image/instagram/Image-01.jpg" alt=""></li>
+                        <li><img src="image/instagram/Image-02.jpg" alt=""></li>
+                        <li><img src="image/instagram/Image-03.jpg" alt=""></li>
+                        <li><img src="image/instagram/Image-04.jpg" alt=""></li>
+                        <li><img src="image/instagram/Image-05.jpg" alt=""></li>
+                        <li><img src="image/instagram/Image-06.jpg" alt=""></li>
+                        <li><img src="image/instagram/Image-07.jpg" alt=""></li>
+                        <li><img src="image/instagram/Image-08.jpg" alt=""></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="border_line"></div>
+        <div class="row footer-bottom d-flex justify-content-between align-items-center">
+            <p class="col-lg-8 col-sm-12 footer-text m-0">
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                Copyright &copy;
+                <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made
+                with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                    target="_blank">Colorlib</a>
+                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+            <div class="col-lg-4 col-sm-12 footer-social">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-dribbble"></i></a>
+                <a href="#"><i class="fa fa-behance"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--================ End footer Area  =================-->

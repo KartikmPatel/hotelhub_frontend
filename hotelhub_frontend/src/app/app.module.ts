@@ -43,6 +43,10 @@ import { AddCityComponent } from './hotels/hotelcities/add-city/add-city.compone
 import { AdminprofileComponent } from './admin/adminprofile/adminprofile.component';
 import { ForgotuserpasswordComponent } from './users/forgotuserpassword/forgotuserpassword.component';
 import { ResetuserpasswordComponent } from './users/resetuserpassword/resetuserpassword.component';
+import { UserhomeComponent } from './users/userhome/userhome.component';
+import { ShowhoteldetailsComponent } from './users/showhoteldetails/showhoteldetails.component';
+import { ShowroomsComponent } from './users/showrooms/showrooms.component';
+import { RoomdetailsComponent } from './users/roomdetails/roomdetails.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +89,10 @@ import { ResetuserpasswordComponent } from './users/resetuserpassword/resetuserp
     AdminprofileComponent,
     ForgotuserpasswordComponent,
     ResetuserpasswordComponent,
+    UserhomeComponent,
+    ShowhoteldetailsComponent,
+    ShowroomsComponent,
+    RoomdetailsComponent,
   ],
   imports: [
     BrowserModule,

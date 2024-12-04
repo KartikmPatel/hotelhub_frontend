@@ -36,6 +36,10 @@ import { UserheaderComponent } from './users/layout/userheader/userheader.compon
 import { AdminprofileComponent } from './admin/adminprofile/adminprofile.component';
 import { ResetuserpasswordComponent } from './users/resetuserpassword/resetuserpassword.component';
 import { ForgotuserpasswordComponent } from './users/forgotuserpassword/forgotuserpassword.component';
+import { UserhomeComponent } from './users/userhome/userhome.component';
+import { ShowhoteldetailsComponent } from './users/showhoteldetails/showhoteldetails.component';
+import { ShowroomsComponent } from './users/showrooms/showrooms.component';
+import { RoomdetailsComponent } from './users/roomdetails/roomdetails.component';
 
 const routes: Routes = [
   {
@@ -167,8 +171,20 @@ const routes: Routes = [
     component: UserloginComponent
   },
   {
-    path: "userheader",
-    component: UserheaderComponent
+    path: "userhome",
+    component: UserhomeComponent
+  },
+  {
+    path: "showhoteldetails",
+    component: ShowhoteldetailsComponent
+  },
+  {
+    path: "showrooms",
+    component: ShowroomsComponent
+  },
+  {
+    path: "roomdetails",
+    component: RoomdetailsComponent
   },
   {
     path: "adminprofile",

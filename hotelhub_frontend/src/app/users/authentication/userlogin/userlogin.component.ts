@@ -56,7 +56,7 @@ export class UserloginComponent {
               const uid = data.userId;
               console.log(uid);
               localStorage.setItem("userid", uid);
-              this.router.navigate(['/userheader']); // Redirect on success
+              this.router.navigate(['/userhome']); // Redirect on success
             });
           }
         },
