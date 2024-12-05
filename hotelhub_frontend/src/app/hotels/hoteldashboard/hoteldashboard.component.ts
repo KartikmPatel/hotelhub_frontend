@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { HotelregisterserviceService } from 'src/app/hotelservices/hotelregisterservice.service';
 import { Router } from '@angular/router';
-import { data } from 'jquery';
 
 @Component({
   selector: 'app-hoteldashboard',
