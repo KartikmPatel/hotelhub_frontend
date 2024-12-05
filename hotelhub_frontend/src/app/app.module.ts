@@ -47,6 +47,8 @@ import { UserhomeComponent } from './users/userhome/userhome.component';
 import { ShowhoteldetailsComponent } from './users/showhoteldetails/showhoteldetails.component';
 import { ShowroomsComponent } from './users/showrooms/showrooms.component';
 import { RoomdetailsComponent } from './users/roomdetails/roomdetails.component';
+import { ShowBookingsComponent } from './users/show-bookings/show-bookings.component';
+import { UserbookingsComponent } from './hotels/userbookings/userbookings.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +95,8 @@ import { RoomdetailsComponent } from './users/roomdetails/roomdetails.component'
     ShowhoteldetailsComponent,
     ShowroomsComponent,
     RoomdetailsComponent,
+    ShowBookingsComponent,
+    UserbookingsComponent,
   ],
   imports: [
     BrowserModule,

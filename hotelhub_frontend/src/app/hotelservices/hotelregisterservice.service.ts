@@ -14,6 +14,7 @@ export class HotelregisterserviceService {
   private roomfacilityUrlApi = "http://localhost:5161/api/RoomFacilitytbs";
   private feedbackUrlApi = "http://localhost:5161/api/Feedbacktbs";
   private hotelCityUrl = "http://localhost:5161/api/HotelCitytbs";
+  private reservation = "http://localhost:5161/api/Reservationtbs";
 
   constructor(private http: HttpClient) { }
 
@@ -53,6 +54,10 @@ export class HotelregisterserviceService {
   // get Rooms Count for Dashboard
   getroomcount(hid:any):Observable<any>{
     return this.http.get(`${this.roomUrlApi}/getroomcount/${hid}`);
+  }
+
+  getBookingCount(hid:any):Observable<any>{
+    return this.http.get(`${this.reservation}/getBookingCountByHotel/${hid}`);
   }
 
   getBranchCountByHid(hid:any):Observable<any>{

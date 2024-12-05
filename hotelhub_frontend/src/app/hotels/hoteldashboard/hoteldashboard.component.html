@@ -3,126 +3,146 @@
 
 <main id="main" class="main">
 
-    <div class="pagetitle">
-        <h1>Dashboard</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
-            </ol>
-        </nav>
-    </div><!-- End Page Title -->
+  <div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
+        <li class="breadcrumb-item active">Dashboard</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
 
-    <section class="section dashboard">
+  <section class="section dashboard">
+    <div class="row">
+
+      <!-- Left side columns -->
+      <div class="col-lg-8">
         <div class="row">
 
-            <!-- Left side columns -->
-            <div class="col-lg-8">
-                <div class="row">
+          <!-- Rooms Card -->
+          <div class="col-xxl-4 col-md-6">
+            <div class="card info-card custom-card shadow-lg">
 
-                    <!-- Rooms Card -->
-                    <div class="col-xxl-4 col-md-6">
-                        <div class="card info-card custom-card shadow-lg">
+              <div class="card-body" [routerLink]="['/displayRooms']" style="cursor: pointer;">
+                <h5 class="card-title text-primary fw-bold">Rooms</h5>
 
-                            <div class="card-body" [routerLink]="['/displayRooms']" style="cursor: pointer;">
-                                <h5 class="card-title text-primary fw-bold">Rooms</h5>
-
-                                <div class="d-flex align-items-center">
-                                    <div
-                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-light text-primary shadow-sm">
-                                        <i class="bi-house fs-3"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h6 class="fw-bold fs-4 text-dark">{{roomcount}}</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Room Facility Card -->
-                    <div class="col-xxl-4 col-md-6">
-                        <div class="card info-card custom-card shadow-lg">
-
-                            <div class="card-body" [routerLink]="['/hotelfacility']" style="cursor: pointer;">
-                                <h5 class="card-title text-success fw-bold">Room Facility</h5>
-
-                                <div class="d-flex align-items-center">
-                                    <div
-                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-light text-success shadow-sm">
-                                        <i class="bi bi-door-open fs-3"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h6 class="fw-bold fs-4 text-dark">{{roomfacilitycount}}</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Room Features Card -->
-                    <div class="col-xxl-4 col-xl-12">
-                        <div class="card info-card custom-card shadow-lg">
-
-                            <div class="card-body" [routerLink]="['/hotelfeature']" style="cursor: pointer;">
-                                <h5 class="card-title text-warning fw-bold">Room Features</h5>
-
-                                <div class="d-flex align-items-center">
-                                    <div
-                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-light text-warning shadow-sm">
-                                        <i class="bi bi-star-fill fs-3"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h6 class="fw-bold fs-4 text-dark">{{roomfeaturescount}}</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Feedback Card -->
-                    <div class="col-xxl-4 col-xl-12">
-                        <div class="card info-card custom-card shadow-lg">
-
-                            <div class="card-body" [routerLink]="['/displayFeedback']" style="cursor: pointer;">
-                                <h5 class="card-title text-danger fw-bold">Feedback</h5>
-
-                                <div class="d-flex align-items-center">
-                                    <div
-                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-light text-danger shadow-sm">
-                                        <i class="bi-chat-square-text fs-3"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h6 class="fw-bold fs-4 text-dark">{{feedbackcount}}</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Branch Card -->
-                    <div class="col-xxl-4 col-xl-12">
-                        <div class="card info-card custom-card shadow-lg">
-
-                            <div class="card-body" [routerLink]="['/displayHotelCities']" style="cursor: pointer;">
-                                <h5 class="card-title text-info fw-bold">Branch</h5>
-
-                                <div class="d-flex align-items-center">
-                                    <div
-                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-light text-info shadow-sm">
-                                        <i class="bi bi-building fs-3"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h6 class="fw-bold fs-4 text-dark">{{branchcount}}</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                <div class="d-flex align-items-center">
+                  <div
+                    class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-light text-primary shadow-sm">
+                    <i class="bi-house fs-3"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6 class="fw-bold fs-4 text-dark">{{roomcount}}</h6>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
+
+          <!-- Room Facility Card -->
+          <div class="col-xxl-4 col-md-6">
+            <div class="card info-card custom-card shadow-lg">
+
+              <div class="card-body" [routerLink]="['/hotelfacility']" style="cursor: pointer;">
+                <h5 class="card-title text-success fw-bold">Room Facility</h5>
+
+                <div class="d-flex align-items-center">
+                  <div
+                    class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-light text-success shadow-sm">
+                    <i class="bi bi-door-open fs-3"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6 class="fw-bold fs-4 text-dark">{{roomfacilitycount}}</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Room Features Card -->
+          <div class="col-xxl-4 col-xl-12">
+            <div class="card info-card custom-card shadow-lg">
+
+              <div class="card-body" [routerLink]="['/hotelfeature']" style="cursor: pointer;">
+                <h5 class="card-title text-warning fw-bold">Room Features</h5>
+
+                <div class="d-flex align-items-center">
+                  <div
+                    class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-light text-warning shadow-sm">
+                    <i class="bi bi-star-fill fs-3"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6 class="fw-bold fs-4 text-dark">{{roomfeaturescount}}</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feedback Card -->
+          <div class="col-xxl-4 col-xl-12">
+            <div class="card info-card custom-card shadow-lg">
+
+              <div class="card-body" [routerLink]="['/displayFeedback']" style="cursor: pointer;">
+                <h5 class="card-title text-danger fw-bold">Feedback</h5>
+
+                <div class="d-flex align-items-center">
+                  <div
+                    class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-light text-danger shadow-sm">
+                    <i class="bi-chat-square-text fs-3"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6 class="fw-bold fs-4 text-dark">{{feedbackcount}}</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Branch Card -->
+          <div class="col-xxl-4 col-xl-12">
+            <div class="card info-card custom-card shadow-lg">
+
+              <div class="card-body" [routerLink]="['/displayHotelCities']" style="cursor: pointer;">
+                <h5 class="card-title text-info fw-bold">Branch</h5>
+
+                <div class="d-flex align-items-center">
+                  <div
+                    class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-light text-info shadow-sm">
+                    <i class="bi bi-building fs-3"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6 class="fw-bold fs-4 text-dark">{{branchcount}}</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Booking Count Card -->
+          <div class="col-xxl-4 col-xl-12">
+            <div class="card info-card custom-card shadow-lg">
+              <div class="card-body" [routerLink]="['/showUserBookings']" style="cursor: pointer;">
+                <h5 class="card-title text-primary fw-bold">Bookings</h5>
+
+                <div class="d-flex align-items-center">
+                  <div
+                    class="card-icon rounded-circle d-flex align-items-center justify-content-center bg-light text-primary shadow-sm">
+                    <i class="bi bi-calendar-check fs-3"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6 class="fw-bold fs-4 text-dark">{{bookingCount}}</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
 </main><!-- End #main -->

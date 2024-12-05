@@ -17,7 +17,7 @@ export class RoomdetailsComponent {
   errorMessage: string = '';
   fesdiscount: any[] = [];
   today: string = new Date().toISOString().split('T')[0];
-  
+
   roomCount: number = 1; // Default quantity
 
   constructor(private UserhomeserviceService: UserhomeserviceService, private router: Router) {}
@@ -106,6 +106,8 @@ export class RoomdetailsComponent {
         this.UserhomeserviceService.bookRoom(bookingData).subscribe(response => {
           if (response.success) {
             console.log(`Room ${i + 1} booked successfully!`);
+            sessionStorage.setItem("successBooking","Done");
+            this.router.navigate(['/showBookings']);
           } else {
             console.error(`Failed to book room ${i + 1}`);
           }

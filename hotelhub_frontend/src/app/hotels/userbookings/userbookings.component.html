@@ -1,22 +1,16 @@
 <app-hotelheader></app-hotelheader>
 
-
-
 <main id="main" class="main">
 
   <div class="pagetitle">
-    <h1>Room Feature</h1>
+    <h1>User Bookings</h1>
     <nav>
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
-        <li class="breadcrumb-item active">Room Feature</li>
+        <li class="breadcrumb-item active">User Bookings</li>
       </ol>
     </nav>
   </div><!-- End Page Title -->
-
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h5 class="fw-bold text-secondary">Manage Room Feature</h5>
-  </div>
 
   <section class="section">
     <div class="row">
@@ -25,7 +19,7 @@
         <div class="card">
           <!-- Card Header -->
           <div class="card-header">
-            Feature List
+            Booking List
           </div>
 
           <!-- Card Body -->
@@ -33,16 +27,30 @@
             <table id="example1" class="table table-hover align-middle">
               <thead>
                 <tr style="text-align: center;">
-                  <th>Feature</th>
-                  <th>Image</th>
+                  <th>Username</th>
+                  <th>Check In</th>
+                  <th>Check Out</th>
+                  <th> Room Category </th>
+                  <th>City</th>
+                  <th>Rent</th>
+                  <th>Booking Status</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let f of feature" style="text-align: center;">
-                  <td>{{f.featureName}}</td>
-                  <td>
-                    <img [src]="'http://localhost:5161/uploads/' + f.image" alt="Feature Image" height="60px" width="100px">
+                <tr *ngFor="let b of bookings" style="text-align: center;">
+                  <td>{{b.userName}}</td>
+                  <td>{{b.checkIn}}</td>
+                  <td>{{b.checkOut}}</td>
+                  <td>{{b.roomCategory}}</td>
+                  <td>{{b.city}}</td>
+                  <td>{{b.rent}}</td>
+                  <td *ngIf="b.bookingStatus === 1">
+                    <span class="badge bg-success">Booked</span>
+                </td>
+                  <td *ngIf="b.bookingStatus === 0">
+                    <span class="badge bg-danger">Canceled</span>
                   </td>
+
                 </tr>
               </tbody>
             </table>

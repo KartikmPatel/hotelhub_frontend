@@ -13,6 +13,7 @@ export class RoomserviceService {
   private roomImageUrl = "http://localhost:5161/api/RoomImagetbs";
   private hotelfacility = "http://localhost:5161/api/RoomFacilitytbs"; // getAllFacilityByHotel/1
   private hotelfeature = "http://localhost:5161/api/RoomFeaturetbs";   // getAllFeatureByHotel/1
+  private reservation = "http://localhost:5161/api/Reservationtbs";
 
   constructor(private http: HttpClient) { }
 
@@ -129,5 +130,9 @@ export class RoomserviceService {
 
   checkRoomExistence(roomId: number, city: string, categoryId: number, hid: string) {
     return this.http.get<any>(`${this.roomApiUrl}/check-existence/${roomId}?city=${city}&categoryId=${categoryId}&hid=${hid}`);
+  }
+
+  getUserBooking(hid:any):Observable<any>{
+    return this.http.get(`${this.reservation}/getReservationByHotel/${hid}`);
   }
 }

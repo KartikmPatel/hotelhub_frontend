@@ -1,0 +1,58 @@
+<app-userheader></app-userheader>
+<section class="blog_area" style="padding-top: 120px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <!-- Display Banner if Booking is Successful -->
+        <div class="festival-banner slide-in" *ngIf="isBannerVisible">
+          <div class="festival-banner-content">
+            <div class="festival-banner-header">
+              <h4 class="success-message">🎉 Your Booking Was Successful! 🎉</h4>
+              <button class="close-button" (click)="closeBanner()">×</button>
+            </div>
+            <p>
+              Thank you for your booking! Don't miss out on our special festival discount.
+              Enjoy exclusive offers and savings when you book more rooms today.
+            </p>
+            <p>
+              This offer is valid for today only! Grab your next discount now!
+            </p>
+          </div>
+        </div>
+
+        <!-- Display Reservation Cards -->
+        <div *ngIf="bookings.length > 0">
+          <div class="row">
+            <div *ngFor="let reservation of bookings; let i = index" class="col-md-3">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">{{ reservation.hotelName }}</h5>
+                  <p class="card-text">
+                    <strong>Check-in:</strong> {{ reservation.checkIn }}<br>
+                    <strong>Check-out:</strong> {{ reservation.checkOut }}<br>
+                    <strong>Room Category:</strong> {{ reservation.roomCategory }}<br>
+                    <strong>Rent:</strong> ₹{{ reservation.rent }}<br>  <!-- Rent in INR -->
+                  </p>
+
+                  <!-- Cancel Button if Check-in date is greater than today's date and booking status is 1 -->
+                  <button *ngIf="reservation.checkIn > today && reservation.bookingStatus === 1" class="btn btn-danger" (click)="cancelBooking(reservation.id)">
+                    Cancel Booking
+                  </button>
+
+                  <!-- Label for already checked-out rooms -->
+                  <span *ngIf="reservation.checkIn <= today && reservation.bookingStatus === 1" class="label text-success">Already Checked-out</span>
+                  <span *ngIf="reservation.bookingStatus ===0" class="label text-danger">Canceled</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Message if No Reservations Found -->
+        <div *ngIf="bookings.length === 0">
+          <p>No reservations found for this user.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

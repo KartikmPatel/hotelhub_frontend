@@ -13,6 +13,7 @@ export class HoteldashboardComponent {
   roomcount:number=0;
   feedbackcount:number=0;
   branchcount:number=0;
+  bookingCount:number=0;
 
   constructor(private hotelregisterserviceService: HotelregisterserviceService, private router: Router) { }
 
@@ -23,6 +24,7 @@ export class HoteldashboardComponent {
     this.getroomcount(hid);
     this.getfeedbackcount(hid);
     this.getBranchCount(hid);
+    this.getBookingCount(hid);
   }
 
   getroomfeaturescount(hid:any)
@@ -58,6 +60,13 @@ export class HoteldashboardComponent {
   {
     this.hotelregisterserviceService.getBranchCountByHid(hid).subscribe(data => {
       this.branchcount = data;
+    })
+  }
+
+  getBookingCount(hid:any)
+  {
+    this.hotelregisterserviceService.getBookingCount(hid).subscribe(data => {
+      this.bookingCount = data;
     })
   }
 }

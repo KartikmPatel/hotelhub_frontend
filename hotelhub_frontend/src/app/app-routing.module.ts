@@ -40,6 +40,8 @@ import { UserhomeComponent } from './users/userhome/userhome.component';
 import { ShowhoteldetailsComponent } from './users/showhoteldetails/showhoteldetails.component';
 import { ShowroomsComponent } from './users/showrooms/showrooms.component';
 import { RoomdetailsComponent } from './users/roomdetails/roomdetails.component';
+import { ShowBookingsComponent } from './users/show-bookings/show-bookings.component';
+import { UserbookingsComponent } from './hotels/userbookings/userbookings.component';
 
 const routes: Routes = [
   {
@@ -197,6 +199,14 @@ const routes: Routes = [
   {
     path: "resetuserpassword",
     component: ResetuserpasswordComponent
+  },
+  {
+    path:"showBookings",
+    component:ShowBookingsComponent
+  },
+  {
+    path:"showUserBookings",
+    component:UserbookingsComponent
   }
 ];
 
