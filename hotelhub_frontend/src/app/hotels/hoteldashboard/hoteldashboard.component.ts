@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HotelregisterserviceService } from 'src/app/hotelservices/hotelregisterservice.service';
 import { Router } from '@angular/router';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-hoteldashboard',
@@ -22,6 +23,7 @@ export class HoteldashboardComponent {
     this.getroomfacilitycount(hid);
     this.getroomcount(hid);
     this.getfeedbackcount(hid);
+    this.getBranchCount(hid);
   }
 
   getroomfeaturescount(hid:any)
@@ -50,6 +52,13 @@ export class HoteldashboardComponent {
   {
     this.hotelregisterserviceService.getfeedbackcountByhid(hid).subscribe(data => {
       this.feedbackcount = data;
+    })
+  }
+
+  getBranchCount(hid:any)
+  {
+    this.hotelregisterserviceService.getBranchCountByHid(hid).subscribe(data => {
+      this.branchcount = data;
     })
   }
 }

@@ -1,0 +1,8 @@
+.custom-checkbox {
+    margin-bottom: 0; /* Remove bottom margin */
+    padding-right: 0; /* Remove extra padding if any */
+}
+
+.custom-checkbox .form-check-label {
+    margin-left: -22px; /* Adjust if necessary */
+}

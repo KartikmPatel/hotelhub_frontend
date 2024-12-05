@@ -55,6 +55,10 @@ export class HotelregisterserviceService {
     return this.http.get(`${this.roomUrlApi}/getroomcount/${hid}`);
   }
 
+  getBranchCountByHid(hid:any):Observable<any>{
+    return this.http.get(`${this.hotelCityUrl}/getBranchCountByHotel/${hid}`);
+  }
+
   displayProfile(hid: any): Observable<any> {
     return this.http.get(`${this.hotelapiUrl}/${hid}`);
   }
