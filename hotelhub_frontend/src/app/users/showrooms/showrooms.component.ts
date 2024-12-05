@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserhomeserviceService } from 'src/app/userservices/userhomeservice.service';
+import { FacilityserviceService } from 'src/app/adminservices/facilityservice.service';
+import { FeatureServiceService } from 'src/app/adminservices/feature-service.service';
+import { RoomcategoryserviceService } from 'src/app/adminservices/roomcategoryservice.service';
 
 @Component({
   selector: 'app-showrooms',
@@ -12,28 +15,60 @@ export class ShowroomsComponent {
   fesdiscount: any[] = [];
   today: string = new Date().toISOString().split('T')[0];
   activeFestival: any;
-  roomDetail: any={}
+  roomDetail: any = {};
 
-  constructor(private UserhomeserviceService: UserhomeserviceService, private router: Router) {
+  facilityData: any[] = [];
+  featuresData: any[] = [];
+  categoryData: any[] = [];
+
+  searchRoom: any = {
+    categoryId: null,
+    facilityIds: [],
+    featureIds: [],
+    rating: null,
+    isActive: null,
+    city: '',
+    hid: null,
+    adultCapacity: null,
+    childQuantity: null,
+  };
+
+  constructor(
+    private UserhomeserviceService: UserhomeserviceService,
+    private FacilityserviceService: FacilityserviceService,
+    private FeatureServiceService: FeatureServiceService,
+    private RoomcategoryserviceService: RoomcategoryserviceService,
+    private router: Router
+  ) {
     this.setActiveFestival();
   }
 
   ngOnInit(): void {
-    this.UserhomeserviceService.getfesdiscount().subscribe((data) => {
-      this.fesdiscount = data.$values;
-      console.log(this.fesdiscount);
+    // Fetch facilities, features, categories, and festival discounts data
+    this.FacilityserviceService.getFacility().subscribe((data) => {
+      this.facilityData = data.$values;
     });
 
-    // Subscribe to BehaviorSubject for real-time updates
+    this.FeatureServiceService.getFeature().subscribe((data) => {
+      this.featuresData = data.$values;
+    });
+
+    this.RoomcategoryserviceService.getCategory().subscribe((data) => {
+      this.categoryData = data.$values;
+    });
+
+    this.UserhomeserviceService.getfesdiscount().subscribe((data) => {
+      this.fesdiscount = data.$values;
+    });
+
+    // Subscribe to BehaviorSubject for real-time updates of room data
     this.UserhomeserviceService.currentRooms.subscribe((data) => {
       if (data.length > 0) {
         this.roomData = data;
-        console.log("+++++++++ Room Data +++++" + this.roomData);
       } else {
-        // If no data from BehaviorSubject, try to load from sessionStorage
+        // Load rooms from sessionStorage if no data from BehaviorSubject
         this.roomData = this.UserhomeserviceService.getStoredRooms();
       }
-      console.log('Hotel data received in hotel details:', this.roomData);
     });
   }
 
@@ -49,34 +84,98 @@ export class ShowroomsComponent {
     return !!festival;
   }
 
-  // Function to set the active festival when it's today
+  // Set the active festival when it's today
   setActiveFestival(): void {
     this.isFestivalToday();
   }
 
+  // Get the applicable discount for a room (combining festival discount and room discount)
   getDiscount(room: any): number {
-    // Normalize the date by removing the time component and adding one day
     const festival = this.fesdiscount.find((fes: any) => {
       const fesDate = new Date(fes.fesdate);
-      // Add one day to the fesDate
-      fesDate.setDate(fesDate.getDate() + 1);
-      // Format the date to 'YYYY-MM-DD' format
+      fesDate.setDate(fesDate.getDate() + 1); // Add one day to the fesDate
       const formattedFesDate = fesDate.toISOString().split('T')[0];
       return formattedFesDate === this.today;
     });
 
-    // If a festival discount exists, return the combined discount; otherwise, return the room's normal discount
     return festival ? (festival.discount + room.discount) : room.discount;
   }
 
-  roomdetails(roomId:any)
-  {
+  // Fetch detailed information of a room
+  roomdetails(roomId: any) {
     this.UserhomeserviceService.getRoomDetailsByRoomId(roomId).subscribe((data) => {
       this.roomDetail = data;
-      // Store the fetched hotels in the service and localStorage
-      console.log("Room Details "+this.roomDetail);
       this.UserhomeserviceService.setRoomDetails(this.roomDetail);
       this.router.navigate(['/roomdetails']);
-    })
+    });
+  }
+
+  // Handle changes in selected facilities
+  onFacilityChange(facilityId: number, event: any): void {
+    if (event.target.checked) {
+      this.searchRoom.facilityIds.push(facilityId);
+    } else {
+      const index = this.searchRoom.facilityIds.indexOf(facilityId);
+      if (index > -1) {
+        this.searchRoom.facilityIds.splice(index, 1);
+      }
+    }
+  }
+
+  // Handle changes in selected features
+  onFeatureChange(featureId: number, event: any): void {
+    if (event.target.checked) {
+      this.searchRoom.featureIds.push(featureId);
+    } else {
+      const index = this.searchRoom.featureIds.indexOf(featureId);
+      if (index > -1) {
+        this.searchRoom.featureIds.splice(index, 1);
+      }
+    }
+  }
+
+  // Methods to search rooms by category, facilities, features, rating, and status
+  searchRoomsByCategory(categoryId: number): void {
+    const commonParams = this.getCommonParams();
+    this.UserhomeserviceService.searchByCategory(categoryId, commonParams).subscribe((data) => {
+      this.roomData = data.$values;
+    });
+  }
+
+  searchRoomsByFacilities(facilityIds: number[]): void {
+    const commonParams = this.getCommonParams();
+    this.UserhomeserviceService.searchByFacilities(facilityIds, commonParams).subscribe((data) => {
+      this.roomData = data.$values;
+    });
+  }
+
+  searchRoomsByFeatures(featureIds: number[]): void {
+    const commonParams = this.getCommonParams();
+    this.UserhomeserviceService.searchByFeatures(featureIds, commonParams).subscribe((data) => {
+      this.roomData = data.$values;
+    });
+  }
+
+  searchRoomsByRating(rating: number): void {
+    const commonParams = this.getCommonParams();
+    this.UserhomeserviceService.searchByRating(rating, commonParams).subscribe((data) => {
+      this.roomData = data.$values;
+    });
+  }
+
+  searchRoomsByStatus(isActive: boolean): void {
+    const commonParams = this.getCommonParams();
+    this.UserhomeserviceService.searchByStatus(isActive, commonParams).subscribe((data) => {
+      this.roomData = data.$values;
+    });
+  }
+
+  private getCommonParams(): any {
+    return {
+      city: sessionStorage.getItem('city') || '',
+      hid: sessionStorage.getItem('hid') ? Number(sessionStorage.getItem('hid')) : null,
+      adultCapacity: sessionStorage.getItem('adultQuantity') ? Number(sessionStorage.getItem('adultQuantity')) : null,
+      childQuantity: sessionStorage.getItem('childQuantity') ? Number(sessionStorage.getItem('childQuantity')) : null,
+    };
   }
 }

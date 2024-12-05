@@ -1,12 +1,16 @@
-import { Component } from '@angular/core';
+import { Component,AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserhomeserviceService } from 'src/app/userservices/userhomeservice.service';
+
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-roomdetails',
   templateUrl: './roomdetails.component.html',
   styleUrls: ['./roomdetails.component.css']
 })
+
+
 export class RoomdetailsComponent {
   roomDetails: any = {};
   availableCount: any = {};
@@ -17,6 +21,16 @@ export class RoomdetailsComponent {
   roomCount: number = 1; // Default quantity
 
   constructor(private UserhomeserviceService: UserhomeserviceService, private router: Router) {}
+
+  ngAfterViewInit(): void {
+    const feedbackCarousel = document.getElementById('feedbackCarousel');
+    if (feedbackCarousel) {
+      new bootstrap.Carousel(feedbackCarousel, {
+        interval: 2000,
+        ride: 'carousel'
+      });
+    }
+  }
 
   increaseRoom(): void {
     this.roomCount++;
@@ -74,10 +88,6 @@ export class RoomdetailsComponent {
       const hid = this.roomDetails.hid;
       const userid = localStorage.getItem("userid");
       const rent = (this.roomDetails.rent) - ((this.roomDetails.rent * this.getDiscount(this.roomDetails))/100);
-
-      this.UserhomeserviceService.updateRoomQty(rid,this.roomCount).subscribe((data) => {
-        console.log(data);
-      })
 
       // Prepare the booking data
       for (let i = 0; i < this.roomCount; i++) {

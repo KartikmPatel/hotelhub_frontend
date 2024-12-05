@@ -72,30 +72,29 @@ export class UserhomeserviceService {
     }
     return {};
   }
-  
-  getfesdiscount():Observable<any>{
+
+  getfesdiscount(): Observable<any> {
     return this.http.get(this.fesdiscountApi);
   }
 
   // get top 5 hotel with highest rating for dashboard
-  getTopRatingHotels():Observable<any>{
+  getTopRatingHotels(): Observable<any> {
     return this.http.get(`${this.roomApiUrl}/topratedhotels`);
   }
 
   // get rooms by hotelid
-  getRoomsByHotel(hid: any,city:any,adultQuantity:any,childQuantity:any): Observable<any> {
+  getRoomsByHotel(hid: any, city: any, adultQuantity: any, childQuantity: any): Observable<any> {
     const url = `${this.roomApiUrl}/searchroomsbyhotel/${hid}?city=${city}&adultCapacity=${adultQuantity}&childCapacity=${childQuantity}`;
     return this.http.get(url);
   }
 
   // get Room Details by RoomId
-  getRoomDetailsByRoomId(rid:any):Observable<any>
-  {
+  getRoomDetailsByRoomId(rid: any): Observable<any> {
     return this.http.get(`${this.roomApiUrl}/${rid}`);
   }
 
   // get Avialibility
-  getRoomAvailibility(rid: any,checkIn:any):Observable<any>{
+  getRoomAvailibility(rid: any, checkIn: any): Observable<any> {
     const url = `${this.reservationApi}/getavailability/${rid}?checkIn=${checkIn}`;
     return this.http.get(url);
   }
@@ -105,11 +104,24 @@ export class UserhomeserviceService {
     return this.http.post<any>(`${this.reservationApi}/bookroom`, bookingData);
   }
 
-  // Update Room Quantity
-  updateRoomQty(roomid: any, qty: any): Observable<any> {
-    const payload = { roomid: roomid, qty: qty };
-    return this.http.post(`${this.reservationApi}/updatequantity`, payload, {
-      headers: { 'Content-Type': 'application/json' },
-    });
+  searchByCategory(categoryId: number, commonParams: any): Observable<any> {
+    return this.http.get(`${this.roomApiUrl}/search-by-category`, { params: { ...commonParams, categoryId } });
   }
+
+  searchByFacilities(facilityIds: number[], commonParams: any): Observable<any> {
+    return this.http.get(`${this.roomApiUrl}/search-by-facilities`, { params: { ...commonParams, facilityIds } });
+  }
+
+  searchByFeatures(featureIds: number[], commonParams: any): Observable<any> {
+    return this.http.get(`${this.roomApiUrl}/search-by-features`, { params: { ...commonParams, featureIds } });
+  }
+
+  searchByRating(rating: number, commonParams: any): Observable<any> {
+    return this.http.get(`${this.roomApiUrl}/search-by-rating`, { params: { ...commonParams, rating } });
+  }
+
+  searchByStatus(isActive: boolean, commonParams: any): Observable<any> {
+    return this.http.get(`${this.roomApiUrl}/search-by-status`, { params: { ...commonParams, isActive } });
+  }
+
 }

@@ -36,6 +36,7 @@ export class ShowhoteldetailsComponent {
 
   searchrooms(hid:any)
   {
+    sessionStorage.setItem('hid',hid);
     this.city = sessionStorage.getItem('city') || '';
     const adultCapacity = sessionStorage.getItem('adultQuantity') || '';
     const childQuantity = sessionStorage.getItem('childQuantity') || '';
