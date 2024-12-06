@@ -20,6 +20,11 @@
           </div>
         </div>
 
+        <div *ngIf="successmsg" class="alert alert-success alert-dismissible fade show">
+          {{ successmsg }}
+          <button type="button" class="btn-close" (click)="closeSuccessMessage()"></button>
+        </div>
+
         <!-- Display Reservation Cards -->
         <div *ngIf="bookings.length > 0">
           <div class="row">
@@ -31,17 +36,29 @@
                     <strong>Check-in:</strong> {{ reservation.checkIn }}<br>
                     <strong>Check-out:</strong> {{ reservation.checkOut }}<br>
                     <strong>Room Category:</strong> {{ reservation.roomCategory }}<br>
-                    <strong>Rent:</strong> ₹{{ reservation.rent }}<br>  <!-- Rent in INR -->
+                    <strong>Rent:</strong> ₹{{ reservation.rent }}<br> <!-- Rent in INR -->
                   </p>
 
                   <!-- Cancel Button if Check-in date is greater than today's date and booking status is 1 -->
-                  <button *ngIf="reservation.checkIn > today && reservation.bookingStatus === 1" class="btn btn-danger" (click)="cancelBooking(reservation.id)">
+                  <button *ngIf="reservation.checkIn > today && reservation.bookingStatus === 1" class="btn btn-danger"
+                    (click)="cancelBooking(reservation.id)">
                     Cancel Booking
                   </button>
 
                   <!-- Label for already checked-out rooms -->
-                  <span *ngIf="reservation.checkIn <= today && reservation.bookingStatus === 1" class="label text-success">Already Checked-out</span>
-                  <span *ngIf="reservation.bookingStatus ===0" class="label text-danger">Canceled</span>
+                  <span
+                    *ngIf="reservation.checkIn <= today && reservation.checkOut < today && reservation.bookingStatus === 1"
+                    class="label text-success">
+                    Stay Completed
+                  </span>
+                  <span
+                    *ngIf="reservation.checkIn <= today && reservation.checkOut >= today && reservation.bookingStatus === 1"
+                    class="label text-primary">
+                    Currently Staying
+                  </span>
+                  <span *ngIf="reservation.bookingStatus === 0" class="label text-danger">
+                    Canceled
+                  </span>
                 </div>
               </div>
             </div>

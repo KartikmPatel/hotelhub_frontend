@@ -1,4 +1,4 @@
-import { Component,AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserhomeserviceService } from 'src/app/userservices/userhomeservice.service';
 
@@ -20,7 +20,7 @@ export class RoomdetailsComponent {
 
   roomCount: number = 1; // Default quantity
 
-  constructor(private UserhomeserviceService: UserhomeserviceService, private router: Router) {}
+  constructor(private UserhomeserviceService: UserhomeserviceService, private router: Router) { }
 
   ngAfterViewInit(): void {
     const feedbackCarousel = document.getElementById('feedbackCarousel');
@@ -87,7 +87,18 @@ export class RoomdetailsComponent {
       const rid = this.roomDetails.id;
       const hid = this.roomDetails.hid;
       const userid = localStorage.getItem("userid");
-      const rent = (this.roomDetails.rent) - ((this.roomDetails.rent * this.getDiscount(this.roomDetails))/100);
+      const rent = (this.roomDetails.rent) - ((this.roomDetails.rent * this.getDiscount(this.roomDetails)) / 100);
+
+      // Parse the check-in and check-out dates
+      const checkInDate = new Date(sessionStorage.getItem('arrivalDate')!);
+      const checkoutDate = new Date(sessionStorage.getItem('departureDate')!);
+
+      // Calculate the difference in milliseconds
+      const timeDifference = checkoutDate.getTime() - checkInDate.getTime();
+
+      // Convert the time difference to days
+      const numberOfDays = timeDifference / (1000 * 3600 * 24); // Milliseconds to days
+      const finalrent = numberOfDays * rent;
 
       // Prepare the booking data
       for (let i = 0; i < this.roomCount; i++) {
@@ -95,7 +106,7 @@ export class RoomdetailsComponent {
           userId: userid,
           roomId: rid,
           hotelId: hid,
-          rent: rent,
+          rent: finalrent,
           checkIn: checkIn,
           checkout: checkout,
           bookingTime: new Date().toISOString(), // Store the current date and time of booking
@@ -106,7 +117,7 @@ export class RoomdetailsComponent {
         this.UserhomeserviceService.bookRoom(bookingData).subscribe(response => {
           if (response.success) {
             console.log(`Room ${i + 1} booked successfully!`);
-            sessionStorage.setItem("successBooking","Done");
+            sessionStorage.setItem("successBooking", "Done");
             this.router.navigate(['/showBookings']);
           } else {
             console.error(`Failed to book room ${i + 1}`);

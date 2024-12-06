@@ -15,6 +15,13 @@ export class HotelloginComponent {
 
   constructor(private hotelregisterserviceService: HotelregisterserviceService, private router: Router) { }
 
+  ngOnInit(): void {
+    const hid = localStorage.getItem("hotelid");
+    if (hid != null) {
+      this.router.navigate(['/']);
+    }
+  }
+
   onSubmit() {
     this.errorMessage = ''; // Clear previous errors
 
@@ -29,7 +36,7 @@ export class HotelloginComponent {
           this.hotelregisterserviceService.gethotelid(this.userdata.email).subscribe((data) => {
             const hid = data.hotelId;
             console.log(hid);
-            localStorage.setItem("hotelid",hid);
+            localStorage.setItem("hotelid", hid);
             this.router.navigate(['/']); // Redirect on success
           });
         }

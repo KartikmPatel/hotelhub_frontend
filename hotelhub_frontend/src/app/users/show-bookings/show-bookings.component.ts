@@ -14,6 +14,7 @@ export class ShowBookingsComponent implements OnInit {
   isBannerVisible: boolean = false;
   today: string = new Date().toISOString().split('T')[0]; // Today's date (yyyy-MM-dd)
   bookings: any[] = [];  // Array to store reservations
+  successmsg:string='';
 
   constructor(private bookingserviceService: BookingserviceService, private datePipe:DatePipe ,private router:Router) {}
 
@@ -25,8 +26,11 @@ export class ShowBookingsComponent implements OnInit {
       sessionStorage.removeItem("successBooking");  // Clear session data after showing banner
     }
 
-    // Get user ID from local storage (replace with actual logic if needed)
-
+    const cancelbookinguccessmsg = sessionStorage.getItem('cancelbookinguccessmsg');
+    if (cancelbookinguccessmsg) {
+      this.successmsg = cancelbookinguccessmsg;
+      sessionStorage.removeItem('cancelbookinguccessmsg');
+    }
 
     this.displayBookings();
     // Fetch reservations for the user
@@ -63,6 +67,10 @@ export class ShowBookingsComponent implements OnInit {
     this.isBannerVisible = false;  // Hide banner when closed
   }
 
+  closeSuccessMessage(): void {
+    this.successmsg = '';
+  }
+
   // Cancel booking logic
   cancelBooking(rid: any) {
     const userId = localStorage.getItem("userid");
@@ -72,10 +80,12 @@ export class ShowBookingsComponent implements OnInit {
         // After successful cancellation, you can update the bookings array to remove the canceled booking
         // this.bookings = this.bookings.filter(booking => booking.id !== bookingId);
         // this.displayBookings();
-        this.displayBookings();
+
+        sessionStorage.setItem('cancelbookinguccessmsg', 'Room Successfully Canceled');
+        this.router.navigate(['/showBookings']).then(() => window.location.reload());
 
         // Trigger a page reload to reflect the changes
-        window.location.reload();
+        // window.location.reload();
 
       },
       error => {
