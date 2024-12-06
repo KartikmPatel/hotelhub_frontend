@@ -1,6 +1,5 @@
 <app-hotelheader></app-hotelheader>
 <main id="main" class="main">
-
   <div class="pagetitle">
     <h1>Add City</h1>
     <nav>
@@ -31,26 +30,27 @@
             <form class="row g-3" (ngSubmit)="onSubmit()">
               <div class="col-md-12">
                 <div class="form-floating position-relative">
-                  <input 
-                    type="text" 
-                    class="form-control" 
-                    id="cityInput" 
-                    placeholder="Start typing city name" 
-                    [(ngModel)]="newCity" 
-                    name="city" 
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="cityInput"
+                    placeholder="Start typing city name"
+                    [(ngModel)]="newCity"
+                    name="city"
                     (input)="filterCities()"
-                    autocomplete="off" 
+                    (focus)="toggleDropdown(true)"
+                    (blur)="onBlur()"
+                    autocomplete="off"
                     required
                   />
                   <label for="cityInput">City Name</label>
 
                   <!-- Dropdown for suggestions -->
-                  <ul *ngIf="filteredCities.length" class="list-group position-absolute" style="z-index: 1000; max-height: 200px; overflow-y: auto;">
-                    <li 
-                      *ngFor="let city of filteredCities" 
+                  <ul *ngIf="isDropdownOpen && filteredCities.length" class="list-group position-absolute" style="z-index: 1000; max-height: 200px; overflow-y: auto;">
+                    <li
+                      *ngFor="let city of filteredCities"
                       class="list-group-item list-group-item-action"
-                      (click)="selectCity(city)"
-                    >
+                      (click)="selectCity(city)">
                       {{ city }}
                     </li>
                   </ul>
@@ -67,5 +67,4 @@
       </div><!-- End Col -->
     </div><!-- End Row -->
   </section><!-- End Section -->
-
 </main><!-- End #main -->

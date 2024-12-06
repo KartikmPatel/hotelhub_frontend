@@ -15,16 +15,17 @@ export class UserhomeComponent {
   hotelData: any[] = []; // To store the hotels fetched based on the selected city
   errorMessage: string = '';
   filteredCities: string[] = [];
+  isDropdownOpen: boolean = false; // Manage dropdown visibility
 
-  tophotels:any[]=[];
+  tophotels: any[] = [];
 
-  minDate: string='';
-  checkOutMinDate: string='';
+  minDate: string = '';
+  checkOutMinDate: string = '';
 
   constructor(
     private UserhomeserviceService: UserhomeserviceService,
     private router: Router
-  ) { 
+  ) {
     // Set today's date as the minimum date for Check In
     const today = new Date();
     this.minDate = this.formatDate(today);
@@ -35,8 +36,8 @@ export class UserhomeComponent {
     this.checkOutMinDate = this.formatDate(tomorrow);
   }
 
-   // Handle Check In date changes
-   onCheckInDateChange(event: Event) {
+  // Handle Check In date changes
+  onCheckInDateChange(event: Event) {
     const selectedDate = (event.target as HTMLInputElement).value;
     if (selectedDate) {
       const checkOutMin = new Date(selectedDate);
@@ -66,10 +67,10 @@ export class UserhomeComponent {
   }
 
   selectCity(city: string) {
-    this.newCity.city = city;  // Set the selected city
+    this.newCity.city = city; // Set the selected city
     this.filteredCities = []; // Clear the dropdown
+    this.isDropdownOpen = false; // Close the dropdown
   }
-
 
   quantity1: number = 1; // Default quantity
 
@@ -81,14 +82,14 @@ export class UserhomeComponent {
     if (this.quantity1 > 1) {
       this.quantity1--;
     }
-  } 
+  }
 
   ngOnInit() {
     this.loadCities();
 
     this.UserhomeserviceService.getTopRatingHotels().subscribe((data) => {
-        this.tophotels = data.$values;
-        console.log(this.tophotels);
+      this.tophotels = data.$values;
+      console.log(this.tophotels);
     });
   }
 
@@ -99,12 +100,21 @@ export class UserhomeComponent {
     this.filteredCities = [...this.indiaCities]; // Initially show all cities
   }
 
-  
   filterCities() {
     const query = this.newCity.city.toLowerCase();
     this.filteredCities = this.indiaCities.filter(city =>
       city.toLowerCase().includes(query)
     );
+  }
+
+  toggleDropdown(state: boolean) {
+    this.isDropdownOpen = state; // Open or close dropdown based on state
+  }
+
+  onInputBlur() {
+    setTimeout(() => {
+      this.isDropdownOpen = false; // Close dropdown after a short delay to handle clicks
+    }, 200);
   }
 
   onSubmit() {
@@ -120,10 +130,10 @@ export class UserhomeComponent {
     }
 
     if (!arrivalDate) {
-      this.errorMessage = 'Please select an Check In Date.';
+      this.errorMessage = 'Please select a Check In Date.';
       return;
     }
-  
+
     if (!departureDate) {
       this.errorMessage = 'Please select a Check Out Date.';
       return;
@@ -133,7 +143,7 @@ export class UserhomeComponent {
       this.errorMessage = 'Please Enter the Adult Quantity.';
       return;
     }
-  
+
     if (!childQuantity) {
       this.errorMessage = 'Please Enter the Child Quantity.';
       return;
