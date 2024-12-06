@@ -43,4 +43,12 @@ export class UserregisterserviceService {
       headers: { 'Content-Type': 'application/json' },
     });
   }
+
+  displayProfile(uid: any): Observable<any> {
+    return this.http.get(`${this.userUrlApi}/${uid}`);
+  }
+
+  updateProfile(uid: any, profileData: FormData): Observable<any> {
+    return this.http.put(`${this.userUrlApi}/${uid}`, profileData);
+  }
 }

@@ -52,6 +52,7 @@ import { UserbookingsComponent } from './hotels/userbookings/userbookings.compon
 import { UserfeedbackComponent } from './users/userfeedback/userfeedback.component';
 import { AddfeedbackComponent } from './users/addfeedback/addfeedback.component';
 import { UserfooterComponent } from './users/layout/userfooter/userfooter.component';
+import { UserprofileComponent } from './users/userprofile/userprofile.component';
 
 @NgModule({
   declarations: [
@@ -103,6 +104,7 @@ import { UserfooterComponent } from './users/layout/userfooter/userfooter.compon
     UserfeedbackComponent,
     AddfeedbackComponent,
     UserfooterComponent,
+    UserprofileComponent,
   ],
   imports: [
     BrowserModule,

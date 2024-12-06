@@ -65,6 +65,12 @@ export class UserhomeComponent {
     }
   }
 
+  selectCity(city: string) {
+    this.newCity.city = city;  // Set the selected city
+    this.filteredCities = []; // Clear the dropdown
+  }
+
+
   quantity1: number = 1; // Default quantity
 
   incrementQuantity1(): void {

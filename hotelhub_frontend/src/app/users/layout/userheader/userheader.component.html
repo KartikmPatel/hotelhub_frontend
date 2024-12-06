@@ -10,7 +10,7 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             <!-- <a class="navbar-brand logo_h" href="index.html"><img src="assets/userstyle/image/Logo.png" alt=""></a> -->
             <div class="d-flex align-items-center justify-content-between">
-                <a [routerLink]="['/']" class="logo d-flex align-items-center">
+                <a [routerLink]="['/userhome']" class="logo d-flex align-items-center">
                     <img src="assets/img/logo.png" alt="">
                     <span class="d-none d-lg-block">Hotel Hub</span>
                 </a>
@@ -24,10 +24,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                 <ul class="nav navbar-nav menu_nav ml-auto">
-                    <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item active"><a class="nav-link" [routerLink]="['/userhome']">Home</a></li>
                     <li class="nav-item"><a class="nav-link" [routerLink]="['/showBookings']">My Bookings</a></li>
                     <li class="nav-item"><a class="nav-link" [routerLink]="['/userfeedback']">Feedback</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" [routerLink]="['/userprofile']">Profile</a></li>
                     <li class="nav-item"><a class="nav-link" href="about.html">About us</a></li>
                     <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>

@@ -79,33 +79,25 @@
                                 <!-- City Selection -->
                                 <div class="col-md-4 mt-3">
                                     <div class="book_tabel_item">
-                                        <!-- <div class="input-group">
-                                            <select [(ngModel)]="newCity.city" name="city" class="nice-select wide"
-                                                required>
-                                                <option value="" disabled selected>Select a City</option>
-                                                <option *ngFor="let city of indiaCities" [value]="city">{{ city }}
-                                                </option>
-                                            </select>
-                                        </div> -->
-
                                         <label for="cityInput" style="color: white;">City Name</label>
                                         <input type="text" class="form-control" id="cityInput"
-                                            placeholder="Start typing city name" [(ngModel)]="newCity.city" name="city"
+                                            placeholder="City" [(ngModel)]="newCity.city" name="city"
                                             (input)="filterCities()" autocomplete="off" required />
-
+                                
                                         <!-- Dropdown for suggestions -->
                                         <ul *ngIf="filteredCities.length" class="list-group position-absolute"
                                             style="z-index: 1000; max-height: 200px; overflow-y: auto;">
                                             <li style="cursor: pointer;" *ngFor="let city of filteredCities"
                                                 class="list-group-item list-group-item-action"
-                                                (click)="newCity.city = city">
+                                                (click)="selectCity(city)">
                                                 {{ city }}
                                             </li>
                                         </ul>
-
+                                
                                         <button class="book_now_btn button_hover mt-3">Book Now</button>
                                     </div>
                                 </div>
+                                
                             </div>
                         </form>
 

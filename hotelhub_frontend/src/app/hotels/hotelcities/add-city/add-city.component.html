@@ -49,7 +49,7 @@
                     <li 
                       *ngFor="let city of filteredCities" 
                       class="list-group-item list-group-item-action"
-                      (click)="newCity = city"
+                      (click)="selectCity(city)"
                     >
                       {{ city }}
                     </li>
@@ -69,6 +69,3 @@
   </section><!-- End Section -->
 
 </main><!-- End #main -->
-
-<!-- Additional Styling -->
-

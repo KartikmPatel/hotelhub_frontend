@@ -33,6 +33,11 @@ export class AddCityComponent implements OnInit {
     );
   }
 
+  selectCity(city: string) {
+    this.newCity = city;
+    this.filteredCities = []; // Clear the list of filtered cities after selection
+  }
+
   onSubmit() {
     const hid = localStorage.getItem("hotelid");
     this.errorMessage = '';
