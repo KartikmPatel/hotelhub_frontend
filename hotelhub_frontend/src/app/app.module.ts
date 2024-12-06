@@ -49,6 +49,9 @@ import { ShowroomsComponent } from './users/showrooms/showrooms.component';
 import { RoomdetailsComponent } from './users/roomdetails/roomdetails.component';
 import { ShowBookingsComponent } from './users/show-bookings/show-bookings.component';
 import { UserbookingsComponent } from './hotels/userbookings/userbookings.component';
+import { UserfeedbackComponent } from './users/userfeedback/userfeedback.component';
+import { AddfeedbackComponent } from './users/addfeedback/addfeedback.component';
+import { UserfooterComponent } from './users/layout/userfooter/userfooter.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +100,9 @@ import { UserbookingsComponent } from './hotels/userbookings/userbookings.compon
     RoomdetailsComponent,
     ShowBookingsComponent,
     UserbookingsComponent,
+    UserfeedbackComponent,
+    AddfeedbackComponent,
+    UserfooterComponent,
   ],
   imports: [
     BrowserModule,

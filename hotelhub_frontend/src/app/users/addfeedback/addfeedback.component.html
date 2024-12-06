@@ -1,0 +1,77 @@
+<app-userheader></app-userheader>
+<main id="main" class="main" style="margin-top: 100px;">
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-9">
+                <div class="card" style="margin-top: 10px;">
+                    <div class="card-header">Give Feedback</div>
+                    <div class="card-body">
+                        <form class="row g-3" (ngSubmit)="onSubmit()">
+                            <!-- Hotel Dropdown -->
+                            <div class="col-md-12">
+                                <div class="form-floating mt-4">
+                                    <select id="hotel" [(ngModel)]="selectedHotelId" name="hotel"
+                                        (change)="onHotelChange($event)" class="form-select">
+                                        <option value="" disabled selected>Select a Hotel</option>
+                                        <option *ngFor="let hotel of hotels" [value]="hotel.id">
+                                            {{ hotel.hname }}
+                                        </option>
+                                    </select>
+                                    <label for="hotel">Select Hotel</label>
+                                </div>
+                            </div>
+                            <!-- City Dropdown -->
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <select id="city" [(ngModel)]="selectedCity" name="city"
+                                        (change)="onCityChange($event)" class="form-select">
+                                        <option value="" disabled selected>Select a City</option>
+                                        <option *ngFor="let city of cities" [value]="city">
+                                            {{ city }}
+                                        </option>
+                                    </select>
+                                    <label for="city">Select Room City</label>
+                                </div>
+                            </div>
+                            <!-- Room Category Dropdown -->
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <select id="category" [(ngModel)]="selectedCategoryId" name="category"
+                                        class="form-select">
+                                        <option value="" disabled selected>Select a Category</option>
+                                        <option *ngFor="let category of categories" [value]="category.id">
+                                            {{ category.categoryName }}
+                                        </option>
+                                    </select>
+                                    <label for="category">Select Room Category</label>
+                                </div>
+                            </div>
+                            <!-- Comments -->
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <textarea id="comments" [(ngModel)]="feedback.comments" name="comments"
+                                        class="form-control" placeholder="Leave your comments here" required></textarea>
+                                    <label for="comments">Comments</label>
+                                </div>
+                            </div>
+                            <!-- Rating -->
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <input type="number" id="rating" [(ngModel)]="feedback.rating" name="rating" min="1"
+                                        max="5" class="form-control" placeholder="Rating" required/>
+                                    <label for="rating">Rating</label>
+                                </div>
+                            </div>
+                            <!-- Submit Button -->
+                            <div class="text-center mt-3">
+                                <button type="submit" class="btn btn-primary">Give Feedback</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<app-userfooter></app-userfooter>

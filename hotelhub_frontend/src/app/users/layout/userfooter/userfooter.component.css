@@ -1,0 +1,32 @@
+.footer-area {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+}
+
+.footer-area .footer_title {
+    color: white;
+}
+
+.footer-area a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-area a:hover {
+    text-decoration: underline;
+}
+
+.border_line {
+    border-color: white;
+    margin: 10px 0;
+}
+
+.footer-social a i {
+    color: white;
+    margin-right: 10px;
+}
+
+.footer-social a i:hover {
+    color: #ccc;
+}
