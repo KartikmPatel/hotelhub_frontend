@@ -14,7 +14,7 @@ interface ImageFile {
 export class AddImagesComponent {
   roomId: string = '';
   images: any[] = [];
-  newImageFiles: ImageFile[] = [];
+  newImageFiles: ImageFile[] = []; // Holds the file input values
 
   constructor(
     private roomservice: RoomserviceService,
@@ -24,7 +24,7 @@ export class AddImagesComponent {
 
   ngOnInit(): void {
     this.roomId = this.route.snapshot.paramMap.get('id') || '';
-    this.loadRoomImages();
+    this.loadRoomImages(); // Load existing images when the component initializes
   }
 
   // Load existing images for the room
@@ -43,16 +43,18 @@ export class AddImagesComponent {
   onImageFileChange(event: any, index: number) {
     const file = event.target.files[0];
     if (file) {
-      this.newImageFiles[index].file = file; // Update file in the specific index
+      this.newImageFiles[index].file = file; // Update the file for the specific input
+    } else {
+      this.newImageFiles[index] = { file: null }; // Reset if no file is selected
     }
   }
 
-  // Add new image input field
+  // Add a new file input field
   addNewImageInput() {
-    this.newImageFiles.push({ file: null }); // Add a placeholder for a new image input
+    this.newImageFiles.push({ file: null }); // Add a placeholder for a new input
   }
 
-  // Delete image
+  // Delete an image
   deleteImage(imageId: string) {
     this.roomservice.deleteRoomImages(imageId).subscribe(
       () => {
@@ -64,24 +66,25 @@ export class AddImagesComponent {
     );
   }
 
-  // Upload images along with roomId
+  // Upload images
   uploadImages() {
     const formData = new FormData();
 
     formData.append('roomId', this.roomId);
 
+    // Append all selected files to the form data
     this.newImageFiles.forEach((imageFile) => {
       if (imageFile.file) {
         formData.append('images', imageFile.file, imageFile.file.name);
       }
     });
 
-    // Make the HTTP request to upload images
+    // Call the service to upload the images
     this.roomservice.addRoomImages(formData).subscribe(
       (response) => {
-        // console.log('Images uploaded successfully:', response);
-        this.loadRoomImages();
-
+        console.log('Images uploaded successfully:', response);
+        this.loadRoomImages(); // Reload images to display the newly added ones
+        this.newImageFiles = []; // Clear all the file input fields
       },
       (error) => {
         console.error('Error uploading images:', error);

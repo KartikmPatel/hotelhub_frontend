@@ -45,6 +45,7 @@ import { UserbookingsComponent } from './hotels/userbookings/userbookings.compon
 import { UserfeedbackComponent } from './users/userfeedback/userfeedback.component';
 import { AddfeedbackComponent } from './users/addfeedback/addfeedback.component';
 import { UserprofileComponent } from './users/userprofile/userprofile.component';
+import { GalleryComponent } from './users/layout/gallery/gallery.component';
 
 const routes: Routes = [
   {
@@ -222,6 +223,10 @@ const routes: Routes = [
   {
     path: "userprofile",
     component: UserprofileComponent
+  },
+  {
+    path: "usergallery",
+    component:GalleryComponent
   }
 ];
 

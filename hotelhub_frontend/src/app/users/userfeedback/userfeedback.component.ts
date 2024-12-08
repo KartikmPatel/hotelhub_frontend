@@ -40,7 +40,7 @@ export class UserfeedbackComponent {
         this.initializeDataTable();
       },
       (error) => {
-        
+        console.log("Not Feedback");
       }
     );
   }
