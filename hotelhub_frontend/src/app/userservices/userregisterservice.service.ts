@@ -51,4 +51,8 @@ export class UserregisterserviceService {
   updateProfile(uid: any, profileData: FormData): Observable<any> {
     return this.http.put(`${this.userUrlApi}/${uid}`, profileData);
   }
+
+  changePassword(hid: any, profileData: FormData): Observable<any> {
+    return this.http.put(`${this.userUrlApi}/changeUserPassword/${hid}`, profileData);
+  }
 }

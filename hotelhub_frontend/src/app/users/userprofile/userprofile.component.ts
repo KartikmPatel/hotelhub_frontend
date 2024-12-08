@@ -12,6 +12,7 @@ export class UserprofileComponent {
   selectedFile: File | null = null;
   successmsg: string = '';
   errorMessage: string = '';
+  loading: boolean = false;
 
   profileFields = [
     { label: 'User Name', key: 'name' },
@@ -37,59 +38,50 @@ export class UserprofileComponent {
   ngOnInit(): void {
     const uid = localStorage.getItem('userid');
     if (!uid) {
+      this.errorMessage = 'Invalid session. Please log in again.';
       this.router.navigate(['/userlogin']);
       return;
     }
 
-    const profilesuccessmsg = sessionStorage.getItem('profilesuccessmsg');
-    if (profilesuccessmsg) {
-      this.successmsg = profilesuccessmsg;
-      sessionStorage.removeItem('profilesuccessmsg');
-    }
-
-    this.loadProfile(uid);
-  }
-
-  loadProfile(uid: string): void {
     this.userregisterserviceService.displayProfile(uid).subscribe({
-      next: (data) => (this.profile = data),
-      error: (error) => {
-        this.errorMessage = 'Failed to load profile. Please try again.';
-        console.error('Error loading profile:', error);
+      next: (data) => {
+        this.profile = data;
+      },
+      error: (err) => {
+        this.errorMessage = 'Failed to load profile. Please try again later.';
+        console.error(err);
       },
     });
   }
 
   onFileSelected(event: any): void {
-    this.selectedFile = event.target.files[0];
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+    }
   }
 
   validateForm(): boolean {
-    if (
-      !this.profile.name ||
-      !this.profile.email ||
-      !this.profile.mno ||
-      !this.profile.city ||
-      !this.profile.gender
-    ) {
+    if (!this.profile.name || !this.profile.mno || !this.profile.city || !this.profile.gender) {
       this.errorMessage = 'All fields are required.';
       return false;
     }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(this.profile.email)) {
-      this.errorMessage = 'Invalid email format.';
+
+    if (!/^\d{10}$/.test(this.profile.mno)) {
+      this.errorMessage = 'Invalid phone number. It must be 10 digits.';
       return false;
     }
+
     return true;
   }
 
-  onSubmit(): void {
+  onSubmitProfile(): void {
     this.errorMessage = '';
-
     if (!this.validateForm()) {
       return;
     }
 
+    this.loading = true;
     const formData = new FormData();
     formData.append('name', this.profile.name);
     formData.append('email', this.profile.email);
@@ -101,20 +93,61 @@ export class UserprofileComponent {
       formData.append('image', this.selectedFile);
     }
 
-    if (this.profile.id) {
-      this.userregisterserviceService.updateProfile(this.profile.id, formData).subscribe({
-        next: () => {
-          sessionStorage.setItem('profilesuccessmsg', 'Profile Successfully Edited');
-          this.router.navigate(['/userprofile']).then(() => window.location.reload());
-        },
-        error: (err) => {
-          this.errorMessage = 'Failed to update profile. Please try again.';
-          console.error('Error updating profile:', err);
-        },
-      });
-    } else {
-      this.errorMessage = 'Profile ID is missing. Unable to update.';
+    this.userregisterserviceService.updateProfile(this.profile.id, formData).subscribe({
+      next: () => {
+        this.loading = false;
+        sessionStorage.setItem('profilesuccessmsg', 'Profile Successfully Edited');
+        this.router.navigate(['/userprofile']).then(() => window.location.reload());
+      },
+      error: (err) => {
+        this.loading = false;
+        this.errorMessage = 'Failed to update profile. Please try again later.';
+        console.error(err);
+      },
+    });
+  }
+
+  onSubmitPassword(): void {
+    this.errorMessage = '';
+    if (
+      !this.profile.oldpass ||
+      !this.profile.newpass ||
+      !this.profile.newpasscheck
+    ) {
+      this.errorMessage = 'All fields are required.';
+      return;
     }
+
+    if (this.profile.newpass !== this.profile.newpasscheck) {
+      this.errorMessage = 'Passwords do not match.';
+      return;
+    }
+
+    const uid = localStorage.getItem('userid');
+    if (!uid) {
+      this.errorMessage = 'Invalid session. Please log in again.';
+      return;
+    }
+
+    this.loading = true;
+    const formData = new FormData();
+    formData.append('password', this.profile.oldpass);
+    formData.append('newpassword', this.profile.newpass);
+
+    this.userregisterserviceService.changePassword(uid, formData).subscribe({
+      next: () => {
+        this.loading = false;
+        this.successmsg = 'Password changed successfully.';
+        this.profile.oldpass = '';
+        this.profile.newpass = '';
+        this.profile.newpasscheck = '';
+      },
+      error: (err) => {
+        this.loading = false;
+        this.errorMessage = 'Failed to change password. Please try again later.';
+        console.error(err);
+      },
+    });
   }
 
   closeSuccessMessage(): void {
