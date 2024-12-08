@@ -19,7 +19,7 @@ export class UserheaderComponent {
   }
 
   logout(): void {
-    localStorage.clear();
+    localStorage.removeItem("userid");
     this.router.navigate(['/userlogin']);
   }
 }

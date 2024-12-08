@@ -72,6 +72,17 @@ export class ShowroomsComponent {
     });
   }
 
+  hoveredRating: number = 0;
+
+  setRating(rating: number): void {
+    this.searchRoom.rating = rating; // Update the selected rating
+    this.searchRoomsByRating(rating); // Trigger the search function
+  }
+
+  hoverRating(rating: number): void {
+    this.hoveredRating = rating; // Update the hovered rating
+  }
+
   // Check if today's date matches any festival date
   isFestivalToday(): boolean {
     const festival = this.fesdiscount.find(fes => {
@@ -110,7 +121,6 @@ export class ShowroomsComponent {
     });
   }
 
-  // Handle changes in selected facilities
   onFacilityChange(facilityId: number, event: any): void {
     if (event.target.checked) {
       this.searchRoom.facilityIds.push(facilityId);
@@ -120,9 +130,9 @@ export class ShowroomsComponent {
         this.searchRoom.facilityIds.splice(index, 1);
       }
     }
+    this.searchRooms(); // Trigger search after facility change
   }
 
-  // Handle changes in selected features
   onFeatureChange(featureId: number, event: any): void {
     if (event.target.checked) {
       this.searchRoom.featureIds.push(featureId);
@@ -132,26 +142,13 @@ export class ShowroomsComponent {
         this.searchRoom.featureIds.splice(index, 1);
       }
     }
+    this.searchRooms(); // Trigger search after feature change
   }
 
   // Methods to search rooms by category, facilities, features, rating, and status
   searchRoomsByCategory(categoryId: number): void {
     const commonParams = this.getCommonParams();
     this.UserhomeserviceService.searchByCategory(categoryId, commonParams).subscribe((data) => {
-      this.roomData = data.$values;
-    });
-  }
-
-  searchRoomsByFacilities(facilityIds: number[]): void {
-    const commonParams = this.getCommonParams();
-    this.UserhomeserviceService.searchByFacilities(facilityIds, commonParams).subscribe((data) => {
-      this.roomData = data.$values;
-    });
-  }
-
-  searchRoomsByFeatures(featureIds: number[]): void {
-    const commonParams = this.getCommonParams();
-    this.UserhomeserviceService.searchByFeatures(featureIds, commonParams).subscribe((data) => {
       this.roomData = data.$values;
     });
   }
@@ -166,6 +163,18 @@ export class ShowroomsComponent {
   searchRoomsByStatus(isActive: boolean): void {
     const commonParams = this.getCommonParams();
     this.UserhomeserviceService.searchByStatus(isActive, commonParams).subscribe((data) => {
+      this.roomData = data.$values;
+    });
+  }
+
+  private searchRooms(): void {
+    const commonParams = this.getCommonParams();
+
+    this.UserhomeserviceService.searchByFacilitiesAndFeatures(
+      this.searchRoom.facilityIds,
+      this.searchRoom.featureIds,
+      commonParams
+    ).subscribe((data) => {
       this.roomData = data.$values;
     });
   }

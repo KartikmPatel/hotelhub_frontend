@@ -1,21 +1,32 @@
 .room-image {
-    width: 100%; /* Ensures the image adapts to the container's width */
-    max-width: 560px; /* Limits the maximum width */
-    height: 350px; /* Fixed height to maintain consistency */
-    object-fit: cover; /* Ensures the image fills the dimensions without distortion */
-    border-radius: 8px; /* Optional: adds rounded corners */
-    margin-bottom: 10px; /* Optional: adds spacing below the image */
+    width: 100%;
+    /* Ensures the image adapts to the container's width */
+    max-width: 560px;
+    /* Limits the maximum width */
+    height: 350px;
+    /* Fixed height to maintain consistency */
+    object-fit: cover;
+    /* Ensures the image fills the dimensions without distortion */
+    border-radius: 8px;
+    /* Optional: adds rounded corners */
+    margin-bottom: 10px;
+    /* Optional: adds spacing below the image */
 }
 
 .card {
-    border: 1px solid #ddd; /* Adds a light gray border around each card */
-    border-radius: 8px; /* Rounded corners for better aesthetics */
-    margin-bottom: 20px; /* Spacing between cards */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    border: 1px solid #ddd;
+    /* Adds a light gray border around each card */
+    border-radius: 8px;
+    /* Rounded corners for better aesthetics */
+    margin-bottom: 20px;
+    /* Spacing between cards */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
 }
 
 .card-body {
-    padding: 20px; /* Adds padding inside each card */
+    padding: 20px;
+    /* Adds padding inside each card */
 }
 
 .festival-banner {
@@ -82,8 +93,28 @@
         transform: translateY(-100%);
         opacity: 0;
     }
+
     100% {
         transform: translateY(0);
         opacity: 1;
     }
+}
+
+.star {
+    color: gray;
+    transition: color 0.3s;
+}
+
+.star.selected {
+    color: gold;
+}
+
+.star:hover {
+    color: gold;
+    /* Change color when hovering */
+}
+
+/* Dynamic hover effect for stars */
+.star:hover~.star {
+    color: gray !important;
 }

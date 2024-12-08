@@ -27,7 +27,7 @@ export class HotelheaderComponent {
   }
 
   logout(): void {
-    localStorage.clear();
+    localStorage.removeItem("hotelid");
     this.router.navigate(['/hotellogin']);
   }
 }

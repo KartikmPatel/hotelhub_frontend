@@ -108,20 +108,22 @@ export class UserhomeserviceService {
     return this.http.get(`${this.roomApiUrl}/search-by-category`, { params: { ...commonParams, categoryId } });
   }
 
-  searchByFacilities(facilityIds: number[], commonParams: any): Observable<any> {
-    return this.http.get(`${this.roomApiUrl}/search-by-facilities`, { params: { ...commonParams, facilityIds } });
-  }
-
-  searchByFeatures(featureIds: number[], commonParams: any): Observable<any> {
-    return this.http.get(`${this.roomApiUrl}/search-by-features`, { params: { ...commonParams, featureIds } });
-  }
-
   searchByRating(rating: number, commonParams: any): Observable<any> {
     return this.http.get(`${this.roomApiUrl}/search-by-rating`, { params: { ...commonParams, rating } });
   }
 
   searchByStatus(isActive: boolean, commonParams: any): Observable<any> {
     return this.http.get(`${this.roomApiUrl}/search-by-status`, { params: { ...commonParams, isActive } });
+  }
+
+  searchByFacilitiesAndFeatures(
+    facilityIds: number[],
+    featureIds: number[],
+    commonParams: any
+  ): Observable<any> {
+    return this.http.get(`${this.roomApiUrl}/search-by-facilities-and-features`, {
+      params: { ...commonParams, facilityIds, featureIds },
+    });
   }
 
 }

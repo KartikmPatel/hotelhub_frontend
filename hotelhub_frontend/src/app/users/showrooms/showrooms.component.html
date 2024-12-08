@@ -54,7 +54,7 @@
                                                     <b>Status: </b>
                                                     <span
                                                         [ngClass]="{'text-danger': room.activeStatus === 0, 'badge bg-success': room.activeStatus !== 0}">
-                                                        {{ room.activeStatus === 0 ? 'Disactive Room' : 'Active Room' }}
+                                                        {{ room.activeStatus === 0 ? 'Inactive Room' : 'Active Room' }}
                                                     </span>
                                                 </a>
                                             </li>
@@ -123,56 +123,67 @@
                                 <label for="category">Room Category</label>
                             </div>
                         </div>
-            
+
                         <h3 class="widget_title mt-5">Room Facilities</h3>
-                        <!-- Facilities Checkboxes -->
                         <div class="col-md-12" *ngIf="facilityData.length > 0">
-                            <div class="col-md-3">
-                                <div *ngFor="let facility of facilityData">
-                                    <input type="checkbox" [value]="facility.id"
-                                        (change)="onFacilityChange(facility.id, $event)" class="form-check-input">
-                                    <label class="form-check-label">{{ facility.facilityName }}</label>
-                                </div>
+                            <div class="col-md-3" *ngFor="let facility of facilityData">
+                                <input type="checkbox" [value]="facility.id"
+                                    (change)="onFacilityChange(facility.id, $event)" class="form-check-input" />
+                                <label class="form-check-label">{{ facility.facilityName }}</label>
                             </div>
                         </div>
-            
+
                         <h3 class="widget_title mt-5">Room Features</h3>
-                        <!-- Features Checkboxes -->
                         <div class="col-md-12" *ngIf="featuresData.length > 0">
-                            <div class="col-md-3">
-                                <div *ngFor="let feature of featuresData">
-                                    <input type="checkbox" [value]="feature.id"
-                                        (change)="onFeatureChange(feature.id, $event)" class="form-check-input">
-                                    <label class="form-check-label">{{ feature.featureName }}</label>
-                                </div>
+                            <div class="col-md-3" *ngFor="let feature of featuresData">
+                                <input type="checkbox" [value]="feature.id"
+                                    (change)="onFeatureChange(feature.id, $event)" class="form-check-input" />
+                                <label class="form-check-label">{{ feature.featureName }}</label>
                             </div>
                         </div>
-            
-                        <h3 class="widget_title mt-5">Rating</h3>
+
+                        <!-- <h3 class="widget_title mt-5">Rating</h3> -->
                         <!-- Rating -->
-                        <div class="col-md-12">
+                        <!-- <div class="col-md-12">
                             <input type="text" [(ngModel)]="searchRoom.rating" class="form-control"
                                 (change)="searchRoomsByRating(searchRoom.rating)" placeholder="Enter Rating...">
+                        </div> -->
+
+                        <h3 class="widget_title mt-5">Rating</h3>
+                        <div class="col-md-12 text-center">
+                            <!-- Display Stars for Rating -->
+                            <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+                                <span class="star" [ngClass]="{'selected': i < searchRoom.rating}"
+                                    (click)="setRating(i + 1)" (mouseover)="hoverRating(i + 1)"
+                                    (mouseleave)="hoverRating(0)" style="cursor: pointer; font-size: 2em;">
+                                    &#9733; <!-- Star symbol -->
+                                </span>
+                            </ng-container>
+                            <div class="mt-2">
+                                Selected Rating: {{ searchRoom.rating || 'None' }}
+                            </div>
                         </div>
-            
+
                         <h3 class="widget_title mt-5">Room Status</h3>
                         <!-- Room Status -->
                         <div class="col-md-12">
                             <div class="form-check">
                                 <input type="radio" id="standardRoom" name="roomPreference" value="1"
-                                    [(ngModel)]="searchRoom.isActive" (change)="searchRoomsByStatus(true)" class="form-check-input">
+                                    [(ngModel)]="searchRoom.isActive" (change)="searchRoomsByStatus(true)"
+                                    class="form-check-input">
                                 <label for="standardRoom" class="form-check-label">Active Room</label>
                             </div>
                             <div class="form-check">
                                 <input type="radio" id="suiteRoom" name="roomPreference" value="0"
-                                    [(ngModel)]="searchRoom.isActive" (change)="searchRoomsByStatus(false)" class="form-check-input">
+                                    [(ngModel)]="searchRoom.isActive" (change)="searchRoomsByStatus(false)"
+                                    class="form-check-input">
                                 <label for="suiteRoom" class="form-check-label">Inactive Room</label>
                             </div>
                         </div>
-            
+
                     </aside>
                 </div>
-            </div>            
+            </div>
 
         </div>
     </div>

@@ -29,7 +29,7 @@ export class AdminheaderComponent {
   }
 
   logout(): void {
-    localStorage.clear();
+    localStorage.removeItem("adminid");
     this.router.navigate(['/userlogin']);
   }
 }
