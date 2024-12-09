@@ -18,7 +18,7 @@ export class HotelloginComponent {
   ngOnInit(): void {
     const hid = localStorage.getItem("hotelid");
     if (hid != null) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/hoteldashboard']);
     }
   }
 
@@ -37,7 +37,7 @@ export class HotelloginComponent {
             const hid = data.hotelId;
             console.log(hid);
             localStorage.setItem("hotelid", hid);
-            this.router.navigate(['/']); // Redirect on success
+            this.router.navigate(['/hoteldashboard']); // Redirect on success
           });
         }
       },

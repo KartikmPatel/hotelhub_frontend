@@ -46,11 +46,12 @@ import { UserfeedbackComponent } from './users/userfeedback/userfeedback.compone
 import { AddfeedbackComponent } from './users/addfeedback/addfeedback.component';
 import { UserprofileComponent } from './users/userprofile/userprofile.component';
 import { GalleryComponent } from './users/layout/gallery/gallery.component';
+import { AboutusComponent } from './users/layout/aboutus/aboutus.component';
 
 const routes: Routes = [
   {
     path: "",
-    component: HoteldashboardComponent
+    component: UserhomeComponent
   },
   {
     path: "displaycategory",
@@ -145,6 +146,10 @@ const routes: Routes = [
     component: HotelprofileComponent
   },
   {
+    path:"hoteldashboard",
+    component:HoteldashboardComponent
+  },
+  {
     path: "displayFeedback",
     component: DisplayFeedbackComponent
   },
@@ -175,10 +180,6 @@ const routes: Routes = [
   {
     path: "userlogin",
     component: UserloginComponent
-  },
-  {
-    path: "userhome",
-    component: UserhomeComponent
   },
   {
     path: "showhoteldetails",
@@ -227,6 +228,10 @@ const routes: Routes = [
   {
     path: "usergallery",
     component:GalleryComponent
+  },
+  {
+    path: "useraboutus",
+    component: AboutusComponent
   }
 ];
 

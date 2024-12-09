@@ -54,6 +54,7 @@ import { AddfeedbackComponent } from './users/addfeedback/addfeedback.component'
 import { UserfooterComponent } from './users/layout/userfooter/userfooter.component';
 import { UserprofileComponent } from './users/userprofile/userprofile.component';
 import { GalleryComponent } from './users/layout/gallery/gallery.component';
+import { AboutusComponent } from './users/layout/aboutus/aboutus.component';
 
 @NgModule({
   declarations: [
@@ -107,6 +108,7 @@ import { GalleryComponent } from './users/layout/gallery/gallery.component';
     UserfooterComponent,
     UserprofileComponent,
     GalleryComponent,
+    AboutusComponent,
   ],
   imports: [
     BrowserModule,

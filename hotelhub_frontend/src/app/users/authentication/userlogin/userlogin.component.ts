@@ -54,9 +54,15 @@ export class UserloginComponent {
           if (response.message === "Login successful.") {
             this.userregisterserviceService.getuserid(this.userdata.email).subscribe((data) => {
               const uid = data.userId;
-              console.log(uid);
               localStorage.setItem("userid", uid);
-              this.router.navigate(['/userhome']); // Redirect on success
+
+              const checkstatus = sessionStorage.getItem("checkstatus");
+              if (checkstatus != null) {
+                sessionStorage.removeItem("checkstatus");
+                this.router.navigate(['/roomdetails']);
+              } else {
+                this.router.navigate(['/']); // Redirect on success
+              }
             });
           }
         },

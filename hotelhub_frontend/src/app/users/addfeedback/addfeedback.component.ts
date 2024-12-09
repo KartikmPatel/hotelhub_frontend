@@ -26,6 +26,11 @@ export class AddfeedbackComponent implements OnInit {
   constructor(private bookingService: BookingserviceService, private router: Router) { }
 
   ngOnInit(): void {
+    const uid = localStorage.getItem("userid");
+    if (uid == null) {
+      this.router.navigate(['/userlogin']);
+    }
+    
     this.loadHotels();
   }
 

@@ -42,7 +42,7 @@ export class RoomdetailsComponent {
     }
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.UserhomeserviceService.currentRoomDetails.subscribe((data) => {
       if (data.length > 0) {
         this.roomDetails = data;
@@ -78,6 +78,14 @@ export class RoomdetailsComponent {
   }
 
   bookRoom(): void {
+    const uid = localStorage.getItem("userid");
+    if (uid == null) {
+      const checkstatus = sessionStorage.setItem("checkstatus","pending");
+      this.router.navigate(['/userlogin']);
+    }else{
+      sessionStorage.removeItem("checkstatus");
+    }
+
     const availableRooms = (this.roomDetails.quantity) - (this.availableCount.availableReservationsCount);
     if (availableRooms < this.roomCount) {
       this.errorMessage = `You cannot book more than ${availableRooms} rooms.`;

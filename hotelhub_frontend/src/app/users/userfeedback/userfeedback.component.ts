@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BookingserviceService } from 'src/app/userservices/bookingservice.service';
+import { Router } from '@angular/router';
 
 declare var $: any;
 
@@ -13,9 +14,14 @@ export class UserfeedbackComponent {
   private table: any;
   successmsg: string = '';
 
-  constructor(private BookingserviceService: BookingserviceService) {}
+  constructor(private BookingserviceService: BookingserviceService, private router: Router) { }
 
   ngOnInit(): void {
+    const uid = localStorage.getItem("userid");
+    if (uid == null) {
+      this.router.navigate(['/userlogin']);
+    }
+
     this.fetchFeedbacks();
   }
 
@@ -36,7 +42,7 @@ export class UserfeedbackComponent {
         if (this.table) {
           this.table.destroy();
         }
-  
+
         this.initializeDataTable();
       },
       (error) => {

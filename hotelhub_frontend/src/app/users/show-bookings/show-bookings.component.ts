@@ -20,9 +20,14 @@ export class ShowBookingsComponent implements OnInit {
     private bookingserviceService: BookingserviceService,
     private datePipe: DatePipe,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
+    const uid = localStorage.getItem("userid");
+    if (uid == null) {
+      this.router.navigate(['/userlogin']);
+    }
+
     // Check for successful booking and display banner only once
     this.checkForSuccessBanner();
 

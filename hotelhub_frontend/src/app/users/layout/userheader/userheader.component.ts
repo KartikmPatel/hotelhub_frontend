@@ -8,14 +8,11 @@ import { Router } from '@angular/router';
 })
 export class UserheaderComponent {
 
+  uid:any;
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    const uid = localStorage.getItem("userid");
-
-    if (uid == null) {
-      this.router.navigate(['/userlogin']);
-    }
+    this.uid = localStorage.getItem("userid");
   }
 
   logout(): void {
