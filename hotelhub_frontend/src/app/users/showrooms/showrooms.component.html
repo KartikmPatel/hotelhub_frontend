@@ -81,9 +81,9 @@
                                                 <h2>{{ room.categoryName }}</h2>
                                             </a>
                                             <h3>
-                                                <del style="color: red;">{{ room.rent | currency: 'INR' }}</del>
+                                                <del style="color: red;">{{ room.rent | currency: 'USD' }}</del>
                                                 {{ (room.rent) - ((room.rent * getDiscount(room)) / 100) | currency:
-                                                'INR' }}
+                                                'USD' }}
                                             </h3>
                                             <button (click)="roomdetails(room.id)" class="view_btn button_hover"
                                                 [disabled]="room.activeStatus === 0"

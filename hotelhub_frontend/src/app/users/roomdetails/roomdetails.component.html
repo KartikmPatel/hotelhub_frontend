@@ -51,8 +51,8 @@
       <div class="col-lg-4">
         <h2>{{ roomDetails.roomCategory?.categoryName || 'Room Details' }}</h2>
         <p>
-          <del style="color: red;">{{ roomDetails.rent | currency: 'INR' }}</del>
-          <strong>{{" "}}{{ (roomDetails.rent) - ((roomDetails.rent * getDiscount(roomDetails)) / 100) | currency: 'INR'
+          <del style="color: red;">{{ roomDetails.rent | currency: 'USD' }}</del>
+          <strong>{{" "}}{{ (roomDetails.rent) - ((roomDetails.rent * getDiscount(roomDetails)) / 100) | currency: 'USD'
             }}</strong> /night
         </p>
         <p><strong>Discount:</strong> {{ getDiscount(roomDetails) }}%</p>

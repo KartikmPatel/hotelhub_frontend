@@ -8,6 +8,7 @@ import { ICreateOrderRequest, IPayPalConfig } from 'ngx-paypal';
   styleUrls: ['./paypal-component.component.css']
 })
 export class PaypalComponentComponent {
+  payment : any;
   public payPalConfig?: IPayPalConfig;
 
   constructor(private router:Router){
@@ -16,6 +17,7 @@ export class PaypalComponentComponent {
 
   ngOnInit(): void {
     this.initConfig();
+    this.payment = sessionStorage.getItem("paymentAmount");
   }
 
   private initConfig(): void {
