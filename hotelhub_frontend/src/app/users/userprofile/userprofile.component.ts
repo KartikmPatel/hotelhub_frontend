@@ -96,8 +96,8 @@ export class UserprofileComponent {
     this.userregisterserviceService.updateProfile(this.profile.id, formData).subscribe({
       next: () => {
         this.loading = false;
-        sessionStorage.setItem('profilesuccessmsg', 'Profile Successfully Edited');
-        this.router.navigate(['/userprofile']).then(() => window.location.reload());
+        this.router.navigate(['/userprofile']);
+        this.successmsg = 'Profile Successfully Edited';
       },
       error: (err) => {
         this.loading = false;

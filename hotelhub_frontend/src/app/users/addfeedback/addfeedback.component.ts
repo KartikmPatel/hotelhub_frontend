@@ -14,6 +14,7 @@ export class AddfeedbackComponent implements OnInit {
   selectedHotelId: number = 0;
   selectedCity: string = '';
   selectedCategoryId: number | null = null;
+  hoveredRating: number = 0;
 
   feedback = {
     comments: '',
@@ -69,6 +70,14 @@ export class AddfeedbackComponent implements OnInit {
           }
         );
     }
+  }
+
+  setRating(rating: number): void {
+    this.feedback.rating = rating; // Update the selected rating
+  }
+  
+  hoverRating(rating: number): void {
+    this.hoveredRating = rating; // Temporarily highlight stars during hover
   }
 
   onSubmit(): void {

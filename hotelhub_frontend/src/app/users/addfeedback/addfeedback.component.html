@@ -11,7 +11,7 @@
                             <div class="col-md-12">
                                 <div class="form-floating mt-4">
                                     <select id="hotel" [(ngModel)]="selectedHotelId" name="hotel"
-                                        (change)="onHotelChange($event)" class="form-select">
+                                        (change)="onHotelChange($event)" class="form-select" required>
                                         <option value="" disabled selected>Select a Hotel</option>
                                         <option *ngFor="let hotel of hotels" [value]="hotel.id">
                                             {{ hotel.hname }}
@@ -24,7 +24,7 @@
                             <div class="col-md-12">
                                 <div class="form-floating">
                                     <select id="city" [(ngModel)]="selectedCity" name="city"
-                                        (change)="onCityChange($event)" class="form-select">
+                                        (change)="onCityChange($event)" class="form-select" required>
                                         <option value="" disabled selected>Select a City</option>
                                         <option *ngFor="let city of cities" [value]="city">
                                             {{ city }}
@@ -37,7 +37,7 @@
                             <div class="col-md-12">
                                 <div class="form-floating">
                                     <select id="category" [(ngModel)]="selectedCategoryId" name="category"
-                                        class="form-select">
+                                        class="form-select" required>
                                         <option value="" disabled selected>Select a Category</option>
                                         <option *ngFor="let category of categories" [value]="category.id">
                                             {{ category.categoryName }}
@@ -54,12 +54,23 @@
                                     <label for="comments">Comments</label>
                                 </div>
                             </div>
-                            <!-- Rating -->
-                            <div class="col-md-12">
-                                <div class="form-floating">
-                                    <input type="number" id="rating" [(ngModel)]="feedback.rating" name="rating" min="1"
-                                        max="5" class="form-control" placeholder="Rating" required/>
-                                    <label for="rating">Rating</label>
+                            <!-- Star Rating -->
+                            <div class="col-md-12 text-center">
+                                <div class="mb-3">
+                                    <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+                                        <span 
+                                            class="star" 
+                                            [ngClass]="{'selected': i < feedback.rating}" 
+                                            (click)="setRating(i + 1)" 
+                                            (mouseover)="hoverRating(i + 1)" 
+                                            (mouseleave)="hoverRating(0)"
+                                            style="cursor: pointer; font-size: 2em;">
+                                            &#9733; <!-- Star symbol -->
+                                        </span>
+                                    </ng-container>
+                                </div>
+                                <div>
+                                    Selected Rating: {{ feedback.rating || 'None' }}
                                 </div>
                             </div>
                             <!-- Submit Button -->
@@ -73,5 +84,4 @@
         </div>
     </section>
 </main>
-
 <app-userfooter></app-userfooter>

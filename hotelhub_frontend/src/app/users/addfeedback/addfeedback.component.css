@@ -1,0 +1,17 @@
+.star {
+    color: gray;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .star.selected {
+    color: gold;
+  }
+  
+  .star:hover {
+    color: gold;
+  }
+  
+  .star:hover ~ .star {
+    color: gray !important;
+  }
+  
