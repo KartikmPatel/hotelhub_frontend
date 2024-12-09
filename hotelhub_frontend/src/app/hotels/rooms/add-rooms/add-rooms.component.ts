@@ -22,7 +22,6 @@ export class AddRoomsComponent {
   features: any[] = [];
   facilitys: any[] = [];
   errorMessage: string = '';
-
   selectedFeatures: boolean[] = [];  // Tracks selected features (boolean)
   selectedFacilities: boolean[] = [];  // Tracks selected facilities (boolean)
 
@@ -37,6 +36,7 @@ export class AddRoomsComponent {
 
   ngOnInit(): void {
     const hid = localStorage.getItem("hotelid");
+
     this.categoryservice.getCategory().subscribe(data => {
       this.categorys = data.$values;
     });
@@ -45,12 +45,11 @@ export class AddRoomsComponent {
       this.facilitys = data.$values;
       this.selectedFacilities = new Array(this.facilitys.length).fill(false);  // Initialize the selectedFacilities array
     });
-
     this.featureservice.getFeature().subscribe(data => {
       this.features = data.$values;
+
       this.selectedFeatures = new Array(this.features.length).fill(false);  // Initialize the selectedFeatures array
     });
-
     this.hotelservice.getCityByHotel(hid).subscribe(data => {
       this.citys = data.$values;
     });
@@ -61,14 +60,13 @@ export class AddRoomsComponent {
 
     // Client-side validation checks
     if (!this.newRoom.roomcategoryid || !this.newRoom.adultCapacity || !this.newRoom.childrenCapacity ||
-        !this.newRoom.quantity || !this.newRoom.city || !this.newRoom.rent || !this.newRoom.discount) {
-      this.errorMessage = 'All fields are required.';
-      return;  // Stop further execution if fields are missing
+      !this.newRoom.quantity || !this.newRoom.city || !this.newRoom.rent || !this.newRoom.discount) {
+    this.errorMessage = 'All fields are required.';
+
+    return;  // Stop further execution if fields are missing
     }
 
     const hid = localStorage.getItem("hotelid");
-
-    // Prepare the base room data
     const roomData = {
       roomcategoryid: this.newRoom.roomcategoryid,
       adultCapacity: this.newRoom.adultCapacity,
@@ -124,7 +122,6 @@ export class AddRoomsComponent {
       );
     });
   }
-
   addRoomFeatures(roomId: number) {
     const selectedFeatureIds = this.features
       .filter((_, index) => this.selectedFeatures[index])

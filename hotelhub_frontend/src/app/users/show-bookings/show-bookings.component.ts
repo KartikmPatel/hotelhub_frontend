@@ -14,46 +14,46 @@ export class ShowBookingsComponent implements OnInit {
   isBannerVisible: boolean = false;
   today: string = new Date().toISOString().split('T')[0]; // Today's date (yyyy-MM-dd)
   bookings: any[] = [];  // Array to store reservations
-  successmsg:string='';
+  successmsg: string = '';
 
-  constructor(private bookingserviceService: BookingserviceService, private datePipe:DatePipe ,private router:Router) {}
+  constructor(
+    private bookingserviceService: BookingserviceService,
+    private datePipe: DatePipe,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    // Check if the booking was successful and show the banner if necessary
-    const successBooking = sessionStorage.getItem("successBooking");
-    if (successBooking === "Done") {
-      this.isBannerVisible = true;
-      sessionStorage.removeItem("successBooking");  // Clear session data after showing banner
-    }
+    // Check for successful booking and display banner only once
+    this.checkForSuccessBanner();
 
-    const cancelbookinguccessmsg = sessionStorage.getItem('cancelbookinguccessmsg');
-    if (cancelbookinguccessmsg) {
-      this.successmsg = cancelbookinguccessmsg;
-      sessionStorage.removeItem('cancelbookinguccessmsg');
-    }
+    // Check for successful cancellation message
 
+    // Display bookings
     this.displayBookings();
-    // Fetch reservations for the user
-
   }
 
-  displayBookings()
-  {
-    const userId = localStorage.getItem("userid");
+  private checkForSuccessBanner() {
+    const successBooking = sessionStorage.getItem('successBooking');
+    if (successBooking === 'Done' && !this.isBannerVisible) {
+      this.isBannerVisible = true;
+      sessionStorage.removeItem('successBooking'); // Ensure it doesn't trigger again
+    }
+  }
+
+  displayBookings() {
+    const userId = localStorage.getItem('userid');
     if (!userId) {
       console.error('User ID is missing');
       return;
     }
     this.bookingserviceService.getReservationsByUser(userId).subscribe(
       data => {
-        // If the API response contains $values, map the data
         this.bookings = data.$values ? data.$values : data;
 
-        // Format Check-in and Check-out dates using DatePipe
         this.bookings = this.bookings.map(booking => ({
           ...booking,
-          checkIn: this.datePipe.transform(booking.checkIn, 'yyyy-MM-dd'),  // Format Check-in date
-          checkOut: this.datePipe.transform(booking.checkOut, 'yyyy-MM-dd')  // Format Check-out date
+          checkIn: this.datePipe.transform(booking.checkIn, 'yyyy-MM-dd'),
+          checkOut: this.datePipe.transform(booking.checkOut, 'yyyy-MM-dd')
         }));
       },
       error => {
@@ -62,31 +62,19 @@ export class ShowBookingsComponent implements OnInit {
     );
   }
 
-  // Function to close the success banner
   closeBanner() {
-    this.isBannerVisible = false;  // Hide banner when closed
+    this.isBannerVisible = false;
   }
 
   closeSuccessMessage(): void {
     this.successmsg = '';
   }
 
-  // Cancel booking logic
   cancelBooking(rid: any) {
-    const userId = localStorage.getItem("userid");
-    // Call the API to cancel the booking (example)
-    this.bookingserviceService.cancelBooking(userId,rid).subscribe(() => {
-        // console.log('Booking canceled successfully');
-        // After successful cancellation, you can update the bookings array to remove the canceled booking
-        // this.bookings = this.bookings.filter(booking => booking.id !== bookingId);
-        // this.displayBookings();
-
-        sessionStorage.setItem('cancelbookinguccessmsg', 'Room Successfully Canceled');
-        this.router.navigate(['/showBookings']).then(() => window.location.reload());
-
-        // Trigger a page reload to reflect the changes
-        // window.location.reload();
-
+    const userId = localStorage.getItem('userid');
+    this.bookingserviceService.cancelBooking(userId, rid).subscribe(
+      () => {
+        this.displayBookings();
       },
       error => {
         console.error('Error canceling booking:', error);
