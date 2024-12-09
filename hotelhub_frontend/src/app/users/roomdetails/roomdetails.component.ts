@@ -17,8 +17,8 @@ export class RoomdetailsComponent {
   errorMessage: string = '';
   fesdiscount: any[] = [];
   today: string = new Date().toISOString().split('T')[0];
-
   roomCount: number = 1; // Default quantity
+  paymentAmount:any;
 
   constructor(private UserhomeserviceService: UserhomeserviceService, private router: Router) { }
 
@@ -42,7 +42,7 @@ export class RoomdetailsComponent {
     }
   }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     this.UserhomeserviceService.currentRoomDetails.subscribe((data) => {
       if (data.length > 0) {
         this.roomDetails = data;
@@ -85,7 +85,6 @@ export class RoomdetailsComponent {
     }else{
       sessionStorage.removeItem("checkstatus");
     }
-
     const availableRooms = (this.roomDetails.quantity) - (this.availableCount.availableReservationsCount);
     if (availableRooms < this.roomCount) {
       this.errorMessage = `You cannot book more than ${availableRooms} rooms.`;
@@ -107,7 +106,8 @@ export class RoomdetailsComponent {
       // Convert the time difference to days
       const numberOfDays = timeDifference / (1000 * 3600 * 24); // Milliseconds to days
       const finalrent = numberOfDays * rent;
-
+      this.paymentAmount = this.roomCount*finalrent;
+      sessionStorage.setItem("paymentAmount", this.paymentAmount);
       // Prepare the booking data
       for (let i = 0; i < this.roomCount; i++) {
         const bookingData = {
@@ -124,9 +124,8 @@ export class RoomdetailsComponent {
 
         this.UserhomeserviceService.bookRoom(bookingData).subscribe(response => {
           if (response.success) {
-            console.log(`Room ${i + 1} booked successfully!`);
-            sessionStorage.setItem("successBooking", "Done");
-            this.router.navigate(['/showBookings']);
+
+            this.router.navigate(['/payment']);
           } else {
             console.error(`Failed to book room ${i + 1}`);
           }

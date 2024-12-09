@@ -1,0 +1,72 @@
+/* Overall container styling */
+.paypal-container {
+  background-color: #f8f9fa;
+  padding: 30px;
+  max-width: 600px;
+  margin: 50px auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+/* Heading for payment section */
+.payment-heading {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Styling for the payment summary */
+.payment-summary {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.amount {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.info1 {
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+}
+
+/* Styling for the PayPal button container */
+.paypal-button-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* Styling for the terms section */
+.terms {
+  font-size: 14px;
+  color: #777;
+  text-align: center;
+}
+
+.terms a {
+  color: #0070ba;
+  text-decoration: none;
+}
+
+.terms a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  .paypal-container {
+    padding: 15px;
+  }
+
+  .payment-summary {
+    padding: 15px;
+  }
+}

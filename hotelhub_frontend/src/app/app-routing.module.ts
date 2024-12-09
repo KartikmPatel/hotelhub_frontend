@@ -47,6 +47,7 @@ import { AddfeedbackComponent } from './users/addfeedback/addfeedback.component'
 import { UserprofileComponent } from './users/userprofile/userprofile.component';
 import { GalleryComponent } from './users/layout/gallery/gallery.component';
 import { AboutusComponent } from './users/layout/aboutus/aboutus.component';
+import { PaypalComponentComponent } from './users/paypal-component/paypal-component.component';
 
 const routes: Routes = [
   {
@@ -232,6 +233,10 @@ const routes: Routes = [
   {
     path: "useraboutus",
     component: AboutusComponent
+  },
+  {
+    path:"payment",
+    component:PaypalComponentComponent
   }
 ];
 

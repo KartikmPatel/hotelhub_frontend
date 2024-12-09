@@ -55,6 +55,8 @@ import { UserfooterComponent } from './users/layout/userfooter/userfooter.compon
 import { UserprofileComponent } from './users/userprofile/userprofile.component';
 import { GalleryComponent } from './users/layout/gallery/gallery.component';
 import { AboutusComponent } from './users/layout/aboutus/aboutus.component';
+import { PaypalComponentComponent } from './users/paypal-component/paypal-component.component';
+import { NgxPayPalModule } from 'ngx-paypal';
 
 @NgModule({
   declarations: [
@@ -109,12 +111,14 @@ import { AboutusComponent } from './users/layout/aboutus/aboutus.component';
     UserprofileComponent,
     GalleryComponent,
     AboutusComponent,
+    PaypalComponentComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxPayPalModule
   ],
   providers: [],
   bootstrap: [AppComponent]

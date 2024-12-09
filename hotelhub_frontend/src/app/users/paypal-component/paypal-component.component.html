@@ -1,0 +1,20 @@
+<p class="payment-heading mt-5">Complete Your Payment</p>
+
+<div class="paypal-container">
+  <div class="payment-summary">
+    <div class="amount">
+      <strong>Total Amount:</strong> ₹2000
+    </div>
+    <div class="info1">
+      Please do not refresh the browser while the transaction is processing.
+    </div>
+  </div>
+
+  <div class="paypal-button-container">
+    <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+  </div>
+
+  <div class="terms">
+    <p>By proceeding, you agree to the <a href="#">Terms and Conditions</a>.</p>
+  </div>
+</div>
