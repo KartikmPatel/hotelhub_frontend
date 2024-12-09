@@ -9,7 +9,7 @@
                         <form class="row g-3" (ngSubmit)="onSubmit()">
                             <!-- Hotel Dropdown -->
                             <div class="col-md-12">
-                                <div class="form-floating mt-4">
+                                <div class="form-floating">
                                     <select id="hotel" [(ngModel)]="selectedHotelId" name="hotel"
                                         (change)="onHotelChange($event)" class="form-select" required>
                                         <option value="" disabled selected>Select a Hotel</option>
@@ -23,21 +23,21 @@
                             <!-- City Dropdown -->
                             <div class="col-md-12">
                                 <div class="form-floating">
-                                    <select id="city" [(ngModel)]="selectedCity" name="city"
+                                    <select id="city" [(ngModel)]="selectedCityId" name="city"
                                         (change)="onCityChange($event)" class="form-select" required>
-                                        <option value="" disabled selected>Select a City</option>
+                                        <option value="" disabled>Select a City</option>
                                         <option *ngFor="let city of cities" [value]="city">
                                             {{ city }}
                                         </option>
                                     </select>
+
                                     <label for="city">Select Room City</label>
                                 </div>
                             </div>
                             <!-- Room Category Dropdown -->
                             <div class="col-md-12">
                                 <div class="form-floating">
-                                    <select id="category" [(ngModel)]="selectedCategoryId" name="category"
-                                        class="form-select" required>
+                                    <select id="category" [(ngModel)]="selectedCategoryId" name="category" class="form-select" required>
                                         <option value="" disabled selected>Select a Category</option>
                                         <option *ngFor="let category of categories" [value]="category.id">
                                             {{ category.categoryName }}

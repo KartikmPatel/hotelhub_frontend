@@ -12,7 +12,7 @@ export class AddfeedbackComponent implements OnInit {
   cities: any[] = [];
   categories: any[] = [];
   selectedHotelId: number = 0;
-  selectedCity: string = '';
+  selectedCityId: any;
   selectedCategoryId: number | null = null;
   hoveredRating: number = 0;
 
@@ -57,9 +57,9 @@ export class AddfeedbackComponent implements OnInit {
   }
 
   onCityChange(event: any): void {
-    if (this.selectedHotelId && this.selectedCity) {
+    if (this.selectedHotelId && this.selectedCityId) {
       this.bookingService
-        .getRoomCategoriesByHotelAndCity(this.selectedHotelId, this.selectedCity)
+        .getRoomCategoriesByHotelAndCity(this.selectedHotelId, this.selectedCityId)
         .subscribe(
           (response: any) => {
             this.categories = response.$values || [];
@@ -81,9 +81,9 @@ export class AddfeedbackComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.selectedHotelId && this.selectedCity && this.selectedCategoryId && this.feedback.comments && this.feedback.rating) {
+    if (this.selectedHotelId && this.selectedCityId && this.selectedCategoryId && this.feedback.comments && this.feedback.rating) {
       this.bookingService
-        .getRoomIdByHotelCityAndCategory(this.selectedHotelId, this.selectedCity, this.selectedCategoryId!)
+        .getRoomIdByHotelCityAndCategory(this.selectedHotelId, this.selectedCityId, this.selectedCategoryId!)
         .subscribe(
           (response: any) => {
             const roomId = response.roomId; // Assuming API returns roomId
